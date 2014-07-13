@@ -9,18 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentSetting extends Fragment {
+public class FragmentWeddingList extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_setting, container, false);
 
+		return inflater.inflate(R.layout.fragment_search, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
-		textView.setText("…Ë÷√");
+		textView.setText("ªÈ¿Ò«Âµ•");
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
 	}
 }

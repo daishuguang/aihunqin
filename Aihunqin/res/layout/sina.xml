@@ -16,14 +16,14 @@
 
     <fragment
         android:id="@+id/fragment_search"
-        android:name="com.aihunqin.crazy.FragmentSearch"
+        android:name="com.aihunqin.crazy.FragmentWeddingList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" />
 
     <fragment
         android:id="@+id/fragment_setting"
-        android:name="com.aihunqin.crazy.FragmentSetting"
+        android:name="com.aihunqin.crazy.FragmentMore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" />
