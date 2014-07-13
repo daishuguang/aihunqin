@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class FragmentInvitation extends Fragment {
@@ -22,5 +24,15 @@ public class FragmentInvitation extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("«ÎÃ˚π‹¿Ì");
+		TextView button = (TextView) getView().findViewById(R.id.back);
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity().getSupportFragmentManager().popBackStack();
+			}
+		});
+		button.setVisibility(View.VISIBLE);
 	}
+
 }

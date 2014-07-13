@@ -12,7 +12,7 @@
     <application
         android:icon="@drawable/hunqin"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
             android:name="com.aihunqin.crazy.TabHostTest"
             android:label="@string/app_name" >
