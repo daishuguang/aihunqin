@@ -13,7 +13,7 @@ public class FragmentMore extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_setting, container, false);
+		return inflater.inflate(R.layout.fragment_more, container, false);
 
 	}
 

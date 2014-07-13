@@ -25,12 +25,15 @@ public class SinaMain extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.sina);
 		fragmentManager = getSupportFragmentManager();
-		mFragments = new Fragment[3];
+		mFragments = new Fragment[4];
 		mFragments[0] = fragmentManager.findFragmentById(R.id.fragment_main);
 		mFragments[1] = fragmentManager.findFragmentById(R.id.fragment_search);
 		mFragments[2] = fragmentManager.findFragmentById(R.id.fragment_setting);
+		mFragments[3] = fragmentManager
+				.findFragmentById(R.id.fragment_invitation);
 		fragmentTransaction = fragmentManager.beginTransaction()
-				.hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2]);
+				.hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2])
+				.hide(mFragments[3]);
 		fragmentTransaction.show(mFragments[0]).commit();
 		setFragmentIndicator();
 	}
@@ -46,8 +49,9 @@ public class SinaMain extends FragmentActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-				fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[0])
-						.hide(mFragments[1]).hide(mFragments[2]);
+				fragmentTransaction = fragmentManager.beginTransaction()
+						.hide(mFragments[0]).hide(mFragments[1])
+						.hide(mFragments[2]).hide(mFragments[3]);
 				Log.v("roboce", checkedId + "");
 				switch (checkedId) {
 				case R.id.rbOne:
