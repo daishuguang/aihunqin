@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_bg"
+    android:orientation="vertical" >
+
+    <!-- 上边主页面 -->
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="com.aihunqin.crazy.FragmentMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10" />
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.aihunqin.crazy.FragmentSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10" />
+
+    <fragment
+        android:id="@+id/fragment_setting"
+        android:name="com.aihunqin.crazy.FragmentSetting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10" />
+    <!-- 底部菜单页面 -->
+
+    <RadioGroup
+        android:id="@+id/bottomRg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:background="@drawable/tabbarbackground"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rbOne"
+            style="@style/rg_btn_style"
+            android:checked="true"
+            android:drawableTop="@drawable/rb_one_btn_selector"
+            android:text="我的婚礼" />
+
+        <RadioButton
+            android:id="@+id/rbTwo"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/rb_two_btn_selector"
+            android:text="婚礼清单" />
+
+        <RadioButton
+            android:id="@+id/rbThree"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/rb_three_btn_selector"
+            android:text="更多" />
+    </RadioGroup>
+
+</LinearLayout>
