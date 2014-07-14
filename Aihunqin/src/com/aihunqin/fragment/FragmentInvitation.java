@@ -31,7 +31,9 @@ public class FragmentInvitation extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				getActivity().getSupportFragmentManager().beginTransaction()
+						.replace(R.id.fragment_container, new FragmentMain())
+						.commit();
 			}
 		});
 		button.setVisibility(View.VISIBLE);
