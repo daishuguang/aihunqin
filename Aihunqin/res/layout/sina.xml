@@ -7,13 +7,20 @@
 
     <!-- 上边主页面 -->
 
+    <FrameLayout
+        android:id="@+id/fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10" >
+    </FrameLayout>
+    <!--
     <fragment
         android:id="@+id/fragment_main"
         android:name="com.aihunqin.crazy.FragmentMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" />
-
+ 
     <fragment
         android:id="@+id/fragment_search"
         android:name="com.aihunqin.crazy.FragmentWeddingList"
@@ -26,9 +33,7 @@
         android:name="com.aihunqin.crazy.FragmentMore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10" />
-
-    <!-- 不在菜单显示 -->
+        android:layout_weight="10" />-->    <!-- 不在菜单显示 -->
 
     <fragment
         android:id="@+id/fragment_invitation"

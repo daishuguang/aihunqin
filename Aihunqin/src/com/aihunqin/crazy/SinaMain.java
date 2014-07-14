@@ -27,12 +27,14 @@ public class SinaMain extends FragmentActivity {
 		fragmentManager = getSupportFragmentManager();
 		mFragments = new Fragment[4];
 		mFragments[0] = fragmentManager.findFragmentById(R.id.fragment_main);
-		mFragments[1] = fragmentManager.findFragmentById(R.id.fragment_search);
-		mFragments[2] = fragmentManager.findFragmentById(R.id.fragment_setting);
+		// mFragments[1] =
+		// fragmentManager.findFragmentById(R.id.fragment_search);
+		// mFragments[2] =
+		// fragmentManager.findFragmentById(R.id.fragment_setting);
 		mFragments[3] = fragmentManager
 				.findFragmentById(R.id.fragment_invitation);
 		fragmentTransaction = fragmentManager.beginTransaction()
-				.hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2])
+				.hide(mFragments[0])
 				.hide(mFragments[3]);
 		fragmentTransaction.show(mFragments[0]).commit();
 		setFragmentIndicator();
@@ -50,18 +52,26 @@ public class SinaMain extends FragmentActivity {
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
 				fragmentTransaction = fragmentManager.beginTransaction()
-						.hide(mFragments[0]).hide(mFragments[1])
-						.hide(mFragments[2]).hide(mFragments[3]);
+						.hide(mFragments[0]).hide(mFragments[3]);
 				Log.v("roboce", checkedId + "");
 				switch (checkedId) {
 				case R.id.rbOne:
-					fragmentTransaction.show(mFragments[0]).commit();
+					Fragment fragment_main = new FragmentMain();
+					fragmentTransaction.replace(R.id.fragment_main,
+							fragment_main).show(mFragments[0]).commit();
+					// fragmentTransaction.show(mFragments[0]).commit();
 					break;
 				case R.id.rbTwo:
-					fragmentTransaction.show(mFragments[1]).commit();
+					Fragment fragment_weddingList = new FragmentWeddingList();
+					fragmentTransaction.replace(R.id.fragment_main,
+							fragment_weddingList).show(mFragments[0]).commit();
+					// fragmentTransaction.show(mFragments[1]).commit();
 					break;
 				case R.id.rbThree:
-					fragmentTransaction.show(mFragments[2]).commit();
+					Fragment fragment_more = new FragmentMore();
+					fragmentTransaction.replace(R.id.fragment_main,
+							fragment_more).show(mFragments[0]).commit();
+					// fragmentTransaction.show(mFragments[2]).commit();
 					break;
 				default:
 					break;
@@ -69,6 +79,5 @@ public class SinaMain extends FragmentActivity {
 			}
 		});
 	}
-	
-	
+
 }
