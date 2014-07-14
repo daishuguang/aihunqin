@@ -1,5 +1,7 @@
 package com.aihunqin.crazy;
 
+import com.aihunqin.fragment.BookDetailFragment;
+import com.aihunqin.fragment.BookListFragment;
 import com.example.aihunqin.R;
 
 import android.app.Activity;

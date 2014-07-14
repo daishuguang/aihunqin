@@ -1,4 +1,4 @@
-package com.aihunqin.crazy;
+package com.aihunqin.fragment;
 
 import com.aihunqin.model.BookContent;
 import com.example.aihunqin.R;

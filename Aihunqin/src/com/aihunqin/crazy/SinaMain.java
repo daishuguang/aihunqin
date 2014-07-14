@@ -1,5 +1,8 @@
 package com.aihunqin.crazy;
 
+import com.aihunqin.fragment.FragmentMain;
+import com.aihunqin.fragment.FragmentMore;
+import com.aihunqin.fragment.FragmentWeddingList;
 import com.example.aihunqin.R;
 
 import android.content.pm.FeatureInfo;
@@ -25,18 +28,11 @@ public class SinaMain extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.sina);
 		fragmentManager = getSupportFragmentManager();
-		mFragments = new Fragment[4];
-		mFragments[0] = fragmentManager.findFragmentById(R.id.fragment_main);
-		// mFragments[1] =
-		// fragmentManager.findFragmentById(R.id.fragment_search);
-		// mFragments[2] =
-		// fragmentManager.findFragmentById(R.id.fragment_setting);
-		mFragments[3] = fragmentManager
-				.findFragmentById(R.id.fragment_invitation);
-		fragmentTransaction = fragmentManager.beginTransaction()
-				.hide(mFragments[0])
-				.hide(mFragments[3]);
-		fragmentTransaction.show(mFragments[0]).commit();
+		fragmentTransaction = fragmentManager.beginTransaction();
+		Fragment fragment_main = new FragmentMain();
+		// Add to Activity
+		fragmentTransaction.add(R.id.fragment_container, fragment_main);
+		fragmentTransaction.commit();
 		setFragmentIndicator();
 	}
 
@@ -51,31 +47,29 @@ public class SinaMain extends FragmentActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-				fragmentTransaction = fragmentManager.beginTransaction()
-						.hide(mFragments[0]).hide(mFragments[3]);
+				fragmentTransaction = fragmentManager.beginTransaction();
 				Log.v("roboce", checkedId + "");
 				switch (checkedId) {
+				// Replace Fragment
 				case R.id.rbOne:
 					Fragment fragment_main = new FragmentMain();
-					fragmentTransaction.replace(R.id.fragment_main,
-							fragment_main).show(mFragments[0]).commit();
-					// fragmentTransaction.show(mFragments[0]).commit();
+					fragmentTransaction.replace(R.id.fragment_container,
+							fragment_main);
 					break;
 				case R.id.rbTwo:
 					Fragment fragment_weddingList = new FragmentWeddingList();
-					fragmentTransaction.replace(R.id.fragment_main,
-							fragment_weddingList).show(mFragments[0]).commit();
-					// fragmentTransaction.show(mFragments[1]).commit();
+					fragmentTransaction.replace(R.id.fragment_container,
+							fragment_weddingList);
 					break;
 				case R.id.rbThree:
 					Fragment fragment_more = new FragmentMore();
-					fragmentTransaction.replace(R.id.fragment_main,
-							fragment_more).show(mFragments[0]).commit();
-					// fragmentTransaction.show(mFragments[2]).commit();
+					fragmentTransaction.replace(R.id.fragment_container,
+							fragment_more);
 					break;
 				default:
 					break;
 				}
+				fragmentTransaction.commit();
 			}
 		});
 	}

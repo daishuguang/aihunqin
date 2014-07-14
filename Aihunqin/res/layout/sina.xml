@@ -8,40 +8,11 @@
     <!-- 上边主页面 -->
 
     <FrameLayout
-        android:id="@+id/fragment_main"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" >
     </FrameLayout>
-    <!--
-    <fragment
-        android:id="@+id/fragment_main"
-        android:name="com.aihunqin.crazy.FragmentMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10" />
- 
-    <fragment
-        android:id="@+id/fragment_search"
-        android:name="com.aihunqin.crazy.FragmentWeddingList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10" />
-
-    <fragment
-        android:id="@+id/fragment_setting"
-        android:name="com.aihunqin.crazy.FragmentMore"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10" />-->    <!-- 不在菜单显示 -->
-
-    <fragment
-        android:id="@+id/fragment_invitation"
-        android:name="com.aihunqin.crazy.FragmentInvitation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10" />
-    <!-- 底部菜单页面 -->
 
     <RadioGroup
         android:id="@+id/bottomRg"

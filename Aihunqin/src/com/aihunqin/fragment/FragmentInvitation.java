@@ -1,4 +1,4 @@
-package com.aihunqin.crazy;
+package com.aihunqin.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.aihunqin.crazy.WebActivity;
 import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {

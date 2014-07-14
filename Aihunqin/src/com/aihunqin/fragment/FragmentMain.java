@@ -1,4 +1,4 @@
-package com.aihunqin.crazy;
+package com.aihunqin.fragment;
 
 import com.example.aihunqin.R;
 
@@ -34,10 +34,10 @@ public class FragmentMain extends Fragment {
 
 				fragmentManager
 						.beginTransaction()
-						.hide(fragmentManager
-								.findFragmentById(R.id.fragment_main))
-						.show(fragmentManager
-								.findFragmentById(R.id.fragment_invitation))
+//						.hide(fragmentManager
+//								.findFragmentById(R.id.fragment_main))
+//						.show(fragmentManager
+//								.findFragmentById(R.id.fragment_invitation))
 						.addToBackStack("frag_main").commit();
 			}
 		});
