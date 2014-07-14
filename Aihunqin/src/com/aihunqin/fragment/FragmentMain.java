@@ -36,9 +36,8 @@ public class FragmentMain extends Fragment {
 				FragmentTransaction fragmentTransaction = fragmentManager
 						.beginTransaction();
 				Fragment fragment_invitation = new FragmentInvitation();
-				fragmentTransaction.replace(R.layout.fragment_invitation,
+				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_invitation);
-				fragmentTransaction.addToBackStack("frag_main");
 				fragmentTransaction.commit();
 			}
 		});
