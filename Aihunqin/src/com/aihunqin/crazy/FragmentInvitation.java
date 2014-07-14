@@ -1,16 +1,16 @@
 package com.aihunqin.crazy;
 
-import com.example.aihunqin.R;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {
 	@Override
@@ -33,6 +33,17 @@ public class FragmentInvitation extends Fragment {
 			}
 		});
 		button.setVisibility(View.VISIBLE);
+		RelativeLayout layout = (RelativeLayout) getView().findViewById(
+				R.id.demolink);
+		layout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), WebActivity.class);
+				intent.putExtra("link", "http://ruiqinsoft.com:3083/wh/t/66");
+				startActivity(intent);
+			}
+		});
 	}
 
 }
