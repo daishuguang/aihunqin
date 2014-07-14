@@ -38,7 +38,7 @@ public class FragmentMain extends Fragment {
 								.findFragmentById(R.id.fragment_main))
 						.show(fragmentManager
 								.findFragmentById(R.id.fragment_invitation))
-						.addToBackStack(null).commit();
+						.addToBackStack("frag_main").commit();
 			}
 		});
 	}
