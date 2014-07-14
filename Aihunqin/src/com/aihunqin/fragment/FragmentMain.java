@@ -5,6 +5,7 @@ import com.example.aihunqin.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,13 +33,13 @@ public class FragmentMain extends Fragment {
 				FragmentManager fragmentManager = getActivity()
 						.getSupportFragmentManager();
 
-				fragmentManager
-						.beginTransaction()
-//						.hide(fragmentManager
-//								.findFragmentById(R.id.fragment_main))
-//						.show(fragmentManager
-//								.findFragmentById(R.id.fragment_invitation))
-						.addToBackStack("frag_main").commit();
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+				Fragment fragment_invitation = new FragmentInvitation();
+				fragmentTransaction.replace(R.layout.fragment_invitation,
+						fragment_invitation);
+				fragmentTransaction.addToBackStack("frag_main");
+				fragmentTransaction.commit();
 			}
 		});
 	}
