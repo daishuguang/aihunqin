@@ -20,7 +20,5 @@ public class FragmentMore extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
-		textView.setText("¸ü¶à");
 	}
 }
