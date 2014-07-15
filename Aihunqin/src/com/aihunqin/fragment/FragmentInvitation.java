@@ -26,8 +26,8 @@ public class FragmentInvitation extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("«ÎÃ˚π‹¿Ì");
-		TextView button = (TextView) getView().findViewById(R.id.back);
-		button.setOnClickListener(new OnClickListener() {
+		TextView backbtn = (TextView) getView().findViewById(R.id.back);
+		backbtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -36,7 +36,7 @@ public class FragmentInvitation extends Fragment {
 						.commit();
 			}
 		});
-		button.setVisibility(View.VISIBLE);
+		backbtn.setVisibility(View.VISIBLE);
 		RelativeLayout layout = (RelativeLayout) getView().findViewById(
 				R.id.demolink);
 		layout.setOnClickListener(new OnClickListener() {
@@ -48,6 +48,11 @@ public class FragmentInvitation extends Fragment {
 				startActivity(intent);
 			}
 		});
+
+		// Create Invitation
+		TextView createInvitationbtn = (TextView) getView().findViewById(
+				R.id.rightmenu);
+		createInvitationbtn.setVisibility(View.VISIBLE);
 	}
 
 }
