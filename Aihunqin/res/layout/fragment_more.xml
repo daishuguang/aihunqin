@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e83a46"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/wenhong" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/tv_press"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="在地图上显示文弘的位置"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/tv_press"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="访问文弘官方网站"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/tv_press"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="拨打文弘客服热线"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/tv_press"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="发送邮件给文弘"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/tv_press"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="短信邀请好友"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="25dp"
+            android:background="#ffffff"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="微信邀请好友"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="检查新版本"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:text="关于文弘婚礼助手App"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</ScrollView>
