@@ -23,8 +23,8 @@ public class FragmentMain extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
-		textView.setText("Ê×Ò³");
+		// TextView textView = (TextView) getView().findViewById(R.id.titleTv);
+		// textView.setText("Ê×Ò³");
 		Button button = (Button) getView().findViewById(R.id.btn);
 		button.setOnClickListener(new OnClickListener() {
 

@@ -60,15 +60,6 @@ public class FragmentAboutus extends Fragment {
 						new FragmentMore()).commit();
 			}
 		});
-		TextView offic = (TextView) getView().findViewById(R.id.offic);
-		offic.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebActivity.class);
-				intent.putExtra("link", "http://www.sh-wenhong.com/");
-				startActivity(intent);
-			}
-		});
 	}
 }
