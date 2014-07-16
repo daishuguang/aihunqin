@@ -1,10 +1,12 @@
 package com.aihunqin.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +41,7 @@ public class FragmentMore extends Fragment {
 				fragmenttransaction.commit();
 			}
 		});
-		
+
 		TextView offic = (TextView) getView().findViewById(R.id.offic);
 		offic.setOnClickListener(new OnClickListener() {
 
@@ -47,6 +49,39 @@ public class FragmentMore extends Fragment {
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), WebActivity.class);
 				intent.putExtra("link", "http://www.sh-wenhong.com/");
+				startActivity(intent);
+			}
+		});
+		TextView callphone = (TextView) getView().findViewById(R.id.callphone);
+		callphone.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+						+ "4006-513520"));
+				startActivity(intent);
+			}
+		});
+
+		TextView mail = (TextView) getView().findViewById(R.id.mail);
+		mail.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_SENDTO, Uri
+						.parse("mailto:daishuguang4461@126.com"));
+				startActivity(intent);
+			}
+		});
+
+		TextView sms = (TextView) getView().findViewById(R.id.sms);
+		sms.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_SENDTO, Uri
+						.parse("smsto:" + "15895565819"));
 				startActivity(intent);
 			}
 		});
