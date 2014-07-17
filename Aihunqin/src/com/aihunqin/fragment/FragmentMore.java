@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.aihunqin.crazy.WebActivity;
 import com.example.aihunqin.R;
-
+import com.tencent.mm.sdk.openapi.WXTextObject;
 public class FragmentMore extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +58,7 @@ public class FragmentMore extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
 						+ "4006-513520"));
 				startActivity(intent);
 			}
@@ -80,9 +80,17 @@ public class FragmentMore extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_SENDTO, Uri
-						.parse("smsto:" + "15895565819"));
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setType("vnd.android-dir/mms-sms");
 				startActivity(intent);
+			}
+		});
+		TextView wechat = (TextView) getView().findViewById(R.id.wechat);
+		wechat.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
 			}
 		});
 	}

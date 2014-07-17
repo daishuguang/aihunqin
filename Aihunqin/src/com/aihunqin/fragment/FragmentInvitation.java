@@ -53,6 +53,17 @@ public class FragmentInvitation extends Fragment {
 		TextView createInvitationbtn = (TextView) getView().findViewById(
 				R.id.rightmenu);
 		createInvitationbtn.setVisibility(View.VISIBLE);
+		createInvitationbtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity()
+						.getSupportFragmentManager()
+						.beginTransaction()
+						.replace(R.id.fragment_container,
+								new FragmentInivitationContent()).commit();
+			}
+		});
 	}
 
 }
