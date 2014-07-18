@@ -1,13 +1,14 @@
 package com.aihunqin.fragment;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,8 +24,6 @@ import com.aihunqin.util.HttpUtil;
 import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {
-	SharedPreferences preferences;
-	SharedPreferences.Editor editor;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,11 +34,35 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		preferences = getActivity().getSharedPreferences("invitation",
-				Context.MODE_PRIVATE);
+		XmlResourceParser xrp = getResources().getXml(R.xml.invitation);
 
-		TextView textid = (TextView) getView().findViewById(R.id.invitationid);
-		textid.setText(preferences.getString("id", "null"));
+		try {
+			StringBuilder sb = new StringBuilder();
+			while (xrp.getEventType() != XmlResourceParser.END_DOCUMENT) {
+				// 如果是开始标签
+				if (xrp.getEventType() == XmlResourceParser.START_TAG) {
+					// 获取标签名称
+					String name = xrp.getName();
+					// 判断标签名称是否等于root
+					if (name.equals("invitation")) {
+						sb.append(xrp.getAttributeValue(0) + "\n");
+						sb.append(xrp.getAttributeValue(1) + "\n");
+						sb.append(xrp.getAttributeValue(2) + "\n");
+						sb.append(xrp.getAttributeValue(3) + "\n");
+					}
+				}
+				// 下一个标签
+				xrp.next();
+			}
+			TextView t = (TextView) getView().findViewById(R.id.invitationid);
+			t.setText(sb);
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("请帖管理");
 		TextView backbtn = (TextView) getView().findViewById(R.id.back);
@@ -106,19 +129,6 @@ public class FragmentInvitation extends Fragment {
 							json = new JSONObject(result);
 							String m = json.getString("id");
 
-							editor = preferences.edit();
-							if (preferences.getString("id", null) == null) {
-								editor.putString("id", m);
-							} else {
-								editor.putString("id",
-										preferences.getString("id", null) + "-"
-												+ m);
-							}
-							editor.commit();
-							Log.v("roboce",
-									"submit:"
-											+ preferences.getString("id",
-													"null"));
 							Log.v("roboce", m);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
