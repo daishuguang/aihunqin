@@ -11,6 +11,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.aihunqin.fragment.FragmentInivitationContent;
+import com.aihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.aihunqin.fragment.FragmentInvitationCreateNew;
 import com.aihunqin.fragment.FragmentMain;
 import com.aihunqin.fragment.FragmentMore;
 import com.aihunqin.fragment.FragmentWeddingList;
@@ -18,7 +21,7 @@ import com.example.aihunqin.R;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-public class SinaMain extends FragmentActivity {
+public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
 	Fragment[] mFragments;
@@ -89,6 +92,27 @@ public class SinaMain extends FragmentActivity {
 				fragmentTransaction.commit();
 			}
 		});
+	}
+
+	@Override
+	public void onItemClicked(String id, String which) {
+		Bundle arguments = new Bundle();
+		arguments.putString("id", id);
+		if (which.equals("createnew")) {
+			FragmentInvitationCreateNew fragment = new FragmentInvitationCreateNew();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
+		if (which.equals("content")) {
+			FragmentInivitationContent fragment = new FragmentInivitationContent();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
+
 	}
 
 }

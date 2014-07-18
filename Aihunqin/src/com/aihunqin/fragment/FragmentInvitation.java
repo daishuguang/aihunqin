@@ -11,6 +11,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,22 @@ import com.aihunqin.util.HttpUtil;
 import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {
+	TextView invitationid;
+	TransferIDListener mCallback;
+
+	public interface TransferIDListener {
+		public void onItemClicked(String id, String fragment);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mCallback = (TransferIDListener) activity;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,12 +57,15 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Button button1 = (Button) getView().findViewById(R.id.button1);
-		button1.setOnClickListener(new OnClickListener() {
+		
+
+
+		Button button2 = (Button) getView().findViewById(R.id.button2);
+		button2.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				writeToXml(WriteToString());
+				mCallback.onItemClicked("101", "createnew");
 			}
 		});
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
@@ -133,6 +153,10 @@ public class FragmentInvitation extends Fragment {
 		});
 	}
 
+	void InsertToXML() {
+
+	}
+
 	// xml数据生成
 	String WriteToString() {
 		XmlSerializer serializer = Xml.newSerializer();
@@ -140,7 +164,8 @@ public class FragmentInvitation extends Fragment {
 		try {
 			serializer.setOutput(writer);
 			serializer.startDocument("utf-8", true);
-			serializer.startTag("", "users");
+			serializer.startTag("", "invitations");
+			serializer.startTag("", "invitation");
 
 			serializer.startTag("", "username");
 			serializer.text("roboce");
@@ -150,7 +175,8 @@ public class FragmentInvitation extends Fragment {
 			serializer.text("daishuguang@126.com");
 			serializer.endTag("", "usermail");
 
-			serializer.endTag("", "users");
+			serializer.endTag("", "invitation");
+			serializer.endTag("", "invitations");
 			serializer.endDocument();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -177,5 +203,16 @@ public class FragmentInvitation extends Fragment {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	void deletefile() {
+
+		getActivity().deleteFile("users.xml");
+		String[] filelist = getActivity().fileList();
+		String str = null;
+		for (int i = 0; i < filelist.length; i++) {
+			str += filelist[i] + "\n";
+		}
+		invitationid.setText(str);
 	}
 }

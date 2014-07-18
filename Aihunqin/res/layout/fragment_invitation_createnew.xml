@@ -12,11 +12,77 @@
         android:layout_height="wrap_content"
         android:scrollbars="none" >
 
-        <TableLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/choosephoto" >
-        </TableLayout>
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/choosephoto"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/ecardbuttons"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/editcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+
+                    <Button
+                        android:id="@+id/gest"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+
+                    <Button
+                        android:id="@+id/blessing"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

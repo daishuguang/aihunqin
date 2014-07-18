@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import com.example.aihunqin.R;
 
 public class FragmentInivitationContent extends Fragment {
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -43,11 +44,12 @@ public class FragmentInivitationContent extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				getActivity()
-						.getSupportFragmentManager()
-						.beginTransaction()
-						.replace(R.id.fragment_container,
-								new FragmentInvitation()).commit();
+				getActivity().getSupportFragmentManager().popBackStack();
+				// getActivity()
+				// .getSupportFragmentManager()
+				// .beginTransaction()
+				// .replace(R.id.fragment_container,
+				// new FragmentInvitationCreateNew()).commit();
 			}
 		});
 

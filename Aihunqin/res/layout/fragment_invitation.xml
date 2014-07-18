@@ -8,10 +8,10 @@
     <include layout="@layout/title_bar" />
 
     <RelativeLayout
-        android:layout_marginTop="20dp"
         android:id="@+id/demolink"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ecarddemo1" >
 
         <TextView
@@ -37,16 +37,12 @@
             android:textSize="12sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/invitationid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:padding="20dp"
+        android:background="@android:color/transparent"
+        android:text="编辑请帖" />
 
 </LinearLayout>
