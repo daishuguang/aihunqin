@@ -1,12 +1,15 @@
 package com.aihunqin.fragment;
 
-import com.example.aihunqin.R;
-
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.aihunqin.R;
 
 public class FragmentInvitationCreateNew extends Fragment {
 	@Override
@@ -18,6 +21,15 @@ public class FragmentInvitationCreateNew extends Fragment {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		TextView back = (TextView) getView().findViewById(R.id.back);
+		back.setVisibility(View.VISIBLE);
+		back.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				getActivity().getSupportFragmentManager().popBackStack();
+			}
+		});
 	}
 }
