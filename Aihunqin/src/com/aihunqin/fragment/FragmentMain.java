@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class FragmentMain extends Fragment {
@@ -23,10 +24,9 @@ public class FragmentMain extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// TextView textView = (TextView) getView().findViewById(R.id.titleTv);
-		// textView.setText("Ê×Ò³");
-		Button button = (Button) getView().findViewById(R.id.btn);
-		button.setOnClickListener(new OnClickListener() {
+
+		ImageView xizhi = (ImageView) getView().findViewById(R.id.xizhi);
+		xizhi.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
