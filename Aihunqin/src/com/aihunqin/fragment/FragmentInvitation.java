@@ -1,22 +1,27 @@
 package com.aihunqin.fragment;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,7 +40,14 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		Button button1 = (Button) getView().findViewById(R.id.button1);
+		button1.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				writeToXml(WriteToString());
+			}
+		});
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("请帖管理");
 		TextView backbtn = (TextView) getView().findViewById(R.id.back);
@@ -119,5 +131,51 @@ public class FragmentInvitation extends Fragment {
 
 			}
 		});
+	}
+
+	// xml数据生成
+	String WriteToString() {
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("utf-8", true);
+			serializer.startTag("", "users");
+
+			serializer.startTag("", "username");
+			serializer.text("roboce");
+			serializer.endTag("", "username");
+
+			serializer.startTag("", "useremail");
+			serializer.text("daishuguang@126.com");
+			serializer.endTag("", "usermail");
+
+			serializer.endTag("", "users");
+			serializer.endDocument();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writer.toString();
+	}
+
+	boolean writeToXml(String str) {
+		try {
+			OutputStream out = getActivity().openFileOutput("users.xml",
+					Context.MODE_PRIVATE);
+
+			OutputStreamWriter outWriter = new OutputStreamWriter(out);
+			outWriter.write(str);
+			outWriter.close();
+			out.close();
+			return true;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
