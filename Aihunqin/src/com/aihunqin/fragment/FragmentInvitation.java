@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Intent;
@@ -34,34 +35,6 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		XmlResourceParser xrp = getResources().getXml(R.xml.invitation);
-
-		try {
-			StringBuilder sb = new StringBuilder();
-			while (xrp.getEventType() != XmlResourceParser.END_DOCUMENT) {
-				// 如果是开始标签
-				if (xrp.getEventType() == XmlResourceParser.START_TAG) {
-					// 获取标签名称
-					String name = xrp.getName();
-					// 判断标签名称是否等于root
-					if (name.equals("invitation")) {
-						sb.append(xrp.getAttributeValue(0) + "\n");
-						sb.append(xrp.getAttributeValue(1) + "\n");
-						sb.append(xrp.getAttributeValue(2) + "\n");
-						sb.append(xrp.getAttributeValue(3) + "\n");
-					}
-				}
-				// 下一个标签
-				xrp.next();
-			}
-			TextView t = (TextView) getView().findViewById(R.id.invitationid);
-			t.setText(sb);
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("请帖管理");
