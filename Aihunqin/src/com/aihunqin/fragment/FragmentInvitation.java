@@ -1,5 +1,6 @@
 package com.aihunqin.fragment;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,7 +9,11 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.json.JSONObject;
+import org.w3c.dom.*;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
@@ -57,8 +62,6 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-
 
 		Button button2 = (Button) getView().findViewById(R.id.button2);
 		button2.setOnClickListener(new OnClickListener() {
@@ -134,9 +137,10 @@ public class FragmentInvitation extends Fragment {
 							json = new JSONObject(result);
 							String m = json.getString("id");
 
+							// Save to XML
+							saveToXML();
 							Log.v("roboce", m);
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
@@ -153,7 +157,52 @@ public class FragmentInvitation extends Fragment {
 		});
 	}
 
-	void InsertToXML() {
+	void saveToXML() {
+		// 文档生成器工厂
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		// 实例化文档生成器
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+
+			File f = new File("test.xml");
+			if (!f.exists()) {
+				f.createNewFile();
+
+				// 生成一个文档
+				Document document = builder.newDocument();
+
+				// 创建根节点
+				Element configs = document.createElement("configs");
+				// 创建XML文件所需的各种对象并序列化(元素)
+				Element config = document.createElement("config");// 创建元素节点
+
+				Element ip = document.createElement("ip");
+				Element socket = document.createElement("socket");
+
+				Text ip_text = document.createTextNode("255.255.0.1");// 创建text文本
+				Text socket_text = document.createTextNode("8888");
+
+				ip.appendChild(ip_text);
+				socket.appendChild(socket_text);
+
+				config.appendChild(ip);
+				config.appendChild(socket);
+
+				configs.appendChild(config);// 添加到文档中
+				// 调用方法，将文档写入xml文件中
+
+			} else {
+				// 解析文档
+				Document document = builder.parse(f);
+				Element configs = document.getDocumentElement();// 得到根节点，把后面创建的子节点加入这个跟节点中
+				
+			}
+		} catch (Exception e) {
+
+		}
+	}
+
+	void writeToXml() {
 
 	}
 
