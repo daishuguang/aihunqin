@@ -10,6 +10,30 @@
         android:background="#a0ffffff"
         android:paddingTop="20dp" >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="25dp"
+                android:text="新郎名"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="30dp"
+                android:text="新娘名"
+                android:textSize="20sp" />
+        </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
