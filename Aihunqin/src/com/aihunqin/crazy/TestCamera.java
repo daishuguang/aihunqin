@@ -1,58 +1,99 @@
 package com.aihunqin.crazy;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.PixelFormat;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.aihunqin.R;
 
-public class TestCamera extends Activity implements OnClickListener {
+@SuppressLint("SdCardPath")
+public class TestCamera extends Activity {
 	/** Called when the activity is first created. */
 
-	// camera类
-	private Camera camera = null;
-
-	// 继承surfaceView的自定义View用于存放照相的图片
-	private CameraView cv = null;
-
-	// 回调用的picture,实现里边的onPictureTaken方法，其中byte[]数组即为照相机获取到的图片信息
-	private Camera.PictureCallback picture = new PictureCallback() {
-
-		@Override
-		public void onPictureTaken(byte[] data, Camera camera) {
-			// 主要就是将图片转化为drawable,设置为固定区域的背景(展示图片),当然也可以直接在布局文件里放一个surfaceView供使用。
-			
-		}
-	};
-
-	// 主要的SurfaceView,负责展示预览图片，camera的开关
-	class CameraView extends SurfaceView {
-
-		public CameraView(Context context) {
-			super(context);
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-	}
+	private Button button;
+	private ImageView view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().setFormat(PixelFormat.TRANSPARENT);
 		setContentView(R.layout.layout_camera);
+		button = (Button) findViewById(R.id.btnTakePicture);
+		view = (ImageView) findViewById(R.id.imageView);
+		Log.v("roboce", "create");
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, 1);
+			}
+		});
 
 	}
+
+	@SuppressLint("SdCardPath")
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		super.onActivityResult(requestCode, resultCode, data);
+
+		Bundle extras = data.getExtras();
+		Bitmap b = (Bitmap) extras.get("data");
+		view.setImageBitmap(b);
+		// if (resultCode == Activity.RESULT_OK) {
+		// String sdStatus = Environment.getExternalStorageState();
+		// if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
+		// return;
+		// }
+		//
+		// String name = new DateFormat().format("yyyyMMdd_hhmmss",
+		// Calendar.getInstance(Locale.CHINA))
+		// + ".jpg";
+		// Toast.makeText(this, name, Toast.LENGTH_LONG).show();
+		//
+		// Bundle bundle = data.getExtras();
+		// Bitmap bitmap = (Bitmap) bundle.get("data");//
+		// 获取相机返回的数据，并转换为Bitmap图片格式
+		// FileOutputStream b = null;
+		// File file = new File("/sdcard/myImage/");
+		// file.mkdir();// 创建文件夹
+		// String fileName = "/sdcard/myImage/" + name;
+		// try {
+		// b = new FileOutputStream(fileName);
+		// bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// } finally {
+		// try {
+		// b.flush();
+		// b.close();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// }
+		// ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);
+		// }
+	}
+
 }
