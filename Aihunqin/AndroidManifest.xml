@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aihunqin"
-    android:installLocation="preferExternal"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -20,6 +19,11 @@
         <activity android:name="com.aihunqin.crazy.SelectBookActivity" >
         </activity>
         <activity android:name="com.aihunqin.crazy.SinaMain" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.aihunqin.crazy.WebActivity" >
         </activity>
@@ -28,11 +32,6 @@
         <activity android:name="com.aihunqin.crazy.Camera" >
         </activity>
         <activity android:name="com.aihunqin.crazy.PopupMain" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

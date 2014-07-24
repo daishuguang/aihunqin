@@ -20,7 +20,15 @@ public class FragmentMain extends Fragment {
 
 		@Override
 		public void onClick(View v) {
+			FragmentManager fragmentManager = getActivity()
+					.getSupportFragmentManager();
 
+			FragmentTransaction fragmentTransaction = fragmentManager
+					.beginTransaction();
+			Fragment fragment_settingname = new FragmentSettingName();
+			fragmentTransaction.replace(R.id.fragment_container,
+					fragment_settingname);
+			fragmentTransaction.commit();
 		}
 	};
 
