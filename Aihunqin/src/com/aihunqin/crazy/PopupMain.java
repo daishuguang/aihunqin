@@ -54,10 +54,12 @@ public class PopupMain extends Activity {
 			break;
 		case 2:
 			Uri uri = data.getData();
+			String uristr = uri.toString();
 			ContentResolver resolver = getContentResolver();
 			Bitmap bm = null;
 			try {
-				bm = MediaStore.Images.Media.getBitmap(resolver, uri);
+				bm = MediaStore.Images.Media.getBitmap(resolver,
+						Uri.parse(uristr));
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();

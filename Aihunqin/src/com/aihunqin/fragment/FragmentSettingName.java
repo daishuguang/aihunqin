@@ -45,5 +45,14 @@ public class FragmentSettingName extends Fragment {
 		((TextView) getView().findViewById(R.id.rightmenu)).setText("±£´æ");
 		((TextView) getView().findViewById(R.id.rightmenu))
 				.setVisibility(View.VISIBLE);
+
+		((TextView) getView().findViewById(R.id.rightmenu))
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						
+					}
+				});
 	}
 }
