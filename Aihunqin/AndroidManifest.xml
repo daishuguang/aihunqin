@@ -24,13 +24,15 @@
         <activity android:name="com.aihunqin.crazy.WebActivity" >
         </activity>
         <activity android:name="com.aihunqin.crazy.TestCamera" >
+        </activity>
+        <activity android:name="com.aihunqin.crazy.Camera" >
+        </activity>
+        <activity android:name="com.aihunqin.crazy.PopupMain" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.aihunqin.crazy.Camera" >
         </activity>
     </application>
 
@@ -38,4 +40,5 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 </manifest>
