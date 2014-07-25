@@ -33,6 +33,12 @@
         </activity>
         <activity android:name="com.aihunqin.crazy.PopupMain" >
         </activity>
+
+        <receiver android:name="com.aihunqin.crazy.BatteryReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
