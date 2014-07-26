@@ -13,7 +13,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.content.ContentResolver;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aihunqin.R;
@@ -94,9 +99,11 @@ public class FragmentMain extends Fragment {
 		// Setting bride name
 		TextView bride = (TextView) getView().findViewById(R.id.bridename);
 		bride.setOnClickListener(settingnameListener);
+		ImageView bannerhead = (ImageView) getView().findViewById(
+				R.id.bannerhead);
 
 		/** Read data from xml */
-		String re = "";
+		String str = "";
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
 		Document document;
@@ -109,12 +116,29 @@ public class FragmentMain extends Fragment {
 			Element root = document.getDocumentElement();
 			NodeList nodeList = root.getElementsByTagName("bridename");
 			Node nd = nodeList.item(0);
-			re = nd.getFirstChild().getNodeValue();
-			bride.setText(re);
+			str = nd.getFirstChild().getNodeValue();
+			bride.setText(str);
 			nodeList = root.getElementsByTagName("bridegroomname");
 			nd = nodeList.item(0);
-			re = nd.getFirstChild().getNodeValue();
-			bridegroom.setText(re);
+			str = nd.getFirstChild().getNodeValue();
+			bridegroom.setText(str);
+			nodeList = root.getElementsByTagName("pic");
+			nd = nodeList.item(0);
+			Node k = nd.getFirstChild();
+
+			if (k != null) {
+				str = nd.getFirstChild().getNodeValue();
+				if (str != "") {
+					Uri uri = Uri.parse(str);
+					ContentResolver contentresolver = getActivity()
+							.getContentResolver();
+					Bitmap bitmap = null;
+					bitmap = MediaStore.Images.Media.getBitmap(contentresolver,
+							uri);
+					bannerhead.setImageBitmap(bitmap);
+				}
+			}
+
 		} catch (ParserConfigurationException e) {
 
 			e.printStackTrace();

@@ -28,6 +28,7 @@
                 android:textSize="20sp" />
 
             <ImageView
+                android:id="@+id/weddingpic"
                 android:layout_width="300dp"
                 android:layout_height="400dp"
                 android:layout_gravity="center_horizontal"

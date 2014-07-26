@@ -17,24 +17,37 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Xml;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.aihunqin.crazy.PopupMain;
+import com.aihunqin.crazy.SelectPopupWindow;
 import com.example.aihunqin.R;
 
 public class FragmentSettingName extends Fragment {
 	EditText bridegroom;
 	EditText bride;
+	SelectPopupWindow menuWindow;
+	String uristr = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,12 +95,87 @@ public class FragmentSettingName extends Fragment {
 		}
 	}
 
+	private OnClickListener itemsOnClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			menuWindow.dismiss();
+			Intent intent = null;
+			switch (v.getId()) {
+			case R.id.btn_take_photo:
+				// 拍照我们用 Action为MediaStore.ACTION_IMAGE_CAPTURE,
+				// 有些人使用其他的Action但我发现在有些机子中会出问题，所以优先选择这个
+				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, 1);
+				break;
+			case R.id.btn_pick_photo:
+				// 选择照片的时候也一样，我们用Intent.ACTION_GET_CONTENT
+				intent = new Intent(Intent.ACTION_PICK);
+				intent.setType("image/*");
+				startActivityForResult(intent, 2);
+				break;
+			default:
+				break;
+			}
+		}
+	};
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode != Activity.RESULT_OK) {
+			return;
+		}
+		switch (requestCode) {
+		case 1:
+
+			break;
+		case 2:
+			Uri uri = data.getData();
+			uristr = uri.toString();
+			ContentResolver resolver = getActivity().getContentResolver();
+			Bitmap bm = null;
+			try {
+				bm = MediaStore.Images.Media.getBitmap(resolver,
+						Uri.parse(uristr));
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+			ImageView image = (ImageView) getView().findViewById(
+					R.id.weddingpic);
+			image.setImageBitmap(bm);
+			break;
+		default:
+			break;
+		}
+	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		bride = (EditText) getView().findViewById(R.id.bridename);
 		bridegroom = (EditText) getView().findViewById(R.id.bridegroomname);
 		readFromXML();
+
+		ImageView weddingpic = (ImageView) getView().findViewById(
+				R.id.weddingpic);
+		weddingpic.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				menuWindow = new SelectPopupWindow(getActivity(), itemsOnClick);
+				// 显示窗口
+				menuWindow.showAtLocation(
+						getActivity().findViewById(R.id.mainpop),
+						Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+			}
+		});
 		((TextView) getView().findViewById(R.id.titleTv)).setText("照片和名字");
 		((TextView) getView().findViewById(R.id.back))
 				.setVisibility(View.VISIBLE);
@@ -136,7 +224,7 @@ public class FragmentSettingName extends Fragment {
 							serializer.endTag("", "bridegroomname");
 
 							serializer.startTag("", "pic");
-							serializer.text("");
+							serializer.text(uristr);
 							serializer.endTag("", "pic");
 
 							serializer.endTag("", "user");
