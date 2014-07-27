@@ -4,9 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="8" />
 
     <application
         android:icon="@drawable/hunqin"
@@ -19,11 +17,6 @@
         <activity android:name="com.aihunqin.crazy.SelectBookActivity" >
         </activity>
         <activity android:name="com.aihunqin.crazy.SinaMain" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.aihunqin.crazy.WebActivity" >
         </activity>
@@ -33,12 +26,13 @@
         </activity>
         <activity android:name="com.aihunqin.crazy.PopupMain" >
         </activity>
-
-        <receiver android:name="com.aihunqin.crazy.BatteryReceiver" >
+        <activity android:name="com.aihunqin.crazy.CameraActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </receiver>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
