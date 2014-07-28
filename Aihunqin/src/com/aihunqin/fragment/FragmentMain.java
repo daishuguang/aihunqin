@@ -116,12 +116,18 @@ public class FragmentMain extends Fragment {
 			Element root = document.getDocumentElement();
 			NodeList nodeList = root.getElementsByTagName("bridename");
 			Node nd = nodeList.item(0);
-			str = nd.getFirstChild().getNodeValue();
-			bride.setText(str);
+			if (nd.getFirstChild() != null) {
+				str = nd.getFirstChild().getNodeValue();
+				bride.setText(str);
+			}
 			nodeList = root.getElementsByTagName("bridegroomname");
+
 			nd = nodeList.item(0);
-			str = nd.getFirstChild().getNodeValue();
-			bridegroom.setText(str);
+			if (nd.getFirstChild() != null) {
+				str = nd.getFirstChild().getNodeValue();
+				bridegroom.setText(str);
+			}
+
 			nodeList = root.getElementsByTagName("pic");
 			nd = nodeList.item(0);
 			Node k = nd.getFirstChild();

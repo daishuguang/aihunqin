@@ -129,15 +129,15 @@ public class CameraActivity extends Activity {
 
 				// imageview.setImageBitmap(bitmap);
 
-				Log.v("roboce", "path2:" + path);
-				File file = new File(path);
-				if (file.exists()) {
-					Log.v("roboce", "file exist");
-					Bitmap bmp = BitmapFactory.decodeFile(path);
-					imageview.setImageBitmap(bmp);
-				}
+				// Log.v("roboce", "path2:" + path);
+				// File file = new File(path);
+				// if (file.exists()) {
+				// Log.v("roboce", "file exist");
+				// Bitmap bmp = BitmapFactory.decodeFile(path);
+				// imageview.setImageBitmap(bmp);
+				// }
 				// Uri uri = Uri.fromFile(file);
-				// imageview.setImageURI(uri);
+				imageview.setImageURI(fileUri);
 			} else if (resultCode == RESULT_CANCELED) {
 				// User cancelled the image capture
 				ImageView imageview = (ImageView) findViewById(R.id.cameraviews);

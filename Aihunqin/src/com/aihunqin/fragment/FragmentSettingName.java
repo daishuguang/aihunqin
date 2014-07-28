@@ -1,10 +1,13 @@
 package com.aihunqin.fragment;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,10 +27,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.util.Xml;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,11 +54,50 @@ public class FragmentSettingName extends Fragment {
 	SelectPopupWindow menuWindow;
 	String uristr = "";
 
+	Uri fileUri;
+	static final int MEDIA_TYPE_IMAGE = 1;
+	static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater
 				.inflate(R.layout.fragment_settingname, container, false);
+	}
+
+	/** Create a file Uri for saving an image or video */
+	private Uri getOutputMediaFileUri(int type) {
+		return Uri.fromFile(getOutputMediaFile(type));
+	}
+
+	/** Create a File for saving an image or video */
+
+	private static File getOutputMediaFile(int type) {
+		// To be safe, you should check that the SDCard is mounted
+		// using Environment.getExternalStorageState() before doing this.
+		File mediaStorageDir = new File(
+				Environment
+						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+				"Aihunqin");
+		// This location works best if you want the created images to be shared
+		// between applications and persist after your app has been uninstalled.
+
+		// Create the storage directory if it does not exist
+		if (!mediaStorageDir.exists()) {
+			if (!mediaStorageDir.mkdirs()) {
+				return null;
+			}
+		}
+		// Create a media file name
+
+		File mediaFile;
+		if (type == MEDIA_TYPE_IMAGE) {
+			mediaFile = new File(mediaStorageDir.getPath() + File.separator
+					+ "IMG_MAIN.jpg");
+		} else {
+			return null;
+		}
+		return mediaFile;
 	}
 
 	void readFromXML() {
@@ -70,12 +114,16 @@ public class FragmentSettingName extends Fragment {
 			Element root = document.getDocumentElement();
 			NodeList nodeList = root.getElementsByTagName("bridename");
 			Node nd = nodeList.item(0);
-			str = nd.getFirstChild().getNodeValue();
-			bride.setText(str);
+			if (nd.getFirstChild() != null) {
+				str = nd.getFirstChild().getNodeValue();
+				bride.setText(str);
+			}
 			nodeList = root.getElementsByTagName("bridegroomname");
 			nd = nodeList.item(0);
-			str = nd.getFirstChild().getNodeValue();
-			bridegroom.setText(str);
+			if (nd.getFirstChild() != null) {
+				str = nd.getFirstChild().getNodeValue();
+				bridegroom.setText(str);
+			}
 		} catch (ParserConfigurationException e) {
 
 			e.printStackTrace();
@@ -106,7 +154,11 @@ public class FragmentSettingName extends Fragment {
 				// 拍照我们用 Action为MediaStore.ACTION_IMAGE_CAPTURE,
 				// 有些人使用其他的Action但我发现在有些机子中会出问题，所以优先选择这个
 				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent, 1);
+
+				fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+				startActivityForResult(intent,
+						CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 				break;
 			case R.id.btn_pick_photo:
 				// 选择照片的时候也一样，我们用Intent.ACTION_GET_CONTENT
@@ -127,9 +179,12 @@ public class FragmentSettingName extends Fragment {
 		if (resultCode != Activity.RESULT_OK) {
 			return;
 		}
+		ImageView image = (ImageView) getView().findViewById(R.id.weddingpic);
+		Log.v("roboce", "" + requestCode);
 		switch (requestCode) {
-		case 1:
-
+		case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+			uristr = fileUri.toString();
+			image.setImageURI(fileUri);
 			break;
 		case 2:
 			Uri uri = data.getData();
@@ -146,8 +201,7 @@ public class FragmentSettingName extends Fragment {
 
 				e.printStackTrace();
 			}
-			ImageView image = (ImageView) getView().findViewById(
-					R.id.weddingpic);
+
 			image.setImageBitmap(bm);
 			break;
 		default:

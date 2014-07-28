@@ -1,2 +1,4 @@
-1、拍照之后读取sdcard中的图片，imageview不显示
+-------- 拍照之后读取sdcard中的图片，imageview不显示
 http://blog.csdn.net/whucyl/article/details/9101563
+将users-sdk中的android:targetSdkVersion注释掉
+
