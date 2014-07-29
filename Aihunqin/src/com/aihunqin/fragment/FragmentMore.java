@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.aihunqin.crazy.WebActivity;
 import com.example.aihunqin.R;
-import com.tencent.mm.sdk.openapi.WXTextObject;
+
 
 public class FragmentMore extends Fragment {
 	@Override

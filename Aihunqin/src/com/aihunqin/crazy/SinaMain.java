@@ -18,8 +18,6 @@ import com.aihunqin.fragment.FragmentMain;
 import com.aihunqin.fragment.FragmentMore;
 import com.aihunqin.fragment.FragmentWeddingList;
 import com.example.aihunqin.R;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;
@@ -29,15 +27,6 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
 	private static final String APP_ID = "wx7160a43122ae9274";
 
-	// IWXAPI 是第三方app和微信通信的openapi接口
-	private IWXAPI api;
-
-	private void regToWx() {
-		// 通过WXAPIFactory工厂，获取IWXAPI的实例
-		api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-		// 将应用的appId注册到微信
-		api.registerApp(APP_ID);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +42,6 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		setFragmentIndicator();
 
 		// 注册到微信
-		regToWx();
 	}
 
 	void setFragmentIndicator() {
