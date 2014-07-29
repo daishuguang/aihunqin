@@ -6,5 +6,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="libs/libammsdk.jar"/>
+	<classpathentry kind="lib" path="E:/DownLoad/commons-net-3.3/commons-net-3.3.jar" sourcepath="D:/Alex/My Downloads/commons-net-3.3-bin/commons-net-3.3/commons-net-3.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/Alex/My Downloads/commons-net-3.3-bin/commons-net-3.3/apidocs/"/>
+			<attribute name="source_encoding" value="UTF-8"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
