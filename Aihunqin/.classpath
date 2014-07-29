@@ -5,12 +5,7 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="E:/DownLoad/commons-net-3.3/commons-net-3.3.jar" sourcepath="D:/Alex/My Downloads/commons-net-3.3-bin/commons-net-3.3/commons-net-3.3-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/D:/Alex/My Downloads/commons-net-3.3-bin/commons-net-3.3/apidocs/"/>
-			<attribute name="source_encoding" value="UTF-8"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="E:/DownLoad/BaiduMap_AndroidSDK_v2.4.1_Lib/baidumapapi_v2_4_1.jar"/>
+	<classpathentry kind="lib" path="libs/baidumapapi_v2_4_1.jar"/>
+	<classpathentry kind="lib" path="libs/commons-net-3.3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
