@@ -12,5 +12,6 @@
 			<attribute name="source_encoding" value="UTF-8"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/DownLoad/BaiduMap_AndroidSDK_v2.4.1_Lib/baidumapapi_v2_4_1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
