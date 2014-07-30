@@ -4,23 +4,25 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.location.LocationClientOption.LocationMode;
+import com.baidu.location.*;
+import com.baidu.location.LocationClientOption.*;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapStatus.Builder;
 import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.example.aihunqin.R;
 
 public class BaiduLocation extends Activity {
@@ -45,6 +47,7 @@ public class BaiduLocation extends Activity {
 		mLocationResult = (TextView) findViewById(R.id.mLocationResult);
 		InitLocation();
 		mLocationClient.start();
+
 	}
 
 	/**
@@ -98,6 +101,38 @@ public class BaiduLocation extends Activity {
 				.newLatLng(point);
 
 		mBaiduMap.setMapStatus(mapstatusupdate);
+
+		setRoutePlan(point);
+	}
+
+	void setRoutePlan(LatLng point) {
+		// 驾车线路规划
+		RoutePlanSearch mSearch = RoutePlanSearch.newInstance();
+		OnGetRoutePlanResultListener listener = new OnGetRoutePlanResultListener() {
+
+			@Override
+			public void onGetWalkingRouteResult(WalkingRouteResult arg0) {
+				// 获取步行路线规划结果
+			}
+
+			@Override
+			public void onGetTransitRouteResult(TransitRouteResult arg0) {
+				// 获取公交换乘路径规划结果
+			}
+
+			@Override
+			public void onGetDrivingRouteResult(DrivingRouteResult arg0) {
+				// 获取驾车路线规划结果
+			}
+		};
+		// 设置驾车线路规划检索监听者
+		mSearch.setOnGetRoutePlanResultListener(listener);
+		// 准备检索起、终点信息
+		PlanNode stNode = PlanNode.withLocation(point);
+		LatLng endpoint = new LatLng(121.473605, 31.232176);
+		PlanNode enNode = PlanNode.withLocation(endpoint);
+		mSearch.drivingSearch((new DrivingRoutePlanOption()).from(stNode).to(
+				enNode));
 	}
 
 	/**
