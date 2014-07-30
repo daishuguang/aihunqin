@@ -2,10 +2,8 @@ package com.aihunqin.test;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.aihunqin.test.BaiduLocation.MyLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -13,13 +11,21 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapStatus.Builder;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.example.aihunqin.R;
 
-public class BaiduTest extends Activity {
+public class BaiduLocation extends Activity {
 	BaiduMap mBaiduMap = null;
 	MapView mMapView = null;
-
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
 	public TextView mLocationResult;
@@ -28,17 +34,10 @@ public class BaiduTest extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		// 在使用SDK各组件之前初始化context信息，传入ApplicationContext
-		// 注意该方法要在setContentView方法之前实现
 		SDKInitializer.initialize(getApplicationContext());
-		setContentView(R.layout.baidutest);
-		// 获取地图控件引用
+		setContentView(R.layout.baidulocation);
 		mMapView = (MapView) findViewById(R.id.bmapView);
 		mBaiduMap = mMapView.getMap();
-		// 普通地图
-		mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-		// 开启定位图层
-		mBaiduMap.setMyLocationEnabled(true);
 
 		mLocationClient = new LocationClient(getApplicationContext());
 		mMyLocationListener = new MyLocationListener();
@@ -46,29 +45,6 @@ public class BaiduTest extends Activity {
 		mLocationResult = (TextView) findViewById(R.id.mLocationResult);
 		InitLocation();
 		mLocationClient.start();
-	}
-
-	@Override
-	protected void onDestroy() {
-
-		super.onDestroy();
-		// 在activity执行onDestroy时执行mMapView.onDestroy(),实现地图生命周期管理
-		mMapView.onDestroy();
-	}
-
-	@Override
-	protected void onResume() {
-
-		super.onResume();
-		mMapView.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-
-		super.onPause();
-		// 在activity执行onPause时执行mMapView.onPause(),实现地图生命周期管理
-		mMapView.onPause();
 	}
 
 	/**
@@ -100,8 +76,28 @@ public class BaiduTest extends Activity {
 				sb.append("\noperationers:");
 				sb.append(location.getOperators());
 			}
+
+			setMarker(location.getLatitude(), location.getLongitude());
 			logMsg(sb.toString());
 		}
+	}
+
+	void setMarker(double lat, double lng) {
+		// 定义Markker坐标点
+		LatLng point = new LatLng(lat, lng);
+		// 构建Marker图标
+		BitmapDescriptor bitmap = BitmapDescriptorFactory
+				.fromResource(R.drawable.wechat);
+		// 构建MarkerOption,用于在地图上添加Marker
+		OverlayOptions option = new MarkerOptions().position(point)
+				.icon(bitmap);
+		// 在地图上添加Marker,并显示
+		mBaiduMap.addOverlay(option);
+
+		MapStatusUpdate mapstatusupdate = MapStatusUpdateFactory
+				.newLatLng(point);
+
+		mBaiduMap.setMapStatus(mapstatusupdate);
 	}
 
 	/**
