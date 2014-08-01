@@ -22,9 +22,6 @@
             android:process=":remote" >
         </service>
 
-        <activity android:name="com.aihunqin.test.TitleProgressBar" >
-           
-        </activity>
         <activity android:name="com.aihunqin.test.baidunavi" >
         </activity>
         <activity
@@ -33,7 +30,8 @@
         </activity>
         <activity android:name="com.aihunqin.crazy.SelectBookActivity" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.SinaMain" > <intent-filter>
+        <activity android:name="com.aihunqin.crazy.SinaMain" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
