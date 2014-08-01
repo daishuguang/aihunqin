@@ -1,6 +1,6 @@
-package com.aihunqin.test;
+package com.common.web;
 
-import com.example.aihunqin.R;
+import com.example.commoncomponent.R;
 
 import android.app.Activity;
 import android.os.Bundle;
