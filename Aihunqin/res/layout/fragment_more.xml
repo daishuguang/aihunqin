@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#efefef"
+    android:fadingEdge="none"
     android:scrollbars="none" >
 
     <LinearLayout
@@ -29,6 +30,7 @@
             android:layout_height="25dp" />
 
         <TextView
+            android:id="@+id/wenhonglocation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="1dp"

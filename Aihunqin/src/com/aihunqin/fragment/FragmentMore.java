@@ -5,16 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.*;
 import android.telephony.SmsManager;
-import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.view.*;
 import android.widget.TextView;
 
 import com.aihunqin.crazy.WebActivity;
+import com.aihunqin.crazy.WenhongLocation;
 import com.example.aihunqin.R;
 
-
 public class FragmentMore extends Fragment {
+	TextView wenhonglocation;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -24,6 +25,17 @@ public class FragmentMore extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		wenhonglocation = (TextView) getView().findViewById(
+				R.id.wenhonglocation);
+		wenhonglocation.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), WenhongLocation.class);
+				startActivity(intent);
+			}
+		});
 		TextView aboutus = (TextView) getView().findViewById(R.id.aboutus);
 		aboutus.setOnClickListener(new OnClickListener() {
 

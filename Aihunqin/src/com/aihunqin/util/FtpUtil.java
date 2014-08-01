@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.SocketException;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
@@ -28,7 +29,7 @@ public class FtpUtil {
 	 *            要上传的文件名
 	 * @return
 	 */
-	public String ftpUpload(String url, String port, String username,
+	public static String ftpUpload(String url, String port, String username,
 			String password, String remotePath, String fileNamPath,
 			String fileName) {
 		FTPClient ftpClient = new FTPClient();
@@ -39,15 +40,17 @@ public class FtpUtil {
 			boolean loginResult = ftpClient.login(username, password);
 			int returnCode = ftpClient.getReplyCode();
 			if (loginResult && FTPReply.isPositiveCompletion(returnCode)) {// 如果登陆成功
-				ftpClient.makeDirectory(remotePath);
+				// ftpClient.makeDirectory(remotePath);
 				// 设置上传目录
 				ftpClient.changeWorkingDirectory(remotePath);
 				ftpClient.setBufferSize(1024);
 				ftpClient.setControlEncoding("UTF-8");
 				ftpClient.enterLocalPassiveMode();
-				fis = new FileInputStream(fileNamPath + fileName);
+				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				fis = new FileInputStream(fileNamPath);
 				ftpClient.storeFile(fileName, fis);
-
+				fis.close();
+				ftpClient.logout();
 				returnMessage = "1";// 上传成功
 			} else {// 如果登录失败
 				returnMessage = "0";

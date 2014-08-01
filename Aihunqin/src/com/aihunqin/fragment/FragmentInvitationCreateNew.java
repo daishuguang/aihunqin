@@ -1,15 +1,21 @@
 package com.aihunqin.fragment;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +25,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aihunqin.crazy.SelectPopupWindow;
 import com.aihunqin.crazy.WebActivity;
 import com.aihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.aihunqin.util.FtpUtil;
 import com.example.aihunqin.R;
 
 public class FragmentInvitationCreateNew extends Fragment {
@@ -35,6 +41,8 @@ public class FragmentInvitationCreateNew extends Fragment {
 	static final int MEDIA_TYPE_IMAGE = 1;
 	static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	int viewid;
+	int current = 0;
+	String img_path = null;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -129,11 +137,75 @@ public class FragmentInvitationCreateNew extends Fragment {
 			break;
 		case 2:
 			fileUri = data.getData();
-			((ImageView) getView().findViewById(viewid)).setImageURI(fileUri);
+
+			// ((ImageView)
+			// getView().findViewById(viewid)).setImageURI(fileUri);
+
+			String[] projection = { MediaStore.Images.Media.DATA };
+			Cursor actualimagecursor = getActivity().getContentResolver()
+					.query(fileUri, projection, null, null, null);
+			int actual_image_column_index = actualimagecursor
+					.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+			if (actualimagecursor.moveToFirst()) {
+				img_path = actualimagecursor
+						.getString(actual_image_column_index);
+			}
+			actualimagecursor.close();
+			Bitmap bitmap = null;
+			try {
+				bitmap = BitmapFactory.decodeStream(new FileInputStream(
+						img_path));
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+			}
+			((ImageView) getView().findViewById(viewid)).setImageBitmap(bitmap);
+			switch (viewid) {
+			case R.id.img1:
+				current = 1;
+				break;
+			case R.id.img2:
+				current = 2;
+				break;
+			case R.id.img3:
+				current = 3;
+				break;
+			case R.id.img4:
+				current = 4;
+				break;
+			case R.id.img5:
+				current = 5;
+				break;
+			case R.id.img6:
+				current = 6;
+				break;
+			case R.id.img7:
+				current = 7;
+				break;
+			case R.id.img8:
+				current = 8;
+				break;
+			case R.id.img9:
+				current = 9;
+				break;
+			}
+			new uploadThread().start();
 			break;
 		}
 
 	};
+
+	class uploadThread extends Thread {
+		@Override
+		public void run() {
+
+			String returnmsg = FtpUtil.ftpUpload("ruiqinsoft.com", "3084",
+					"tanqci", "tanqci123", "201405", img_path, "101-" + current
+							+ ".jpg");
+			Log.v("roboce", returnmsg);
+		}
+	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
