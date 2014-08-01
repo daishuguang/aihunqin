@@ -4,16 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/title_bar" />
-
-    <ProgressBar
-        android:id="@+id/webprogress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp" />
-
-    <WebView
-        android:id="@+id/webdemo"
+    <com.aihunqin.test.ProgressWebView
+        android:id="@+id/progresswebview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
