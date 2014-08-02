@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -23,10 +25,9 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
 	Fragment[] mFragments;
-
+	
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
 	private static final String APP_ID = "wx7160a43122ae9274";
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

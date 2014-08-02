@@ -2,18 +2,26 @@ package com.aihunqin.fragment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.json.JSONObject;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
@@ -38,6 +46,10 @@ import com.example.aihunqin.R;
 public class FragmentInvitation extends Fragment {
 	TextView invitationid;
 	TransferIDListener mCallback;
+	/** 保存图片 */
+	String FILENAME = "invitationinfo.xml";
+
+	File file = null;
 
 	public interface TransferIDListener {
 		public void onItemClicked(String id, String fragment);
@@ -69,6 +81,15 @@ public class FragmentInvitation extends Fragment {
 			@Override
 			public void onClick(View v) {
 				mCallback.onItemClicked("101", "createnew");
+			}
+		});
+
+		Button button3 = (Button) getView().findViewById(R.id.button3);
+		button3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mCallback.onItemClicked("160", "createnew");
 			}
 		});
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
@@ -136,14 +157,13 @@ public class FragmentInvitation extends Fragment {
 							JSONObject json;
 							json = new JSONObject(result);
 							String m = json.getString("id");
-
+							writeToXml(m);
 							// Save to XML
-							saveToXML();
+							mCallback.onItemClicked(m, "createnew");
 							Log.v("roboce", m);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-
 						getActivity()
 								.getSupportFragmentManager()
 								.beginTransaction()
@@ -155,6 +175,119 @@ public class FragmentInvitation extends Fragment {
 
 			}
 		});
+
+		writeToXml("101");
+		writeToXml("160");
+
+	}
+
+	void writeToXml(String returnid) {
+
+		// File file = new File(getActivity().getFilesDir().getPath() + "/"
+		// + FILENAME);
+		 file = new File(getActivity().getFilesDir().getPath() + "/"
+				+ FILENAME);
+		// try {
+		// file.createNewFile();
+		// } catch (IOException e1) {
+		//
+		// e1.printStackTrace();
+		// }
+		// file.exists();
+		// file.isFile();
+		// file.isDirectory();
+		// file.exists();
+		// file.delete();
+		// file.isFile();
+		// file.isDirectory();
+		// file.exists();
+
+		if (file.exists()) {
+			DocumentBuilderFactory dbf = null;
+			DocumentBuilder db = null;
+			Document doc = null;
+			try {
+				dbf = DocumentBuilderFactory.newInstance();
+				// 通过实例构建DocumentBuilder
+				db = dbf.newDocumentBuilder();
+				// 创建Document 解析给定的文件
+				doc = db.parse(file);
+				Element root = doc.getDocumentElement();
+
+				root.getElementsByTagName("invitations").getLength();
+				Element root2 = doc.createElement("invitation_" + returnid);
+				root.appendChild(root2);
+
+				TransformerFactory tfs = TransformerFactory.newInstance();
+				Transformer tf = tfs.newTransformer();
+				tf.transform(new DOMSource(doc), new StreamResult(
+						new FileOutputStream(file)));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				doc = null;
+				db = null;
+				dbf = null;
+			}
+		} else {
+
+			try {
+				XmlSerializer serializer = Xml.newSerializer();
+				StringWriter writer = new StringWriter();
+				serializer.setOutput(writer);
+				serializer.startDocument("utf-8", true);
+				serializer.startTag("", "invitations");
+
+				serializer.startTag("", "invitation_" + returnid);
+				serializer.text("");
+				serializer.endTag("", "invitation_" + returnid);
+
+				serializer.endTag("", "invitations");
+				serializer.endDocument();
+				OutputStream out = getActivity().openFileOutput(FILENAME,
+						Context.MODE_PRIVATE);
+				getActivity().getFileStreamPath(FILENAME).exists();
+
+				OutputStreamWriter outWriter = new OutputStreamWriter(out);
+				outWriter.write(writer.toString());
+				writer.close();
+				outWriter.close();
+				out.close();
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// xml数据生成
+	String WriteToString() {
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("utf-8", true);
+			serializer.startTag("", "invitations");
+			serializer.startTag("", "invitation");
+
+			serializer.startTag("", "username");
+			serializer.text("roboce");
+			serializer.endTag("", "username");
+
+			serializer.startTag("", "useremail");
+			serializer.text("daishuguang@126.com");
+			serializer.endTag("", "usermail");
+
+			serializer.endTag("", "invitation");
+			serializer.endTag("", "invitations");
+			serializer.endDocument();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writer.toString();
 	}
 
 	void saveToXML() {
@@ -195,62 +328,10 @@ public class FragmentInvitation extends Fragment {
 				// 解析文档
 				Document document = builder.parse(f);
 				Element configs = document.getDocumentElement();// 得到根节点，把后面创建的子节点加入这个跟节点中
-				
+
 			}
 		} catch (Exception e) {
 
-		}
-	}
-
-	void writeToXml() {
-
-	}
-
-	// xml数据生成
-	String WriteToString() {
-		XmlSerializer serializer = Xml.newSerializer();
-		StringWriter writer = new StringWriter();
-		try {
-			serializer.setOutput(writer);
-			serializer.startDocument("utf-8", true);
-			serializer.startTag("", "invitations");
-			serializer.startTag("", "invitation");
-
-			serializer.startTag("", "username");
-			serializer.text("roboce");
-			serializer.endTag("", "username");
-
-			serializer.startTag("", "useremail");
-			serializer.text("daishuguang@126.com");
-			serializer.endTag("", "usermail");
-
-			serializer.endTag("", "invitation");
-			serializer.endTag("", "invitations");
-			serializer.endDocument();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return writer.toString();
-	}
-
-	boolean writeToXml(String str) {
-		try {
-			OutputStream out = getActivity().openFileOutput("users.xml",
-					Context.MODE_PRIVATE);
-
-			OutputStreamWriter outWriter = new OutputStreamWriter(out);
-			outWriter.write(str);
-			outWriter.close();
-			out.close();
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
 		}
 	}
 

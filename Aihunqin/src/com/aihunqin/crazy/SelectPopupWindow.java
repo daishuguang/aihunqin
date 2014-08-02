@@ -27,13 +27,7 @@ public class SelectPopupWindow extends PopupWindow {
 		btn_pick_photo = (Button) mMenuView.findViewById(R.id.btn_pick_photo);
 		btn_cancel = (Button) mMenuView.findViewById(R.id.btn_cancel);
 		// 取消按钮
-		btn_cancel.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		btn_cancel.setOnClickListener(itemsOnClick);
 
 		// 设置按钮监听
 		btn_pick_photo.setOnClickListener(itemsOnClick);

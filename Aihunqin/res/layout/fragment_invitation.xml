@@ -43,6 +43,12 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:background="@android:color/transparent"
-        android:text="编辑请帖" />
-
+        android:text="编辑请帖101" />
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@android:color/transparent"
+        android:text="编辑请帖160" />
 </LinearLayout>

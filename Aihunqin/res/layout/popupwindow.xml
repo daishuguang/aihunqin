@@ -44,7 +44,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_style_alert_dialog_cancel"
-            android:text="取消"
+            android:text="删除"
             android:textColor="#ffffff"
             android:textStyle="bold" />
     </LinearLayout>

@@ -1,30 +1,49 @@
 package com.aihunqin.fragment;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aihunqin.crazy.SelectPopupWindow;
 import com.aihunqin.crazy.WebActivity;
@@ -40,9 +59,10 @@ public class FragmentInvitationCreateNew extends Fragment {
 	Uri fileUri;
 	static final int MEDIA_TYPE_IMAGE = 1;
 	static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	int viewid;
+	static int viewid;
 	int current = 0;
-	String img_path = null;
+	static String img_path = null;
+	static int picid = 0;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -68,7 +88,7 @@ public class FragmentInvitationCreateNew extends Fragment {
 		File mediaStorageDir = new File(
 				Environment
 						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-				"Aihunqin");
+				"Aihunqin/pics/");
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 
@@ -82,8 +102,38 @@ public class FragmentInvitationCreateNew extends Fragment {
 
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
-			mediaFile = new File(mediaStorageDir.getPath() + File.separator
-					+ "IMG_MAIN.jpg");
+			switch (viewid) {
+			case R.id.img1:
+				picid = 1;
+				break;
+			case R.id.img2:
+				picid = 2;
+				break;
+			case R.id.img3:
+				picid = 3;
+				break;
+			case R.id.img4:
+				picid = 4;
+				break;
+			case R.id.img5:
+				picid = 5;
+				break;
+			case R.id.img6:
+				picid = 6;
+				break;
+			case R.id.img7:
+				picid = 7;
+				break;
+			case R.id.img8:
+				picid = 8;
+				break;
+			case R.id.img9:
+				picid = 9;
+				break;
+			}
+			img_path = mediaStorageDir.getPath() + File.separator + picid
+					+ ".jpg";
+			mediaFile = new File(img_path);
 		} else {
 			return null;
 		}
@@ -109,11 +159,20 @@ public class FragmentInvitationCreateNew extends Fragment {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					viewid = v.getId();
+					Intent intent = null;
 					switch (which) {
 					case 0:
+						// 拍照我们用 Action为MediaStore.ACTION_IMAGE_CAPTURE,
+						// 有些人使用其他的Action但我发现在有些机子中会出问题，所以优先选择这个
+						intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+						fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+						intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+						startActivityForResult(intent,
+								CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 						break;
 					case 1:
-						Intent intent = new Intent();
+						intent = new Intent();
 						intent.setAction(Intent.ACTION_PICK);
 						intent.setType("image/*");
 						intent.putExtra("view", viewid);
@@ -126,6 +185,69 @@ public class FragmentInvitationCreateNew extends Fragment {
 		}
 	};
 
+	void loadImg() {
+		/** 保存图片 */
+		String FILENAME = "invitationinfo.xml";
+
+		File file = new File(getActivity().getFilesDir().getPath() + "/"
+				+ FILENAME);
+
+		if (file.exists()) {
+			try {
+				DocumentBuilderFactory dbf = DocumentBuilderFactory
+						.newInstance();
+				// 通过实例构建DocumentBuilder
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				// 创建Document 解析给定的文件
+				Document doc = db.parse(file);
+				Element root = doc.getDocumentElement();
+				NodeList nodeList = root.getElementsByTagName("invitation_"
+						+ id);
+				Element root2 = (Element) nodeList.item(0);
+				for (int i = 1; i < 10; i++) {
+					if (root2.getElementsByTagName("pic_" + i).item(0) != null) {
+						String uri = root2.getElementsByTagName("pic_" + i)
+								.item(0).getFirstChild().getNodeValue();
+						int imgid = 0;
+						switch (i) {
+						case 1:
+							imgid = R.id.img1;
+							break;
+						case 2:
+							imgid = R.id.img2;
+							break;
+						case 3:
+							imgid = R.id.img3;
+							break;
+						case 4:
+							imgid = R.id.img4;
+							break;
+						case 5:
+							imgid = R.id.img5;
+							break;
+						case 6:
+							imgid = R.id.img6;
+							break;
+						case 7:
+							imgid = R.id.img7;
+							break;
+						case 8:
+							imgid = R.id.img8;
+							break;
+						case 9:
+							imgid = R.id.img9;
+							break;
+						}
+						((ImageView) getView().findViewById(imgid))
+								.setImageURI(Uri.parse(uri));
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -133,11 +255,12 @@ public class FragmentInvitationCreateNew extends Fragment {
 			return;
 		}
 		switch (requestCode) {
-		case 1:
+		case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+			// ((ImageView)
+			// getView().findViewById(viewid)).setImageURI(fileUri);
 			break;
 		case 2:
 			fileUri = data.getData();
-
 			// ((ImageView)
 			// getView().findViewById(viewid)).setImageURI(fileUri);
 
@@ -152,61 +275,145 @@ public class FragmentInvitationCreateNew extends Fragment {
 						.getString(actual_image_column_index);
 			}
 			actualimagecursor.close();
-			Bitmap bitmap = null;
+			// Bitmap bitmap = null;
+			// try {
+			// bitmap = BitmapFactory.decodeStream(new
+			// FileInputStream(img_path));
+			// } catch (FileNotFoundException e) {
+			//
+			// e.printStackTrace();
+			// }
+			// ((ImageView)
+			// getView().findViewById(viewid)).setImageBitmap(bitmap);
+
+			break;
+		}
+		((ImageView) getView().findViewById(viewid)).setImageURI(fileUri);
+		switch (viewid) {
+		case R.id.img1:
+			current = 1;
+			break;
+		case R.id.img2:
+			current = 2;
+			break;
+		case R.id.img3:
+			current = 3;
+			break;
+		case R.id.img4:
+			current = 4;
+			break;
+		case R.id.img5:
+			current = 5;
+			break;
+		case R.id.img6:
+			current = 6;
+			break;
+		case R.id.img7:
+			current = 7;
+			break;
+		case R.id.img8:
+			current = 8;
+			break;
+		case R.id.img9:
+			current = 9;
+			break;
+		}
+		new uploadThread().start();
+
+		/** 保存图片 */
+		String FILENAME = "invitationinfo.xml";
+
+		File file = new File(getActivity().getFilesDir().getPath() + "/"
+				+ FILENAME);
+
+		if (file.exists()) {
 			try {
-				bitmap = BitmapFactory.decodeStream(new FileInputStream(
-						img_path));
+				DocumentBuilderFactory dbf = DocumentBuilderFactory
+						.newInstance();
+				// 通过实例构建DocumentBuilder
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				// 创建Document 解析给定的文件
+				Document doc = db.parse(file);
+				Element root = doc.getDocumentElement();
+				NodeList nodeList = root.getElementsByTagName("invitation_"
+						+ id);
+				Element root2 = (Element) nodeList.item(0);
+
+				if (root2.getElementsByTagName("pic_" + current).item(0) != null) {
+					String uri = root2.getElementsByTagName("pic_" + current)
+							.item(0).getFirstChild().getNodeValue();
+
+					root2.getElementsByTagName("pic_" + current).item(0)
+							.getFirstChild().setNodeValue(fileUri.toString());
+				} else {
+					Element ele = doc.createElement("pic_" + current);
+					Text eletext = doc.createTextNode(fileUri.toString());
+					ele.appendChild(eletext);
+					root2.appendChild(ele);
+				}
+				TransformerFactory tfs = TransformerFactory.newInstance();
+				Transformer tf = tfs.newTransformer();
+				tf.transform(new DOMSource(doc), new StreamResult(
+						new FileOutputStream(file)));
+				// 添加一个元素
+				// Element eModel = doc.createElement("");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+
+			try {
+				XmlSerializer serializer = Xml.newSerializer();
+				StringWriter writer = new StringWriter();
+				serializer.setOutput(writer);
+				serializer.startDocument("utf-8", true);
+				serializer.startTag("", "invitations");
+				serializer.startTag("", "invitation_" + id);
+
+				serializer.startTag("", "pic_" + current);
+				serializer.text(fileUri.toString());
+				serializer.endTag("", "pic_" + current);
+
+				serializer.endTag("", "invitation_" + id);
+				serializer.endTag("", "invitations");
+				serializer.endDocument();
+				OutputStream out = getActivity().openFileOutput(FILENAME,
+						Context.MODE_PRIVATE);
+				OutputStreamWriter outWriter = new OutputStreamWriter(out);
+				outWriter.write(writer.toString());
+				outWriter.close();
+				out.close();
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();
-			}
-			((ImageView) getView().findViewById(viewid)).setImageBitmap(bitmap);
-			switch (viewid) {
-			case R.id.img1:
-				current = 1;
-				break;
-			case R.id.img2:
-				current = 2;
-				break;
-			case R.id.img3:
-				current = 3;
-				break;
-			case R.id.img4:
-				current = 4;
-				break;
-			case R.id.img5:
-				current = 5;
-				break;
-			case R.id.img6:
-				current = 6;
-				break;
-			case R.id.img7:
-				current = 7;
-				break;
-			case R.id.img8:
-				current = 8;
-				break;
-			case R.id.img9:
-				current = 9;
-				break;
-			}
-			new uploadThread().start();
-			break;
-		}
+			} catch (IOException e) {
 
+				e.printStackTrace();
+			}
+		}
 	};
 
+	/***
+	 * 上传图片到FTP
+	 * 
+	 * @author Alex
+	 * 
+	 */
 	class uploadThread extends Thread {
 		@Override
 		public void run() {
 
 			String returnmsg = FtpUtil.ftpUpload("ruiqinsoft.com", "3084",
-					"tanqci", "tanqci123", "201405", img_path, "101-" + current
-							+ ".jpg");
+					"tanqci", "tanqci123", "201405", img_path, id + "-"
+							+ current + ".jpg");
 			Log.v("roboce", returnmsg);
 		}
 	}
 
+	/***
+	 * 
+	 * 第一步要执行的Callback
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -298,5 +505,6 @@ public class FragmentInvitationCreateNew extends Fragment {
 		img7.setOnClickListener(clickListiener);
 		img8.setOnClickListener(clickListiener);
 		img9.setOnClickListener(clickListiener);
+		loadImg();
 	}
 }

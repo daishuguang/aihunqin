@@ -34,6 +34,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/bridegroomname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -77,6 +78,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/bridename"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -114,6 +116,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/bridegroommobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -151,6 +154,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/bridemobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -188,6 +192,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/love1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -224,6 +229,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/love2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -260,6 +266,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/love3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -296,6 +303,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/love4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -411,6 +419,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/weddinglocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -447,6 +456,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/hotelname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -521,6 +531,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/seat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -556,6 +567,7 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:id="@+id/youkuid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

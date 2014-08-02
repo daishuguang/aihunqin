@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,7 +54,7 @@ public class FragmentSettingName extends Fragment {
 	EditText bride;
 	SelectPopupWindow menuWindow;
 	String uristr = "";
-
+	ImageView weddingpic = null;
 	Uri fileUri;
 	static final int MEDIA_TYPE_IMAGE = 1;
 	static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -118,6 +119,14 @@ public class FragmentSettingName extends Fragment {
 				str = nd.getFirstChild().getNodeValue();
 				bride.setText(str);
 			}
+			nodeList = root.getElementsByTagName("pic");
+			nd = nodeList.item(0);
+			if (nd.getFirstChild() != null) {
+				uristr = nd.getFirstChild().getNodeValue();
+				if (uristr != "") {
+					weddingpic.setImageURI(Uri.parse(uristr));
+				}
+			}
 			nodeList = root.getElementsByTagName("bridegroomname");
 			nd = nodeList.item(0);
 			if (nd.getFirstChild() != null) {
@@ -165,6 +174,10 @@ public class FragmentSettingName extends Fragment {
 				intent = new Intent(Intent.ACTION_PICK);
 				intent.setType("image/*");
 				startActivityForResult(intent, 2);
+				break;
+			case R.id.btn_cancel:
+				uristr = "";
+				weddingpic.setImageResource(R.drawable.tabbannerhead);
 				break;
 			default:
 				break;
@@ -214,10 +227,7 @@ public class FragmentSettingName extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		bride = (EditText) getView().findViewById(R.id.bridename);
 		bridegroom = (EditText) getView().findViewById(R.id.bridegroomname);
-		readFromXML();
-
-		ImageView weddingpic = (ImageView) getView().findViewById(
-				R.id.weddingpic);
+		weddingpic = (ImageView) getView().findViewById(R.id.weddingpic);
 		weddingpic.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -230,6 +240,9 @@ public class FragmentSettingName extends Fragment {
 						Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 			}
 		});
+
+		readFromXML();
+
 		((TextView) getView().findViewById(R.id.titleTv)).setText("ÕÕÆ¬ºÍÃû×Ö");
 		((TextView) getView().findViewById(R.id.back))
 				.setVisibility(View.VISIBLE);
