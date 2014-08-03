@@ -22,6 +22,10 @@
         <activity android:name="com.common.ui.ListActivityTest" >
         </activity>
         <activity android:name="com.common.ui.SimpleAdapterTest" >
+        </activity>
+        <activity android:name="com.common.ui.BaseAdapterTest" >
+        </activity>
+        <activity android:name="com.common.ui.WeddingList" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
