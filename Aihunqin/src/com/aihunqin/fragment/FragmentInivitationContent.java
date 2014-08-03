@@ -400,7 +400,6 @@ public class FragmentInivitationContent extends Fragment {
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
 			}
-			root.appendChild(root2);
 			TransformerFactory tfs = TransformerFactory.newInstance();
 			Transformer tf = tfs.newTransformer();
 			tf.transform(new DOMSource(doc), new StreamResult(
@@ -552,6 +551,8 @@ public class FragmentInivitationContent extends Fragment {
 					String m = json.getString("id");
 					if (m.equals(id)) {
 						writeToXml();
+						getActivity().getSupportFragmentManager()
+								.popBackStack();
 					}
 					Log.v("roboce", m);
 				} catch (Exception e) {

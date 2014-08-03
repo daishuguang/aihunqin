@@ -180,8 +180,8 @@ public class FragmentInvitation extends Fragment {
 			}
 		});
 
-		writeToXml("101");
-		writeToXml("160");
+		// writeToXml("101");
+		// writeToXml("160");
 
 	}
 
@@ -189,9 +189,10 @@ public class FragmentInvitation extends Fragment {
 
 		file = new File(getActivity().getFilesDir().getPath() + File.separator
 				+ FILENAME);
+		try {
+			FileInputStream fis = getActivity().openFileInput(FILENAME);
 
-		if (file.exists()) {
-
+			fis.close();
 			DocumentBuilderFactory dbf = null;
 			DocumentBuilder db = null;
 			Document doc = null;
@@ -218,8 +219,7 @@ public class FragmentInvitation extends Fragment {
 				db = null;
 				dbf = null;
 			}
-		} else {
-
+		} catch (FileNotFoundException e1) {
 			try {
 				XmlSerializer serializer = Xml.newSerializer();
 				StringWriter writer = new StringWriter();
@@ -249,6 +249,9 @@ public class FragmentInvitation extends Fragment {
 
 				e.printStackTrace();
 			}
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
 		}
 	}
 
