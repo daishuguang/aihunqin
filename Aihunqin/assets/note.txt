@@ -2,3 +2,26 @@
 http://blog.csdn.net/whucyl/article/details/9101563
 将users-sdk中的android:targetSdkVersion注释掉
 
+2------- 关于File的读写权限,以及file.exists()
+
+function writeToXML() {
+		file = new File(getActivity().getFilesDir().getPath() + File.separator
+				+ FILENAME);
+
+		if (file.exists()) {
+		
+		}else{
+			OutputStream out = getActivity().openFileOutput(FILENAME,
+						Context.MODE_PRIVATE);
+				getActivity().getFileStreamPath(FILENAME).exists();
+
+				OutputStreamWriter outWriter = new OutputStreamWriter(out);
+				outWriter.write(writer.toString());
+				writer.close();
+				outWriter.close();
+				out.close();
+		}
+}
+
+file.exists()------------>永远是true或false
+http://wingjang.blog.163.com/blog/static/4791344220110142319369/

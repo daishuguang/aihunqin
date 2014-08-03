@@ -1,11 +1,15 @@
 package com.aihunqin.fragment;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,26 +187,11 @@ public class FragmentInvitation extends Fragment {
 
 	void writeToXml(String returnid) {
 
-		// File file = new File(getActivity().getFilesDir().getPath() + "/"
-		// + FILENAME);
-		 file = new File(getActivity().getFilesDir().getPath() + "/"
+		file = new File(getActivity().getFilesDir().getPath() + File.separator
 				+ FILENAME);
-		// try {
-		// file.createNewFile();
-		// } catch (IOException e1) {
-		//
-		// e1.printStackTrace();
-		// }
-		// file.exists();
-		// file.isFile();
-		// file.isDirectory();
-		// file.exists();
-		// file.delete();
-		// file.isFile();
-		// file.isDirectory();
-		// file.exists();
 
 		if (file.exists()) {
+
 			DocumentBuilderFactory dbf = null;
 			DocumentBuilder db = null;
 			Document doc = null;
