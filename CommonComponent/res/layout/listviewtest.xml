@@ -8,6 +8,14 @@
     <!-- 设置使用红色的分隔条 -->
 
     <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0000ff"
+        android:drawSelectorOnTop="false" >
+    </ListView>
+
+    <ListView
         android:id="@+id/list1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

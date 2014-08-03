@@ -18,6 +18,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity android:name="com.common.ui.SimpleListViewTest" >
+        </activity>
+        <activity android:name="com.common.ui.ListActivityTest" >
+        </activity>
+        <activity android:name="com.common.ui.SimpleAdapterTest" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

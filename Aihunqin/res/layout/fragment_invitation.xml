@@ -11,6 +11,7 @@
         android:id="@+id/demolink"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/ecarddemo1" >
 
@@ -41,7 +42,9 @@
         android:id="@+id/invitationlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/books" >
+        android:entries="@array/books"
+        android:fadingEdge="none"
+        android:scrollbars="none" >
     </ListView>
 
     <Button
