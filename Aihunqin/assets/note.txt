@@ -25,3 +25,28 @@ function writeToXML() {
 
 file.exists()------------>永远是true或false
 http://wingjang.blog.163.com/blog/static/4791344220110142319369/
+
+3-------------关于list_item中设置item的高度问题
+在item_layout文件中设置的高度无效，只能在getview中设置
+http://www.apkbus.com/android-73425-1-1.html
+据我所了解，listview每行的宽度是由 inflater填充布局中高度最大的那个控件的高度。。。
+public  void setListViewHeightBasedOnChildren(ListView listView) 
+        {
+                //获取ListView对应的Adapter
+                ListAdapter listAdapter = listView.getAdapter();
+                if (listAdapter == null) {
+                        return;
+                }
+
+                int totalHeight = 0;
+                for (int i = 0, len = listAdapter.getCount(); i < len; i++)
+                {   
+                        totalHeight += 42; 
+                }
+
+                ViewGroup.LayoutParams params = listView.getLayoutParams();
+                params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+                //listView.getDividerHeight()获取子项间分隔符占用的高度
+                //params.height最后得到整个ListView完整显示需要的高度
+                listView.setLayoutParams(params);
+        }
