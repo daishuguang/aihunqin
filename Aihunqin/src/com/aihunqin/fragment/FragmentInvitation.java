@@ -1,18 +1,16 @@
 package com.aihunqin.fragment;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.RandomAccessFile;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -39,21 +37,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aihunqin.crazy.WebActivity;
+import com.aihunqin.model.InvitationItem;
 import com.aihunqin.util.HttpUtil;
 import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {
 	TextView invitationid;
+	ListView invitationlist;
 	TransferIDListener mCallback;
 	/** 保存图片 */
 	String FILENAME = "invitationinfo.xml";
 
 	File file = null;
+	/** data */
+	List<InvitationItem> invitationDatas = null;
 
 	public interface TransferIDListener {
 		public void onItemClicked(String id, String fragment);
@@ -78,7 +83,7 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		invitationlist = (ListView) getView().findViewById(R.id.invitationlist);
 		Button button2 = (Button) getView().findViewById(R.id.button2);
 		button2.setOnClickListener(new OnClickListener() {
 
@@ -182,7 +187,9 @@ public class FragmentInvitation extends Fragment {
 
 		// writeToXml("101");
 		// writeToXml("160");
-
+		invitationDatas = new ArrayList<InvitationItem>();
+		InvitationAdapter adapter = new InvitationAdapter();
+		invitationlist.setAdapter(adapter);
 	}
 
 	void writeToXml(String returnid) {
@@ -336,5 +343,52 @@ public class FragmentInvitation extends Fragment {
 			str += filelist[i] + "\n";
 		}
 		invitationid.setText(str);
+	}
+
+	void readFromXML(){
+		
+	}
+	class InvitationAdapter extends BaseAdapter {
+		TextView listid, listdate, listtitle, listinvitor, listdrink;
+		ImageView listimg;
+
+		@Override
+		public int getCount() {
+
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int position) {
+
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			convertView = getActivity().getLayoutInflater().inflate(
+					R.layout.simple_invitation_item, null);
+
+			listid = (TextView) convertView.findViewById(R.id.listid);
+			listid.setText("第" + position + "张");
+			listimg = (ImageView) convertView.findViewById(R.id.listimg);
+			listimg.setImageResource(R.drawable.aboutus);
+			listdate = (TextView) convertView.findViewById(R.id.listdate);
+			listdate.setText("创建日期:" + "2014.04.14");
+			listtitle = (TextView) convertView.findViewById(R.id.listtitle);
+			listtitle.setText("婚贴标题");
+			listinvitor = (TextView) convertView.findViewById(R.id.listinvitor);
+			listinvitor.setText("新郎名");
+			listdrink = (TextView) convertView.findViewById(R.id.listdrink);
+			listdrink.setText("新娘名");
+			return convertView;
+		}
+
 	}
 }
