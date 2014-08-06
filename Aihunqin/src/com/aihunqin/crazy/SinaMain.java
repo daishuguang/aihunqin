@@ -18,6 +18,7 @@ import com.aihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.aihunqin.fragment.FragmentInvitationCreateNew;
 import com.aihunqin.fragment.FragmentMain;
 import com.aihunqin.fragment.FragmentMore;
+import com.aihunqin.fragment.FragmentQRCode;
 import com.aihunqin.fragment.FragmentWeddingList;
 import com.example.aihunqin.R;
 
@@ -96,6 +97,13 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		}
 		if (which.equals("content")) {
 			FragmentInivitationContent fragment = new FragmentInivitationContent();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
+		if(which.equals("qrcode")){
+			FragmentQRCode fragment = new FragmentQRCode();
 			fragment.setArguments(arguments);
 			this.getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragment_container, fragment)

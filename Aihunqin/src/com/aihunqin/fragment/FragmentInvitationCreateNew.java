@@ -486,6 +486,15 @@ public class FragmentInvitationCreateNew extends Fragment {
 				startActivity(intent);
 			}
 		});
+
+		Button qrcode = (Button) getView().findViewById(R.id.qrcode);
+		qrcode.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mCallback.onItemClicked(id, "qrcode");
+			}
+		});
 		img1 = (ImageView) getView().findViewById(R.id.img1);
 		img2 = (ImageView) getView().findViewById(R.id.img2);
 		img3 = (ImageView) getView().findViewById(R.id.img3);

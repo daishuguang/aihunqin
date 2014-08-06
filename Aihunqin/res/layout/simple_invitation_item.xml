@@ -18,8 +18,7 @@
         android:id="@+id/listimg"
         android:layout_width="72dp"
         android:layout_height="90dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/map" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="wrap_content"
