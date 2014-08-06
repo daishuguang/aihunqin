@@ -1,12 +1,16 @@
 package com.aihunqin.crazy;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import com.example.aihunqin.R;
 public class WebActivity extends Activity {
 	boolean loadtitle = false;
 	ProgressBar progressbar;
+	LinearLayout nonet;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,8 +29,16 @@ public class WebActivity extends Activity {
 		webview.getSettings().setJavaScriptEnabled(true);
 		progressbar = (ProgressBar) findViewById(R.id.webprogress);
 		String url = getIntent().getExtras().getString("link");
-		webview.loadUrl(url);
+		nonet = (LinearLayout) findViewById(R.id.nonet);
+		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
+		if (networkInfo != null && networkInfo.isConnected()) {
+			webview.loadUrl(url);
+		} else {
+			webview.setVisibility(View.GONE);
+			nonet.setVisibility(View.VISIBLE);
+		}
 		webview.setWebViewClient(new WebViewClient() {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				view.loadUrl(url);
