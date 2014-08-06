@@ -5,13 +5,24 @@ public class InvitationItem {
 	String itemdate;
 	String iteminvitor;
 	String itemdrink;
+	String itemid;
+
+	public String getItemid() {
+		return itemid;
+	}
+
+	public void setItemid(String itemid) {
+		this.itemid = itemid;
+	}
 
 	public InvitationItem() {
 		super();
 	}
 
 	public InvitationItem(String imguri, String itemdate, String iteminvitor,
-			String itemdrink) {
+			String itemdrink, String itemid) {
+		super();
+		this.itemid = itemid;
 		this.imguri = imguri;
 		this.itemdate = itemdate;
 		this.iteminvitor = iteminvitor;

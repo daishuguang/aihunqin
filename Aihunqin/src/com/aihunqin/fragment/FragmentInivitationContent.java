@@ -1,9 +1,13 @@
 package com.aihunqin.fragment;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -240,170 +244,246 @@ public class FragmentInivitationContent extends Fragment {
 				root2.getElementsByTagName("bridegroomname").item(0)
 						.getFirstChild()
 						.setNodeValue(bridegroomname.getText().toString());
+
+				root2.getElementsByTagName("bridename").item(0).getFirstChild()
+						.setNodeValue(bridename.getText().toString());
+				Text eletext = null;
+				if (root2.getElementsByTagName("bridegroommobile").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(bridegroomname.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("bridegroommobile")
+							.item(0)
+							.getFirstChild()
+							.setNodeValue(bridegroommobile.getText().toString());
+				}
+
+				if (root2.getElementsByTagName("bridemobile").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(bridemobile.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("bridemobile").item(0)
+							.getFirstChild()
+							.setNodeValue(bridemobile.getText().toString());
+				}
+
+				if (root2.getElementsByTagName("love1").item(0).getFirstChild() == null) {
+					eletext = doc.createTextNode(love1.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("love1").item(0).getFirstChild()
+							.setNodeValue(love1.getText().toString());
+				}
+				if (root2.getElementsByTagName("love2").item(0).getFirstChild() == null) {
+					eletext = doc.createTextNode(love2.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("love2").item(0).getFirstChild()
+							.setNodeValue(love2.getText().toString());
+				}
+				if (root2.getElementsByTagName("love3").item(0).getFirstChild() == null) {
+					eletext = doc.createTextNode(love3.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("love3").item(0).getFirstChild()
+							.setNodeValue(love3.getText().toString());
+				}
+				if (root2.getElementsByTagName("love4").item(0).getFirstChild() == null) {
+					eletext = doc.createTextNode(love4.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("love4").item(0).getFirstChild()
+							.setNodeValue(love4.getText().toString());
+				}
+				if (root2.getElementsByTagName("weddingdate").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(weddingdate.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("weddingdate").item(0)
+							.getFirstChild()
+							.setNodeValue(weddingdate.getText().toString());
+				}
+				if (root2.getElementsByTagName("weddingdatechinese").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(weddingdatechinese.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("weddingdatechinese")
+							.item(0)
+							.getFirstChild()
+							.setNodeValue(
+									weddingdatechinese.getText().toString());
+				}
+
+				if (root2.getElementsByTagName("weddinglocation").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(weddinglocation.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("weddinglocation").item(0)
+							.getFirstChild()
+							.setNodeValue(weddinglocation.getText().toString());
+				}
+
+				if (root2.getElementsByTagName("weddingtime").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(weddingtime.getText()
+							.toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("weddingtime").item(0)
+							.getFirstChild()
+							.setNodeValue(weddingtime.getText().toString());
+				}
+				if (root2.getElementsByTagName("seat").item(0).getFirstChild() == null) {
+					eletext = doc.createTextNode(seat.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("seat").item(0).getFirstChild()
+							.setNodeValue(seat.getText().toString());
+				}
+				if (root2.getElementsByTagName("youkuid").item(0)
+						.getFirstChild() == null) {
+					eletext = doc.createTextNode(youkuid.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("youkuid").item(0)
+							.getFirstChild()
+							.setNodeValue(youkuid.getText().toString());
+				}
+
+				if (root2.getElementsByTagName("hotelname").item(0)
+						.getFirstChild() == null) {
+					eletext = doc
+							.createTextNode(hotelname.getText().toString());
+					root2.appendChild(eletext);
+				} else {
+					root2.getElementsByTagName("hotelname").item(0)
+							.getFirstChild()
+							.setNodeValue(hotelname.getText().toString());
+				}
+
 			} else {
 				Element ele = doc.createElement("bridegroomname");
 				Text eletext = doc.createTextNode(bridegroomname.getText()
 						.toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
-			if (root2.getElementsByTagName("bridename").item(0) != null) {
-				root2.getElementsByTagName("bridename").item(0).getFirstChild()
-						.setNodeValue(bridename.getText().toString());
-			} else {
-				Element ele = doc.createElement("bridename");
-				Text eletext = doc.createTextNode(bridename.getText()
+
+				ele = doc.createElement("bridename");
+				eletext = doc.createTextNode(bridename.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("bridegroommobile");
+				eletext = doc.createTextNode(bridegroommobile.getText()
 						.toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("bridegroommobile").item(0) != null) {
-				root2.getElementsByTagName("bridegroommobile").item(0)
-						.getFirstChild()
-						.setNodeValue(bridegroommobile.getText().toString());
-			} else {
-				Element ele = doc.createElement("bridegroommobile");
-				Text eletext = doc.createTextNode(bridegroommobile.getText()
+				ele = doc.createElement("bridemobile");
+				eletext = doc.createTextNode(bridemobile.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("love1");
+				eletext = doc.createTextNode(love1.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("love2");
+				eletext = doc.createTextNode(love2.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("love3");
+				eletext = doc.createTextNode(love3.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("love4");
+				eletext = doc.createTextNode(love4.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("weddingdate");
+				eletext = doc.createTextNode(weddingdate.getText().toString());
+				ele.appendChild(eletext);
+				root2.appendChild(ele);
+
+				ele = doc.createElement("weddingdatechinese");
+				eletext = doc.createTextNode(weddingdatechinese.getText()
 						.toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("bridemobile").item(0) != null) {
-				root2.getElementsByTagName("bridemobile").item(0)
-						.getFirstChild()
-						.setNodeValue(bridemobile.getText().toString());
-			} else {
-				Element ele = doc.createElement("bridemobile");
-				Text eletext = doc.createTextNode(bridemobile.getText()
+				ele = doc.createElement("weddinglocation");
+				eletext = doc.createTextNode(weddinglocation.getText()
 						.toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("love1").item(0) != null) {
-				root2.getElementsByTagName("love1").item(0).getFirstChild()
-						.setNodeValue(love1.getText().toString());
-			} else {
-				Element ele = doc.createElement("love1");
-				Text eletext = doc.createTextNode(love1.getText().toString());
+				ele = doc.createElement("hotelname");
+				eletext = doc.createTextNode(hotelname.getText().toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("love2").item(0) != null) {
-				root2.getElementsByTagName("love2").item(0).getFirstChild()
-						.setNodeValue(love2.getText().toString());
-			} else {
-				Element ele = doc.createElement("love2");
-				Text eletext = doc.createTextNode(love2.getText().toString());
+				ele = doc.createElement("weddingtime");
+				eletext = doc.createTextNode(weddingtime.getText().toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("love3").item(0) != null) {
-				root2.getElementsByTagName("love3").item(0).getFirstChild()
-						.setNodeValue(love3.getText().toString());
-			} else {
-				Element ele = doc.createElement("love3");
-				Text eletext = doc.createTextNode(love3.getText().toString());
+				ele = doc.createElement("seat");
+				eletext = doc.createTextNode(seat.getText().toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
-			}
 
-			if (root2.getElementsByTagName("love4").item(0) != null) {
-				root2.getElementsByTagName("love4").item(0).getFirstChild()
-						.setNodeValue(love4.getText().toString());
-			} else {
-				Element ele = doc.createElement("love4");
-				Text eletext = doc.createTextNode(love4.getText().toString());
+				ele = doc.createElement("youkuid");
+				eletext = doc.createTextNode(youkuid.getText().toString());
 				ele.appendChild(eletext);
 				root2.appendChild(ele);
+
 			}
 
-			if (root2.getElementsByTagName("weddingdate").item(0) != null) {
-				root2.getElementsByTagName("weddingdate").item(0)
-						.getFirstChild()
-						.setNodeValue(weddingdate.getText().toString());
-			} else {
-				Element ele = doc.createElement("weddingdate");
-				Text eletext = doc.createTextNode(weddingdate.getText()
-						.toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("weddingdatechinese").item(0) != null) {
-				root2.getElementsByTagName("weddingdatechinese").item(0)
-						.getFirstChild()
-						.setNodeValue(weddingdatechinese.getText().toString());
-			} else {
-				Element ele = doc.createElement("weddingdatechinese");
-				Text eletext = doc.createTextNode(weddingdatechinese.getText()
-						.toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("weddinglocation").item(0) != null) {
-				root2.getElementsByTagName("weddinglocation").item(0)
-						.getFirstChild()
-						.setNodeValue(weddinglocation.getText().toString());
-			} else {
-				Element ele = doc.createElement("weddinglocation");
-				Text eletext = doc.createTextNode(weddinglocation.getText()
-						.toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("hotelname").item(0) != null) {
-				root2.getElementsByTagName("hotelname").item(0).getFirstChild()
-						.setNodeValue(hotelname.getText().toString());
-			} else {
-				Element ele = doc.createElement("hotelname");
-				Text eletext = doc.createTextNode(hotelname.getText()
-						.toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("weddingtime").item(0) != null) {
-				root2.getElementsByTagName("weddingtime").item(0)
-						.getFirstChild()
-						.setNodeValue(weddingtime.getText().toString());
-			} else {
-				Element ele = doc.createElement("weddingtime");
-				Text eletext = doc.createTextNode(weddingtime.getText()
-						.toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("seat").item(0) != null) {
-				root2.getElementsByTagName("seat").item(0).getFirstChild()
-						.setNodeValue(seat.getText().toString());
-			} else {
-				Element ele = doc.createElement("seat");
-				Text eletext = doc.createTextNode(seat.getText().toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
-
-			if (root2.getElementsByTagName("youkuid").item(0) != null) {
-				root2.getElementsByTagName("youkuid").item(0).getFirstChild()
-						.setNodeValue(youkuid.getText().toString());
-			} else {
-				Element ele = doc.createElement("youkuid");
-				Text eletext = doc.createTextNode(youkuid.getText().toString());
-				ele.appendChild(eletext);
-				root2.appendChild(ele);
-			}
 			TransformerFactory tfs = TransformerFactory.newInstance();
 			Transformer tf = tfs.newTransformer();
 			tf.transform(new DOMSource(doc), new StreamResult(
 					new FileOutputStream(file)));
+
+			try {
+				FileInputStream fs = getActivity().openFileInput(FILENAME);
+				try {
+					InputStreamReader reader = new InputStreamReader(fs,
+							"UTF-8");
+					BufferedReader in = new BufferedReader(reader);
+					StringBuffer buffer = new StringBuffer();
+
+					buffer.append(in.readLine());
+					buffer.toString();
+				} catch (UnsupportedEncodingException e) {
+
+					e.printStackTrace();
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+
+			} catch (FileNotFoundException e1) {
+
+				e1.printStackTrace();
+			}
+			doc = null;
+			db = null;
+			dbf = null;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -500,7 +580,9 @@ public class FragmentInivitationContent extends Fragment {
 							.getElementsByTagName("youkuid").item(0)
 							.getFirstChild().getNodeValue());
 				}
-
+				doc = null;
+				db = null;
+				dbf = null;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

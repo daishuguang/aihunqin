@@ -1,14 +1,16 @@
 package com.aihunqin.fragment;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,20 +25,24 @@ import javax.xml.transform.stream.StreamResult;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.Xml;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,6 +53,7 @@ import android.widget.TextView;
 import com.aihunqin.crazy.WebActivity;
 import com.aihunqin.model.InvitationItem;
 import com.aihunqin.util.HttpUtil;
+import com.aihunqin.util.PullXmlService;
 import com.example.aihunqin.R;
 
 public class FragmentInvitation extends Fragment {
@@ -83,24 +90,9 @@ public class FragmentInvitation extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		
 		invitationlist = (ListView) getView().findViewById(R.id.invitationlist);
-		Button button2 = (Button) getView().findViewById(R.id.button2);
-		button2.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mCallback.onItemClicked("101", "createnew");
-			}
-		});
-
-		Button button3 = (Button) getView().findViewById(R.id.button3);
-		button3.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mCallback.onItemClicked("160", "createnew");
-			}
-		});
 		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
 		textView.setText("请帖管理");
 		TextView backbtn = (TextView) getView().findViewById(R.id.back);
@@ -185,11 +177,49 @@ public class FragmentInvitation extends Fragment {
 			}
 		});
 
-		// writeToXml("101");
-		// writeToXml("160");
-		invitationDatas = new ArrayList<InvitationItem>();
+//		 writeToXml("101");
+//		 writeToXml("160");
+		try {
+			FileInputStream fs = getActivity().openFileInput(FILENAME);
+			try {
+				InputStreamReader reader = new InputStreamReader(fs, "UTF-8");
+				BufferedReader in = new BufferedReader(reader);
+				StringBuffer buffer = new StringBuffer();
+
+				buffer.append(in.readLine());
+				buffer.toString();
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		} catch (FileNotFoundException e1) {
+
+			e1.printStackTrace();
+		}
+
+		try {
+			invitationDatas = PullXmlService.readXml(getActivity()
+					.openFileInput(FILENAME));
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
 		InvitationAdapter adapter = new InvitationAdapter();
 		invitationlist.setAdapter(adapter);
+
+		invitationlist.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				mCallback.onItemClicked(invitationDatas.get(position)
+						.getItemid(), "createnew");
+			}
+		});
 	}
 
 	void writeToXml(String returnid) {
@@ -213,6 +243,7 @@ public class FragmentInvitation extends Fragment {
 
 				root.getElementsByTagName("invitations").getLength();
 				Element root2 = doc.createElement("invitation_" + returnid);
+				root2.setTextContent("");
 				root.appendChild(root2);
 
 				TransformerFactory tfs = TransformerFactory.newInstance();
@@ -262,100 +293,13 @@ public class FragmentInvitation extends Fragment {
 		}
 	}
 
-	// xml数据生成
-	String WriteToString() {
-		XmlSerializer serializer = Xml.newSerializer();
-		StringWriter writer = new StringWriter();
-		try {
-			serializer.setOutput(writer);
-			serializer.startDocument("utf-8", true);
-			serializer.startTag("", "invitations");
-			serializer.startTag("", "invitation");
-
-			serializer.startTag("", "username");
-			serializer.text("roboce");
-			serializer.endTag("", "username");
-
-			serializer.startTag("", "useremail");
-			serializer.text("daishuguang@126.com");
-			serializer.endTag("", "usermail");
-
-			serializer.endTag("", "invitation");
-			serializer.endTag("", "invitations");
-			serializer.endDocument();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return writer.toString();
-	}
-
-	void saveToXML() {
-		// 文档生成器工厂
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		// 实例化文档生成器
-		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-
-			File f = new File("test.xml");
-			if (!f.exists()) {
-				f.createNewFile();
-
-				// 生成一个文档
-				Document document = builder.newDocument();
-
-				// 创建根节点
-				Element configs = document.createElement("configs");
-				// 创建XML文件所需的各种对象并序列化(元素)
-				Element config = document.createElement("config");// 创建元素节点
-
-				Element ip = document.createElement("ip");
-				Element socket = document.createElement("socket");
-
-				Text ip_text = document.createTextNode("255.255.0.1");// 创建text文本
-				Text socket_text = document.createTextNode("8888");
-
-				ip.appendChild(ip_text);
-				socket.appendChild(socket_text);
-
-				config.appendChild(ip);
-				config.appendChild(socket);
-
-				configs.appendChild(config);// 添加到文档中
-				// 调用方法，将文档写入xml文件中
-
-			} else {
-				// 解析文档
-				Document document = builder.parse(f);
-				Element configs = document.getDocumentElement();// 得到根节点，把后面创建的子节点加入这个跟节点中
-
-			}
-		} catch (Exception e) {
-
-		}
-	}
-
-	void deletefile() {
-
-		getActivity().deleteFile("users.xml");
-		String[] filelist = getActivity().fileList();
-		String str = null;
-		for (int i = 0; i < filelist.length; i++) {
-			str += filelist[i] + "\n";
-		}
-		invitationid.setText(str);
-	}
-
-	void readFromXML(){
-		
-	}
 	class InvitationAdapter extends BaseAdapter {
 		TextView listid, listdate, listtitle, listinvitor, listdrink;
 		ImageView listimg;
 
 		@Override
 		public int getCount() {
-
-			return 0;
+			return invitationDatas.size();
 		}
 
 		@Override
@@ -378,17 +322,19 @@ public class FragmentInvitation extends Fragment {
 			listid = (TextView) convertView.findViewById(R.id.listid);
 			listid.setText("第" + position + "张");
 			listimg = (ImageView) convertView.findViewById(R.id.listimg);
-			listimg.setImageResource(R.drawable.aboutus);
+			if (invitationDatas.get(position).getImguri() != null) {
+				listimg.setImageURI(Uri.parse(invitationDatas.get(position)
+						.getImguri()));
+			}
 			listdate = (TextView) convertView.findViewById(R.id.listdate);
-			listdate.setText("创建日期:" + "2014.04.14");
+			listdate.setText(invitationDatas.get(position).getItemdate());
 			listtitle = (TextView) convertView.findViewById(R.id.listtitle);
 			listtitle.setText("婚贴标题");
 			listinvitor = (TextView) convertView.findViewById(R.id.listinvitor);
-			listinvitor.setText("新郎名");
+			listinvitor.setText(invitationDatas.get(position).getIteminvitor());
 			listdrink = (TextView) convertView.findViewById(R.id.listdrink);
-			listdrink.setText("新娘名");
+			listdrink.setText(invitationDatas.get(position).getItemdrink());
 			return convertView;
 		}
-
 	}
 }
