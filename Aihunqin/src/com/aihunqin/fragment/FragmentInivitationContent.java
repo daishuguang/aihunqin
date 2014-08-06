@@ -33,6 +33,9 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -214,6 +217,17 @@ public class FragmentInivitationContent extends Fragment {
 
 				if (weddinglocation.getText().toString().equals("")) {
 					Toast.makeText(getActivity(), "婚礼地址不能为空", Toast.LENGTH_LONG)
+							.show();
+					return;
+				}
+				ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+						.getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+				if (networkInfo != null && networkInfo.isConnected()) {
+					//
+				} else {
+					Toast.makeText(getActivity(), "网络未连接", Toast.LENGTH_SHORT)
 							.show();
 					return;
 				}

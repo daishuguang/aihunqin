@@ -30,6 +30,8 @@ import org.xmlpull.v1.XmlSerializer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +51,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aihunqin.crazy.WebActivity;
 import com.aihunqin.model.InvitationItem;
@@ -125,6 +128,18 @@ public class FragmentInvitation extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+						.getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+				if (networkInfo != null && networkInfo.isConnected()) {
+					//
+				} else {
+					Toast.makeText(getActivity(), "ÍøÂçÎ´Á¬½Ó", Toast.LENGTH_SHORT)
+							.show();
+					return;
+				}
+
 				new Thread(new Runnable() {
 
 					@Override

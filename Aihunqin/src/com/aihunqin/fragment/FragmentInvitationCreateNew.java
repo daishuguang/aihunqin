@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -153,6 +155,17 @@ public class FragmentInvitationCreateNew extends Fragment {
 
 		@Override
 		public void onClick(final View v) {
+			ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+			if (networkInfo != null && networkInfo.isConnected()) {
+				//
+			} else {
+				Toast.makeText(getActivity(), "ÍøÂçÎ´Á¬½Ó", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
 			AlertDialog.Builder builder = new Builder(getActivity());
 			builder.setItems(items, new DialogInterface.OnClickListener() {
 
