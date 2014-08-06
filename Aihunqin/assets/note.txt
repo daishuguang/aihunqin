@@ -50,3 +50,10 @@ public  void setListViewHeightBasedOnChildren(ListView listView)
                 //params.height最后得到整个ListView完整显示需要的高度
                 listView.setLayoutParams(params);
         }
+        
+        
+/** 
+* 2014/08/06
+* setImageURI();内存溢出
+* getView
+*/

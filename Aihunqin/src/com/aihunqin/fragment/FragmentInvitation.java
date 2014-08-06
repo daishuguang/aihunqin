@@ -165,12 +165,6 @@ public class FragmentInvitation extends Fragment {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						getActivity()
-								.getSupportFragmentManager()
-								.beginTransaction()
-								.replace(R.id.fragment_container,
-										new FragmentInvitationCreateNew())
-								.addToBackStack(null).commit();
 					}
 				}).start();
 
