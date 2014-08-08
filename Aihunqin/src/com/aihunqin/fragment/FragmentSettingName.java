@@ -26,6 +26,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -189,14 +190,29 @@ public class FragmentSettingName extends Fragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		super.onActivityResult(requestCode, resultCode, data);
+		ImageView image = (ImageView) getView().findViewById(R.id.weddingpic);
+		Log.v("roboce", "" + requestCode);
+
+		// boolean flag = true;
+		// if (flag) {
+		// String str = Environment.getExternalStorageDirectory()
+		// + "/Pictures/Aihunqin/IMG_MAIN.jpg";
+		// File file = new File(uristr);
+		// Bitmap bmp = BitmapFactory.decodeFile(uristr);
+		// image.setImageBitmap(bmp);
+		//
+		// return;
+		// }
 		if (resultCode != Activity.RESULT_OK) {
 			return;
 		}
-		ImageView image = (ImageView) getView().findViewById(R.id.weddingpic);
-		Log.v("roboce", "" + requestCode);
+
 		switch (requestCode) {
 		case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
 			uristr = fileUri.toString();
+			// File file = new File(uristr);
+			// Bitmap bmp = BitmapFactory.decodeFile(uristr);
+			// image.setImageBitmap(bmp);
 			image.setImageURI(fileUri);
 			break;
 		case 2:

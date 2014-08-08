@@ -187,47 +187,48 @@ public class FragmentInvitation extends Fragment {
 
 		// writeToXml("101");
 		// writeToXml("160");
-		try {
-			FileInputStream fs = getActivity().openFileInput(FILENAME);
-			try {
-				InputStreamReader reader = new InputStreamReader(fs, "UTF-8");
-				BufferedReader in = new BufferedReader(reader);
-				StringBuffer buffer = new StringBuffer();
-
-				buffer.append(in.readLine());
-				buffer.toString();
-			} catch (UnsupportedEncodingException e) {
-
-				e.printStackTrace();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-
-		} catch (FileNotFoundException e1) {
-
-			e1.printStackTrace();
-		}
+		// try {
+		// FileInputStream fs = getActivity().openFileInput(FILENAME);
+		// try {
+		// InputStreamReader reader = new InputStreamReader(fs, "UTF-8");
+		// BufferedReader in = new BufferedReader(reader);
+		// StringBuffer buffer = new StringBuffer();
+		//
+		// buffer.append(in.readLine());
+		// buffer.toString();
+		// } catch (UnsupportedEncodingException e) {
+		//
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		//
+		// e.printStackTrace();
+		// }
+		//
+		// } catch (FileNotFoundException e1) {
+		//
+		// e1.printStackTrace();
+		// }
 
 		try {
 			invitationDatas = PullXmlService.readXml(getActivity()
 					.openFileInput(FILENAME));
+			InvitationAdapter adapter = new InvitationAdapter();
+			invitationlist.setAdapter(adapter);
+
+			invitationlist.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					mCallback.onItemClicked(invitationDatas.get(position)
+							.getItemid(), "createnew");
+				}
+			});
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
 		}
-		InvitationAdapter adapter = new InvitationAdapter();
-		invitationlist.setAdapter(adapter);
 
-		invitationlist.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				mCallback.onItemClicked(invitationDatas.get(position)
-						.getItemid(), "createnew");
-			}
-		});
 	}
 
 	void writeToXml(String returnid) {
