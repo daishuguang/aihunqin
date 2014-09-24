@@ -35,8 +35,8 @@ public class HttpUtil {
 	// public static HttpClient httpClient = new DefaultHttpClient();
 	public static DefaultHttpClient httpClient = new DefaultHttpClient();
 
-	public static final String BASE_URL = "http://www.ryapp.cn:3083";
-
+	//public static final String BASE_URL = "http://www.ryapp.cn:3083";
+	public static final String BASE_URL = "http://home.ihunqin.com";
 	public static String getRequest(final String url) throws Exception {
 		// 创建HttpGet对象.
 		HttpGet get = new HttpGet(url);
