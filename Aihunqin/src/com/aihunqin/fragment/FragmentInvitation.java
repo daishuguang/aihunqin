@@ -140,6 +140,8 @@ public class FragmentInvitation extends Fragment {
 					return;
 				}
 
+				// register or login
+				
 				new Thread(new Runnable() {
 
 					@Override
