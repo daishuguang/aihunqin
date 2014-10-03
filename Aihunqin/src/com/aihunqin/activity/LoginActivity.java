@@ -67,7 +67,8 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 				if (phonenum.getText().toString().equals("")) {
 					Toast.makeText(getApplicationContext(), "手机号不能为空",
 							Toast.LENGTH_SHORT).show();
@@ -92,8 +93,7 @@ public class LoginActivity extends Activity {
 				rawparams.put("mobile", phonenum.getText().toString());
 				rawparams.put("password", password.getText().toString());
 
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+				
 				Async task = new Async(url, rawparams);
 				task.execute();
 

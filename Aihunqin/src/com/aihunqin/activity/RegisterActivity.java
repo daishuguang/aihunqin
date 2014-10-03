@@ -62,6 +62,9 @@ public class RegisterActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+				
 				if (phonenum.getText().toString().equals("")) {
 					Toast.makeText(getApplicationContext(), "手机号不能为空",
 							Toast.LENGTH_SHORT).show();
@@ -92,8 +95,7 @@ public class RegisterActivity extends Activity {
 						.toString());
 				String result = null;
 				try {
-					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
 					result = HttpUtil.postRequst(url, rawparams);
 					JSONObject json = new JSONObject(result);
 					String status = json.getString("Status");
