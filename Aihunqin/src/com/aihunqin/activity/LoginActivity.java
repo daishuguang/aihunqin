@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aihunqin.crazy.SinaMain;
 import com.aihunqin.util.HttpUtil;
 import com.example.aihunqin.R;
 
@@ -35,6 +36,7 @@ public class LoginActivity extends Activity {
 	ProgressDialog p1;
 	SharedPreferences preferences;
 	SharedPreferences.Editor editor;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,17 +132,16 @@ public class LoginActivity extends Activity {
 
 				String status = json.getString("Status");
 				if (status.equals("0")) {
-					
-					preferences = getSharedPreferences("userinfo",
-							MODE_PRIVATE);
+
+					preferences = getSharedPreferences("userinfo", MODE_PRIVATE);
 					editor = preferences.edit();
-					editor.putString("mobile", phonenum.getText()
-							.toString());
-					editor.putString("password", password.getText()
-							.toString());
+					editor.putString("mobile", phonenum.getText().toString());
+					editor.putString("password", password.getText().toString());
 					editor.commit();
-					Toast.makeText(LoginActivity.this, "登录成功",
-							Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(LoginActivity.this,
+							SinaMain.class);
+					LoginActivity.this.startActivity(intent);
+					LoginActivity.this.finish();
 				} else {
 					Toast.makeText(LoginActivity.this, "用户名或密码错误",
 							Toast.LENGTH_SHORT).show();

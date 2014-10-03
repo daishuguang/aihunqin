@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aihunqin.crazy.SinaMain;
 import com.aihunqin.util.HttpUtil;
 import com.baidu.navisdk.ui.routeguide.subview.r;
 import com.example.aihunqin.R;
@@ -103,6 +105,11 @@ public class RegisterActivity extends Activity {
 						editor.putString("password", password1.getText()
 								.toString());
 						editor.commit();
+
+						Intent intent = new Intent(RegisterActivity.this,
+								SinaMain.class);
+						startActivity(intent);
+						finish();
 					} else {
 						Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
 								Toast.LENGTH_SHORT).show();

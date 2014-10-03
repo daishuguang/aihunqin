@@ -66,9 +66,25 @@ public class SplashActivity extends Activity {
 
 				String status = json.getString("Status");
 				if (status.equals("0")) {
-					Intent intent = new Intent(SplashActivity.this,
-							SinaMain.class);
-					SplashActivity.this.startActivity(intent);
+
+					/**
+					 * Handler
+					 */
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							/*
+							 * Create an Intent that will start the Main
+							 * WordPress Activity.
+							 */
+							Intent intent = new Intent(SplashActivity.this,
+									SinaMain.class);
+							SplashActivity.this.startActivity(intent);
+							SplashActivity.this.finish();
+							SplashActivity.this.overridePendingTransition(
+									R.anim.launch_input, R.anim.launch_output);
+						}
+					}, LOAD_DISPLAY_TIME);
 				} else {
 
 					/**
@@ -90,7 +106,6 @@ public class SplashActivity extends Activity {
 						}
 					}, LOAD_DISPLAY_TIME);
 				}
-				finish();
 			} catch (JSONException e) {
 
 				e.printStackTrace();
