@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -32,7 +33,8 @@ public class LoginActivity extends Activity {
 	EditText password;
 	Button login1;
 	ProgressDialog p1;
-
+	SharedPreferences preferences;
+	SharedPreferences.Editor editor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,6 +130,15 @@ public class LoginActivity extends Activity {
 
 				String status = json.getString("Status");
 				if (status.equals("0")) {
+					
+					preferences = getSharedPreferences("userinfo",
+							MODE_PRIVATE);
+					editor = preferences.edit();
+					editor.putString("mobile", phonenum.getText()
+							.toString());
+					editor.putString("password", password.getText()
+							.toString());
+					editor.commit();
 					Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦",
 							Toast.LENGTH_SHORT).show();
 				} else {

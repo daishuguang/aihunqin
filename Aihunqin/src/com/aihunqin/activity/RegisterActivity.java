@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +27,9 @@ public class RegisterActivity extends Activity {
 	EditText phonenum;
 	EditText password1;
 	EditText password2;
+
+	SharedPreferences preferences;
+	SharedPreferences.Editor editor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,14 @@ public class RegisterActivity extends Activity {
 					register.setText("×¢²á");
 					if (status.equals("0")) {
 						// HttpUtil.httpClient.getCookieStore();
-						
+						preferences = getSharedPreferences("userinfo",
+								MODE_PRIVATE);
+						editor = preferences.edit();
+						editor.putString("mobile", phonenum.getText()
+								.toString());
+						editor.putString("password", password1.getText()
+								.toString());
+						editor.commit();
 					} else {
 						Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
 								Toast.LENGTH_SHORT).show();
