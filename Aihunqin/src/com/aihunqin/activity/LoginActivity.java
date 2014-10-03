@@ -41,10 +41,10 @@ public class LoginActivity extends Activity {
 		phonenum = (EditText) findViewById(R.id.phonenum);
 		password = (EditText) findViewById(R.id.password);
 		login1 = (Button) findViewById(R.id.login1);
-		back = (TextView) findViewById(R.id.back);
+
 		titleTv = (TextView) findViewById(R.id.titleTv);
 		rightmenu = (TextView) findViewById(R.id.rightmenu);
-		back.setVisibility(View.VISIBLE);
+
 		titleTv.setText("ÓÃ»§µÇÂ¼");
 		rightmenu.setText("×¢²á");
 		rightmenu.setVisibility(View.VISIBLE);
@@ -55,14 +55,6 @@ public class LoginActivity extends Activity {
 				Intent intent = new Intent(getApplicationContext(),
 						RegisterActivity.class);
 				startActivity(intent);
-			}
-		});
-
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
 			}
 		});
 
