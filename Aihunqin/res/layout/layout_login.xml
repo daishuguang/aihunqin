@@ -8,6 +8,7 @@
     <include layout="@layout/title_bar" />
 
     <EditText
+        android:id="@+id/phonenum"
         style="@style/Edit_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +17,6 @@
         android:layout_marginTop="10dp"
         android:hint="请输入手机号"
         android:inputType="phone"
-        android:id="@+id/phonenum"
         android:maxLength="11" />
 
     <EditText
@@ -31,7 +31,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/login1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
@@ -42,4 +42,5 @@
         android:textColor="#ffffff"
         android:textSize="20sp" />
 
+    
 </LinearLayout>

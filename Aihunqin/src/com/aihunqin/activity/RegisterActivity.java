@@ -84,11 +84,16 @@ public class RegisterActivity extends Activity {
 						.toString());
 				String result = null;
 				try {
+					register.setText("×¢²áÖÐ");
 					result = HttpUtil.postRequst(url, rawparams);
 					JSONObject json = new JSONObject(result);
 					String status = json.getString("Status");
+					register.setText("×¢²á");
 					if (status.equals("0")) {
-						HttpUtil.httpClient.getCookieStore();
+						// HttpUtil.httpClient.getCookieStore();
+					} else {
+						Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
+								Toast.LENGTH_SHORT).show();
 					}
 					String data = json.getString("Data");
 					if (!(json.get("DataExt").equals(null))) {
