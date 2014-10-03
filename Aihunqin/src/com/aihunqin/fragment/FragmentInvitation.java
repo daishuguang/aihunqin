@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.R.raw;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -141,13 +144,20 @@ public class FragmentInvitation extends Fragment {
 				}
 
 				// register or login
-				
+
 				new Thread(new Runnable() {
 
 					@Override
 					public void run() {
-						String url = "http://www.ruiqinsoft.com:3083/wh/c";
+						// String url = "http://www.ruiqinsoft.com:3083/wh/c";
+						String url = "http://wedding.ihunqin.com/api/ecard";
 						Map<String, String> rawparams = new HashMap<String, String>();
+						rawparams.put(
+								"UserID",
+								getActivity().getSharedPreferences("userinfo",
+										Activity.MODE_PRIVATE).getString(
+										"userid", ""));
+						rawparams.put("StoreID", "0");
 						rawparams.put("KehuName", "wenhong");
 						rawparams.put("BackGroundImageUrl", "beijing");
 						rawparams.put("YouKuVideoId", "youkuid");
@@ -156,7 +166,8 @@ public class FragmentInvitation extends Fragment {
 						rawparams.put("XinniangName", "xn");
 						rawparams.put("XinniangMobile", "133333");
 						rawparams.put("WeddingDateNongli", "nongliriqi");
-						rawparams.put("WeddingDateTime", "hunlishij");
+						rawparams.put("WeddingDateTime", (new SimpleDateFormat(
+								"yyyy-MM-dd")).format(new Date()));
 						rawparams.put("textFieldWeddingTime", "jidianshijian");
 						rawparams.put("WeddingLoacation", "123");
 						rawparams.put("WeddingMenu", "hunlicaidan");
@@ -173,11 +184,13 @@ public class FragmentInvitation extends Fragment {
 							Log.v("roboce", result);
 							JSONObject json;
 							json = new JSONObject(result);
-							String m = json.getString("id");
-							writeToXml(m);
-							// Save to XML
-							mCallback.onItemClicked(m, "createnew");
-							Log.v("roboce", m);
+							if (json.getString("Status").equals("0")) {
+								String m = json.getString("Data");
+								writeToXml(m);
+								// Save to XML
+								mCallback.onItemClicked(m, "createnew");
+								Log.v("roboce", m);
+							}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

@@ -609,9 +609,16 @@ public class FragmentInivitationContent extends Fragment {
 
 			@Override
 			public void run() {
-				String url = "http://www.ruiqinsoft.com:3083/wh/edit/" + id;
+				// String url = "http://www.ruiqinsoft.com:3083/wh/edit/" + id;
+				String url = "http://wedding.ihunqin.com/api/ecard/" + id
+						+ "/edit";
 				Map<String, String> rawparams = new HashMap<String, String>();
-				rawparams.put("EcardType1Id", id);
+				// rawparams.put("EcardType1Id", id);
+				rawparams.put(
+						"UserID",
+						getActivity().getSharedPreferences("userinfo",
+								Activity.MODE_PRIVATE).getString("userid", ""));
+				rawparams.put("StoreID", "0");
 				rawparams.put("KehuName", "wenhong");
 				rawparams.put("BackGroundImageUrl", "beijing");
 				rawparams.put("YouKuVideoId", youkuid.getText().toString());
@@ -644,13 +651,15 @@ public class FragmentInivitationContent extends Fragment {
 					Log.v("roboce", result);
 					JSONObject json;
 					json = new JSONObject(result);
-					String m = json.getString("id");
-					if (m.equals(id)) {
-						writeToXml();
-						getActivity().getSupportFragmentManager()
-								.popBackStack();
+					if (json.getString("Status").equals("0")) {
+						String m = json.getString("Data");
+						if (m.equals(id)) {
+							writeToXml();
+							getActivity().getSupportFragmentManager()
+									.popBackStack();
+						}
+						Log.v("roboce", m);
 					}
-					Log.v("roboce", m);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

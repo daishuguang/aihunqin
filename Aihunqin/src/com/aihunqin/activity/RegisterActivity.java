@@ -6,11 +6,13 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -90,11 +92,11 @@ public class RegisterActivity extends Activity {
 						.toString());
 				String result = null;
 				try {
-					register.setText("×¢²áÖÐ");
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 					result = HttpUtil.postRequst(url, rawparams);
 					JSONObject json = new JSONObject(result);
 					String status = json.getString("Status");
-					register.setText("×¢²á");
 					if (status.equals("0")) {
 						// HttpUtil.httpClient.getCookieStore();
 						preferences = getSharedPreferences("userinfo",
@@ -104,6 +106,7 @@ public class RegisterActivity extends Activity {
 								.toString());
 						editor.putString("password", password1.getText()
 								.toString());
+						editor.putString("userid", json.getString("Data"));
 						editor.commit();
 
 						Intent intent = new Intent(RegisterActivity.this,
@@ -114,7 +117,6 @@ public class RegisterActivity extends Activity {
 						Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
 								Toast.LENGTH_SHORT).show();
 					}
-					String data = json.getString("Data");
 					if (!(json.get("DataExt").equals(null))) {
 						JSONObject dataext = json.getJSONObject("DataExt");
 					}
