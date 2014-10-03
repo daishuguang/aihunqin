@@ -61,6 +61,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.aihunqin.activity.RegisterActivity" >
+        </activity>
 
         <provider
             android:name="com.aihunqin.crazy.FirstProviders"

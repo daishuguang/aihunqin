@@ -8,6 +8,7 @@
     <include layout="@layout/title_bar" />
 
     <EditText
+        android:id="@+id/phonenum"
         style="@style/Edit_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,11 +16,11 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:hint="请输入手机号"
-        android:inputType="text"
-        android:padding="10dp"
-        android:singleLine="true" />
+        android:inputType="phone"
+        android:maxLength="11" />
 
     <EditText
+        android:id="@+id/password1"
         style="@style/Edit_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,19 +28,28 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:hint="请输入密码"
-        android:inputType="text"
-        android:padding="10dp"
-        android:singleLine="true" />
+        android:inputType="textPassword" />
 
-    <Button
+    <EditText
+        android:id="@+id/password2"
+        style="@style/Edit_Style"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="请确认密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/logoff"
-        android:text="登录"
+        android:text="注册"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 

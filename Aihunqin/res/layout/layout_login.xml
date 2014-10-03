@@ -15,9 +15,12 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:hint="请输入手机号"
-        android:inputType="text" />
+        android:inputType="phone"
+        android:id="@+id/phonenum"
+        android:maxLength="11" />
 
     <EditText
+        android:id="@+id/password"
         style="@style/Edit_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,9 +28,10 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:hint="请输入密码"
-        android:inputType="text" />
+        android:inputType="textPassword" />
 
     <Button
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"

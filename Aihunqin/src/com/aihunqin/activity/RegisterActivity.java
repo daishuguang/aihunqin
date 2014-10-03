@@ -6,7 +6,6 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,42 +15,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aihunqin.util.HttpUtil;
+import com.baidu.navisdk.ui.routeguide.subview.r;
 import com.example.aihunqin.R;
 
-public class LoginActivity extends Activity {
-
+public class RegisterActivity extends Activity {
 	TextView back;
 	TextView titleTv;
 	TextView rightmenu;
+	Button register;
 	EditText phonenum;
-	EditText password;
-	Button login;
+	EditText password1;
+	EditText password2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_login);
+		setContentView(R.layout.layout_register);
 
-		phonenum = (EditText) findViewById(R.id.phonenum);
-		password = (EditText) findViewById(R.id.password);
-		login = (Button) findViewById(R.id.login);
 		back = (TextView) findViewById(R.id.back);
 		titleTv = (TextView) findViewById(R.id.titleTv);
-		rightmenu = (TextView) findViewById(R.id.rightmenu);
+		register = (Button) findViewById(R.id.register);
+		phonenum = (EditText) findViewById(R.id.phonenum);
+		password1 = (EditText) findViewById(R.id.password1);
+		password2 = (EditText) findViewById(R.id.password2);
 
 		back.setVisibility(View.VISIBLE);
-		titleTv.setText("用户登录");
-		rightmenu.setText("注册");
-		rightmenu.setVisibility(View.VISIBLE);
-		rightmenu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),
-						RegisterActivity.class);
-				startActivity(intent);
-			}
-		});
+		titleTv.setText("用户注册");
 
 		back.setOnClickListener(new OnClickListener() {
 
@@ -61,7 +50,7 @@ public class LoginActivity extends Activity {
 			}
 		});
 
-		login.setOnClickListener(new OnClickListener() {
+		register.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -76,24 +65,28 @@ public class LoginActivity extends Activity {
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
-
-				if (password.getText().toString().equals("")) {
+				if (password1.getText().toString().equals("")
+						|| password2.getText().toString().equals("")) {
 					Toast.makeText(getApplicationContext(), "密码不能为空",
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
 
-				String url = "http://home.ihunqin.com/api/passport/signin";
+				if (!password1.getText().toString()
+						.equals(password2.getText().toString()))
+					Toast.makeText(getApplicationContext(), "密码不一致",
+							Toast.LENGTH_SHORT).show();
+				String url = "http://home.ihunqin.com/api/passport/register";
 				Map<String, String> rawparams = new HashMap<String, String>();
 				rawparams.put("mobile", phonenum.getText().toString());
-				rawparams.put("password", password.getText().toString());
+				rawparams.put("password", password1.getText().toString());
+				rawparams.put("passwordConfirmed", password2.getText()
+						.toString());
 				String result = null;
 				try {
 					result = HttpUtil.postRequst(url, rawparams);
-
 					JSONObject json = new JSONObject(result);
 					String status = json.getString("Status");
-
 					if (status.equals("0")) {
 						HttpUtil.httpClient.getCookieStore();
 					}
@@ -101,12 +94,14 @@ public class LoginActivity extends Activity {
 					if (!(json.get("DataExt").equals(null))) {
 						JSONObject dataext = json.getJSONObject("DataExt");
 					}
-
 				} catch (Exception e) {
 
 					e.printStackTrace();
 				}
+
 			}
 		});
+
 	}
+
 }
