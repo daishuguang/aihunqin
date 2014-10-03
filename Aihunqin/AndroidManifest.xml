@@ -31,11 +31,6 @@
         <activity android:name="com.aihunqin.crazy.SelectBookActivity" >
         </activity>
         <activity android:name="com.aihunqin.crazy.SinaMain" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.aihunqin.test.AllProvidersTest" >
         </activity>
@@ -58,6 +53,13 @@
         <activity android:name="com.aihunqin.crazy.CameraActivity" >
         </activity>
         <activity android:name="com.aihunqin.crazy.WenhongLocation" >
+        </activity>
+        <activity android:name="com.aihunqin.activity.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <provider
