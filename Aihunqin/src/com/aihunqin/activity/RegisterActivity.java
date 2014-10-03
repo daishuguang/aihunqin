@@ -91,6 +91,7 @@ public class RegisterActivity extends Activity {
 					register.setText("×¢²á");
 					if (status.equals("0")) {
 						// HttpUtil.httpClient.getCookieStore();
+						
 					} else {
 						Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
 								Toast.LENGTH_SHORT).show();
