@@ -416,8 +416,8 @@ public class FragmentInvitationCreateNew extends Fragment {
 		@Override
 		public void run() {
 
-			String returnmsg = FtpUtil.ftpUpload("ruiqinsoft.com", "3084",
-					"tanqci", "tanqci123", "201405", img_path, id + "-"
+			String returnmsg = FtpUtil.ftpUpload("www.ihunqin.com", "3083",
+					"tanqci", "tanqci123", null, img_path, id + "-"
 							+ current + ".jpg");
 			Log.v("roboce", returnmsg);
 		}
