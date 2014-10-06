@@ -23,7 +23,7 @@ import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
-import com.example.aihunqin.R;
+import com.ihunqin.mm.R;
 
 public class BaiduLocation extends Activity {
 	BaiduMap mBaiduMap = null;

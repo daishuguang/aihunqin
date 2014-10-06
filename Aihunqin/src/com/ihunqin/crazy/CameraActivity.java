@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.aihunqin.R;
+import com.ihunqin.mm.R;
 
 public class CameraActivity extends Activity {
 	Button btn1;

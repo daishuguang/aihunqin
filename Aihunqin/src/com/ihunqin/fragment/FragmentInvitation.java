@@ -56,8 +56,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aihunqin.R;
 import com.ihunqin.crazy.WebActivity;
+import com.ihunqin.mm.R;
 import com.ihunqin.model.InvitationItem;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.PullXmlService;

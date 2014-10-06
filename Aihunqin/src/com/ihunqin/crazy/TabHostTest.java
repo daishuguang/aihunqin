@@ -1,6 +1,6 @@
 package com.ihunqin.crazy;
 
-import com.example.aihunqin.R;
+import com.ihunqin.mm.R;
 
 import android.app.TabActivity;
 import android.os.Bundle;

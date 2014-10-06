@@ -8,9 +8,9 @@ import org.json.JSONObject;
 
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
-import com.example.aihunqin.R;
 import com.ihunqin.activity.LoginActivity.Async;
 import com.ihunqin.crazy.SinaMain;
+import com.ihunqin.mm.R;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
 

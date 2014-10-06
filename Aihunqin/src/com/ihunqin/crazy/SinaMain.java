@@ -13,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInivitationContent;
 import com.ihunqin.fragment.FragmentInvitationCreateNew;
 import com.ihunqin.fragment.FragmentMain;
@@ -21,6 +20,7 @@ import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
 import com.ihunqin.fragment.FragmentWeddingList;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.ihunqin.mm.R;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;

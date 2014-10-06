@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.navisdk.ui.routeguide.subview.r;
-import com.example.aihunqin.R;
 import com.ihunqin.crazy.SinaMain;
+import com.ihunqin.mm.R;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
 

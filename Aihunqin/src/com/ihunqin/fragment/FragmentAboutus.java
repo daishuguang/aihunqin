@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.aihunqin.R;
 import com.ihunqin.crazy.WebActivity;
+import com.ihunqin.mm.R;
 
 public class FragmentAboutus extends Fragment {
 	@Override

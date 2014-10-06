@@ -46,9 +46,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aihunqin.R;
 import com.ihunqin.crazy.PopupMain;
 import com.ihunqin.crazy.SelectPopupWindow;
+import com.ihunqin.mm.R;
 
 public class FragmentSettingName extends Fragment {
 	EditText bridegroom;

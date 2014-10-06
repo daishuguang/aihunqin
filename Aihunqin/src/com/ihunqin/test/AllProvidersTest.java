@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.aihunqin.R;
+import com.ihunqin.mm.R;
 
 public class AllProvidersTest extends Activity {
 	ListView providers;

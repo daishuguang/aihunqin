@@ -25,7 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.aihunqin.R;
+import com.ihunqin.mm.R;
 
 @SuppressLint("SdCardPath")
 public class TestCamera extends Activity {
