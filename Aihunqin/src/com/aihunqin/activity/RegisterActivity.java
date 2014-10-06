@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.aihunqin.crazy.SinaMain;
 import com.aihunqin.util.HttpUtil;
+import com.aihunqin.util.NetworkUtil;
 import com.baidu.navisdk.ui.routeguide.subview.r;
 import com.example.aihunqin.R;
 
@@ -62,71 +63,76 @@ public class RegisterActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-				
-				if (phonenum.getText().toString().equals("")) {
-					Toast.makeText(getApplicationContext(), "手机号不能为空",
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
+				if (NetworkUtil.isOnline(RegisterActivity.this)) {
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-				if (!phonenum.getText().toString().matches("[1][358]\\d{9}")) {
-					Toast.makeText(getApplicationContext(), "手机号不正确",
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if (password1.getText().toString().equals("")
-						|| password2.getText().toString().equals("")) {
-					Toast.makeText(getApplicationContext(), "密码不能为空",
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-
-				if (!password1.getText().toString()
-						.equals(password2.getText().toString()))
-					Toast.makeText(getApplicationContext(), "密码不一致",
-							Toast.LENGTH_SHORT).show();
-				String url = "http://home.ihunqin.com/api/passport/register";
-				Map<String, String> rawparams = new HashMap<String, String>();
-				rawparams.put("mobile", phonenum.getText().toString());
-				rawparams.put("password", password1.getText().toString());
-				rawparams.put("passwordConfirmed", password2.getText()
-						.toString());
-				String result = null;
-				try {
-
-					result = HttpUtil.postRequst(url, rawparams);
-					JSONObject json = new JSONObject(result);
-					String status = json.getString("Status");
-					if (status.equals("0")) {
-						// HttpUtil.httpClient.getCookieStore();
-						preferences = getSharedPreferences("userinfo",
-								MODE_PRIVATE);
-						editor = preferences.edit();
-						editor.putString("mobile", phonenum.getText()
-								.toString());
-						editor.putString("password", password1.getText()
-								.toString());
-						editor.putString("userid", json.getString("Data"));
-						editor.commit();
-
-						Intent intent = new Intent(RegisterActivity.this,
-								SinaMain.class);
-						startActivity(intent);
-						finish();
-					} else {
-						Toast.makeText(getApplicationContext(), "注册失败",
+					if (phonenum.getText().toString().equals("")) {
+						Toast.makeText(getApplicationContext(), "手机号不能为空",
 								Toast.LENGTH_SHORT).show();
+						return;
 					}
-					if (!(json.get("DataExt").equals(null))) {
-						JSONObject dataext = json.getJSONObject("DataExt");
-					}
-				} catch (Exception e) {
 
-					e.printStackTrace();
+					if (!phonenum.getText().toString()
+							.matches("[1][358]\\d{9}")) {
+						Toast.makeText(getApplicationContext(), "手机号不正确",
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+					if (password1.getText().toString().equals("")
+							|| password2.getText().toString().equals("")) {
+						Toast.makeText(getApplicationContext(), "密码不能为空",
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+
+					if (!password1.getText().toString()
+							.equals(password2.getText().toString()))
+						Toast.makeText(getApplicationContext(), "密码不一致",
+								Toast.LENGTH_SHORT).show();
+					String url = "http://home.ihunqin.com/api/passport/register";
+					Map<String, String> rawparams = new HashMap<String, String>();
+					rawparams.put("mobile", phonenum.getText().toString());
+					rawparams.put("password", password1.getText().toString());
+					rawparams.put("passwordConfirmed", password2.getText()
+							.toString());
+					String result = null;
+					try {
+
+						result = HttpUtil.postRequst(url, rawparams);
+						JSONObject json = new JSONObject(result);
+						String status = json.getString("Status");
+						if (status.equals("0")) {
+							// HttpUtil.httpClient.getCookieStore();
+							preferences = getSharedPreferences("userinfo",
+									MODE_PRIVATE);
+							editor = preferences.edit();
+							editor.putString("mobile", phonenum.getText()
+									.toString());
+							editor.putString("password", password1.getText()
+									.toString());
+							editor.putString("userid", json.getString("Data"));
+							editor.commit();
+
+							Intent intent = new Intent(RegisterActivity.this,
+									SinaMain.class);
+							startActivity(intent);
+							finish();
+						} else {
+							Toast.makeText(getApplicationContext(), "注册失败",
+									Toast.LENGTH_SHORT).show();
+						}
+						if (!(json.get("DataExt").equals(null))) {
+							JSONObject dataext = json.getJSONObject("DataExt");
+						}
+					} catch (Exception e) {
+
+						e.printStackTrace();
+					}
+				} else {
+					Toast.makeText(RegisterActivity.this, "未连接到网络",
+							Toast.LENGTH_SHORT).show();
 				}
-
 			}
 		});
 

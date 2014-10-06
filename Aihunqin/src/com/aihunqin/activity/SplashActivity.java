@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.aihunqin.activity.LoginActivity.Async;
 import com.aihunqin.crazy.SinaMain;
 import com.aihunqin.util.HttpUtil;
+import com.aihunqin.util.NetworkUtil;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.example.aihunqin.R;
@@ -126,9 +127,13 @@ public class SplashActivity extends Activity {
 		final Map<String, String> rawparams = new HashMap<String, String>();
 		rawparams.put("mobile", mobile);
 		rawparams.put("password", password);
+		if (NetworkUtil.isOnline(this)) {
+			Async task = new Async(url, rawparams);
+			task.execute();
+		} else {
+			Toast.makeText(this, "Î´Á¬½Óµ½ÍøÂç", Toast.LENGTH_LONG).show();
+		}
 
-		Async task = new Async(url, rawparams);
-		task.execute();
 	}
 
 }

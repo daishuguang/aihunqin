@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.aihunqin.crazy.SinaMain;
 import com.aihunqin.util.HttpUtil;
+import com.aihunqin.util.NetworkUtil;
 import com.example.aihunqin.R;
 
 public class LoginActivity extends Activity {
@@ -67,38 +68,42 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-				if (phonenum.getText().toString().equals("")) {
-					Toast.makeText(getApplicationContext(), "手机号不能为空",
+				if (NetworkUtil.isOnline(LoginActivity.this)) {
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+					if (phonenum.getText().toString().equals("")) {
+						Toast.makeText(getApplicationContext(), "手机号不能为空",
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+
+					if (!phonenum.getText().toString()
+							.matches("[1][358]\\d{9}")) {
+						Toast.makeText(getApplicationContext(), "手机号不正确",
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+
+					if (password.getText().toString().equals("")) {
+						Toast.makeText(getApplicationContext(), "密码不能为空",
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+					p1.setMessage("正在登录中");
+					p1.show();
+					final String url = "http://home.ihunqin.com/api/passport/signin";
+					final Map<String, String> rawparams = new HashMap<String, String>();
+					rawparams.put("mobile", phonenum.getText().toString());
+					rawparams.put("password", password.getText().toString());
+
+					Async task = new Async(url, rawparams);
+					task.execute();
+
+				} else {
+					Toast.makeText(LoginActivity.this, "未连接到网络",
 							Toast.LENGTH_SHORT).show();
-					return;
 				}
-
-				if (!phonenum.getText().toString().matches("[1][358]\\d{9}")) {
-					Toast.makeText(getApplicationContext(), "手机号不正确",
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-
-				if (password.getText().toString().equals("")) {
-					Toast.makeText(getApplicationContext(), "密码不能为空",
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-				p1.setMessage("正在登录中");
-				p1.show();
-				final String url = "http://home.ihunqin.com/api/passport/signin";
-				final Map<String, String> rawparams = new HashMap<String, String>();
-				rawparams.put("mobile", phonenum.getText().toString());
-				rawparams.put("password", password.getText().toString());
-
-				
-				Async task = new Async(url, rawparams);
-				task.execute();
-
 			}
-
 		});
 
 	}
