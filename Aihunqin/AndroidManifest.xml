@@ -22,43 +22,43 @@
             android:process=":remote" >
         </service>
 
-        <activity android:name="com.aihunqin.test.baidunavi" >
+        <activity android:name="com.ihunqin.test.baidunavi" >
         </activity>
         <activity
-            android:name="com.aihunqin.crazy.TabHostTest"
+            android:name="com.ihunqin.crazy.TabHostTest"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.SelectBookActivity" >
+        <activity android:name="com.ihunqin.crazy.SelectBookActivity" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.SinaMain" >
+        <activity android:name="com.ihunqin.crazy.SinaMain" >
         </activity>
-        <activity android:name="com.aihunqin.test.AllProvidersTest" >
+        <activity android:name="com.ihunqin.test.AllProvidersTest" >
         </activity>
-        <activity android:name="com.aihunqin.test.FreeProvidersTest" >
+        <activity android:name="com.ihunqin.test.FreeProvidersTest" >
         </activity>
-        <activity android:name="com.aihunqin.test.LocationTest" >
+        <activity android:name="com.ihunqin.test.LocationTest" >
         </activity>
-        <activity android:name="com.aihunqin.test.BaiduTest" >
+        <activity android:name="com.ihunqin.test.BaiduTest" >
         </activity>
-        <activity android:name="com.aihunqin.test.BaiduLocation" >
+        <activity android:name="com.ihunqin.test.BaiduLocation" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.WebActivity" >
+        <activity android:name="com.ihunqin.crazy.WebActivity" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.TestCamera" >
+        <activity android:name="com.ihunqin.crazy.TestCamera" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.Camera" >
+        <activity android:name="com.ihunqin.crazy.Camera" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.PopupMain" >
+        <activity android:name="com.ihunqin.crazy.PopupMain" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.CameraActivity" >
+        <activity android:name="com.ihunqin.crazy.CameraActivity" >
         </activity>
-        <activity android:name="com.aihunqin.crazy.WenhongLocation" >
+        <activity android:name="com.ihunqin.crazy.WenhongLocation" >
         </activity>
-        <activity android:name="com.aihunqin.activity.LoginActivity" >
+        <activity android:name="com.ihunqin.activity.LoginActivity" >
         </activity>
-        <activity android:name="com.aihunqin.activity.RegisterActivity" >
+        <activity android:name="com.ihunqin.activity.RegisterActivity" >
         </activity>
-        <activity android:name="com.aihunqin.activity.SplashActivity" >
+        <activity android:name="com.ihunqin.activity.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,7 +67,7 @@
         </activity>
 
         <provider
-            android:name="com.aihunqin.crazy.FirstProviders"
+            android:name="com.ihunqin.crazy.FirstProviders"
             android:authorities="org.crazy.providers.firstprovider"
             android:exported="true" >
         </provider>
