@@ -53,7 +53,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 import com.ihunqin.util.HttpUtil;
 
 public class FragmentInivitationContent extends Fragment {

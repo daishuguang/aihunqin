@@ -8,7 +8,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class LocationTest extends Activity {
 

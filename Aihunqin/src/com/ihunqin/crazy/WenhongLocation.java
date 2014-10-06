@@ -28,7 +28,7 @@ import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class WenhongLocation extends Activity {
 	BaiduMap mBaiduMap = null;

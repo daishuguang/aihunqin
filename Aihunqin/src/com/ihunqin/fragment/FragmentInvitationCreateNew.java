@@ -50,7 +50,7 @@ import android.widget.Toast;
 import com.ihunqin.crazy.SelectPopupWindow;
 import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 import com.ihunqin.util.FtpUtil;
 
 public class FragmentInvitationCreateNew extends Fragment {

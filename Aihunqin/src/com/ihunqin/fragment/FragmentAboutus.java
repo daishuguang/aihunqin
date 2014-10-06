@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ihunqin.crazy.WebActivity;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class FragmentAboutus extends Fragment {
 	@Override

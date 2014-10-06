@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.crazy.WenhongLocation;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class FragmentMore extends Fragment {
 	TextView wenhonglocation;

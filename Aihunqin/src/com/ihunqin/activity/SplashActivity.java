@@ -6,14 +6,6 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.ihunqin.activity.LoginActivity.Async;
-import com.ihunqin.crazy.SinaMain;
-import com.ihunqin.mm.R;
-import com.ihunqin.util.HttpUtil;
-import com.ihunqin.util.NetworkUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +15,13 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.widget.Toast;
+
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.example.aihunqin.R;
+import com.ihunqin.crazy.SinaMain;
+import com.ihunqin.util.HttpUtil;
+import com.ihunqin.util.NetworkUtil;
 
 public class SplashActivity extends Activity {
 	Handler mHandler = new Handler();

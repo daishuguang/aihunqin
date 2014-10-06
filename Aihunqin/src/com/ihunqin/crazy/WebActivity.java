@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class WebActivity extends Activity {
 	boolean loadtitle = false;

@@ -20,7 +20,7 @@ import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
 import com.ihunqin.fragment.FragmentWeddingList;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;

@@ -20,7 +20,7 @@ import com.baidu.navisdk.model.RoutePlanModel;
 import com.baidu.navisdk.model.datastruct.RoutePlanNode;
 import com.baidu.navisdk.ui.widget.RoutePlanObserver;
 import com.baidu.nplatform.comapi.map.MapGLSurfaceView;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class baidunavi extends Activity {
 	private MapGLSurfaceView mMapView = null;

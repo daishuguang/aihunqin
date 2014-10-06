@@ -21,7 +21,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.ihunqin.crazy.WebActivity;
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class FragmentQRCode extends Fragment {
 	TextView back, visitweb, saveqrcode;

@@ -29,7 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class FragmentMain extends Fragment {
 	OnClickListener settingnameListener = new OnClickListener() {

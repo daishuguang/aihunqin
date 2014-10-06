@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class FreeProvidersTest extends Activity {
 

@@ -11,7 +11,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.PopupWindow;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class SelectPopupWindow extends PopupWindow {
 

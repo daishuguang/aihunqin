@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class Camera extends Activity {
 	private Button button;

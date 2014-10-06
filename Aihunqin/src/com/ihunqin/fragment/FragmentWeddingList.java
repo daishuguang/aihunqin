@@ -1,6 +1,6 @@
 package com.ihunqin.fragment;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

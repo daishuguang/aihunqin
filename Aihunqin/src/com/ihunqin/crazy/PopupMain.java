@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihunqin.mm.R;
+import com.example.aihunqin.R;
 
 public class PopupMain extends Activity {
 	SelectPopupWindow menuWindow;
