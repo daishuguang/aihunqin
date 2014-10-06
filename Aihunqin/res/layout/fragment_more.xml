@@ -54,7 +54,7 @@
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:text="访问文弘官方网站"
+            android:text="访问官方网站"
             android:textSize="15sp" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:text="拨打文弘客服热线"
+            android:text="拨打客服热线"
             android:textSize="15sp" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:text="发送邮件给文弘"
+            android:text="发送邮件"
             android:textSize="15sp" />
 
         <TextView
@@ -137,7 +137,7 @@
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:text="关于文弘婚礼助手App"
+            android:text="关于婚礼助手App"
             android:textSize="15sp" />
 
         <Button
