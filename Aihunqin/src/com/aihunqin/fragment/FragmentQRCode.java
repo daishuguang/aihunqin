@@ -50,7 +50,7 @@ public class FragmentQRCode extends Fragment {
 		});
 		try {
 			id = getArguments().getString("id");
-			url = "http://www.ruiqinsoft.com:3083/wh/t/" + id;
+			url = "http://wedding.ihunqin.com/ecard/" + id;
 			bm = create2DCode(url);
 			((ImageView) getView().findViewById(R.id.qrimg)).setImageBitmap(bm);
 		} catch (WriterException e) {
