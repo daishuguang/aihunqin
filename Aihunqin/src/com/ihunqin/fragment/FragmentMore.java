@@ -27,7 +27,7 @@ public class FragmentMore extends Fragment {
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
 	private static final String APP_ID = "wx7160a43122ae9274";
 
-	public IWXAPI api;
+	private IWXAPI api;
 
 	private void regToWx() {
 		// 通过WXAPIFactory工厂，获取IWXAPI的实例
@@ -134,7 +134,7 @@ public class FragmentMore extends Fragment {
 			public void onClick(View v) {
 				// 初始化一个WXTextObject对象
 				WXTextObject textObj = new WXTextObject();
-				textObj.text = "婚庆助手";
+				textObj.text = "快来参加我的婚礼吧";
 
 				// WXTextObject
 				WXMediaMessage msg = new WXMediaMessage();

@@ -21,17 +21,35 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.ihunqin.crazy.WebActivity;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXImageObject;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXTextObject;
+import com.tencent.mm.sdk.openapi.WXWebpageObject;
 import com.example.aihunqin.R;
 
 public class FragmentQRCode extends Fragment {
-	TextView back, visitweb, saveqrcode;
+	TextView back, visitweb, saveqrcode, friend;
 	String url, id;
 	Bitmap bm;
+	private static final String APP_ID = "wx7160a43122ae9274";
+
+	private IWXAPI api;
+
+	private void regToWx() {
+		// 通过WXAPIFactory工厂，获取IWXAPI的实例
+		api = WXAPIFactory.createWXAPI(getActivity(), APP_ID, true);
+
+		// 将应用的appId注册到微信
+		api.registerApp(APP_ID);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		regToWx();
 		return inflater.inflate(R.layout.fragment_qrcode, container, false);
 	}
 
@@ -91,6 +109,32 @@ public class FragmentQRCode extends Fragment {
 		});
 
 		saveqrcode.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+		friend = (TextView) getView().findViewById(R.id.friend);
+		friend.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 初始化一个WXTextObject对象
+				WXWebpageObject webpage = new WXWebpageObject();
+				webpage.webpageUrl = url;
+
+				// WXTextObject
+				WXMediaMessage msg = new WXMediaMessage(webpage);
+				msg.title = "快来参加我的婚礼吧";
+				msg.description = "婚庆助手";
+				Bitmap bwx = Bitmap.createScaledBitmap(bm, 150, 150, true);
+				msg.setThumbImage(bwx);
+
+				// 构造一个Req
+				SendMessageToWX.Req req = new SendMessageToWX.Req();
+				req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				req.transaction = String.valueOf(System.currentTimeMillis());
+				req.message = msg;
+
+				api.sendReq(req);
+			}
+		});
 	}
 
 	public Bitmap create2DCode(String str) throws WriterException {

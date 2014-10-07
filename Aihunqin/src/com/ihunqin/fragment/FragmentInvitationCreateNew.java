@@ -52,6 +52,11 @@ import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.example.aihunqin.R;
 import com.ihunqin.util.FtpUtil;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXTextObject;
 
 public class FragmentInvitationCreateNew extends Fragment {
 	String id = "";
@@ -65,6 +70,18 @@ public class FragmentInvitationCreateNew extends Fragment {
 	int current = 0;
 	static String img_path = null;
 	static int picid = 0;
+
+	private static final String APP_ID = "wx7160a43122ae9274";
+
+	private IWXAPI api;
+
+	private void regToWx() {
+		// 通过WXAPIFactory工厂，获取IWXAPI的实例
+		api = WXAPIFactory.createWXAPI(getActivity(), APP_ID, true);
+
+		// 将应用的appId注册到微信
+		api.registerApp(APP_ID);
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -145,6 +162,7 @@ public class FragmentInvitationCreateNew extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		regToWx();
 		return inflater.inflate(R.layout.fragment_invitation_createnew,
 				container, false);
 	}
@@ -417,8 +435,8 @@ public class FragmentInvitationCreateNew extends Fragment {
 		public void run() {
 
 			String returnmsg = FtpUtil.ftpUpload("www.ihunqin.com", "3083",
-					"tanqci", "tanqci123", null, img_path, id + "-"
-							+ current + ".jpg");
+					"tanqci", "tanqci123", null, img_path, id + "-" + current
+							+ ".jpg");
 			Log.v("roboce", returnmsg);
 		}
 	}
@@ -470,7 +488,7 @@ public class FragmentInvitationCreateNew extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), WebActivity.class);
-				intent.putExtra("link", "http://www.ruiqinsoft.com:3083/wh/t/"
+				intent.putExtra("link", "http://wedding.ihunqin.com/ecard/"
 						+ id);
 				startActivity(intent);
 			}
@@ -482,8 +500,8 @@ public class FragmentInvitationCreateNew extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), WebActivity.class);
-				intent.putExtra("link",
-						"http://www.ruiqinsoft.com:3083/guest/v/" + id);
+				intent.putExtra("link", "http://wedding.ihunqin.com/ecard/"
+						+ id + "/guest");
 				startActivity(intent);
 			}
 		});
@@ -499,7 +517,30 @@ public class FragmentInvitationCreateNew extends Fragment {
 				startActivity(intent);
 			}
 		});
+		Button sendreq = (Button) getView().findViewById(R.id.sendreq);
+		sendreq.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+
+				// 初始化一个WXTextObject对象
+				WXTextObject textObj = new WXTextObject();
+				textObj.text = "快来参加我的婚礼吧";
+
+				// WXTextObject
+				WXMediaMessage msg = new WXMediaMessage();
+				msg.mediaObject = textObj;
+				msg.description = "婚庆助手";
+
+				// 构造一个Req
+				SendMessageToWX.Req req = new SendMessageToWX.Req();
+				// req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				req.transaction = String.valueOf(System.currentTimeMillis());
+				req.message = msg;
+
+				api.sendReq(req);
+			}
+		});
 		Button qrcode = (Button) getView().findViewById(R.id.qrcode);
 		qrcode.setOnClickListener(new OnClickListener() {
 
