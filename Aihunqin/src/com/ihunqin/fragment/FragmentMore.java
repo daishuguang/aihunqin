@@ -15,14 +15,32 @@ import android.widget.Toast;
 
 import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.crazy.WenhongLocation;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXTextObject;
 import com.example.aihunqin.R;
 
 public class FragmentMore extends Fragment {
 	TextView wenhonglocation;
+	// APP_ID 替换为你的应用从官方网站申请到的合法appId
+	private static final String APP_ID = "wx7160a43122ae9274";
+
+	public IWXAPI api;
+
+	private void regToWx() {
+		// 通过WXAPIFactory工厂，获取IWXAPI的实例
+		api = WXAPIFactory.createWXAPI(getActivity(), APP_ID, true);
+
+		// 将应用的appId注册到微信
+		api.registerApp(APP_ID);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		regToWx();
 		return inflater.inflate(R.layout.fragment_more, container, false);
 	}
 
@@ -114,7 +132,22 @@ public class FragmentMore extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				// 初始化一个WXTextObject对象
+				WXTextObject textObj = new WXTextObject();
+				textObj.text = "婚庆助手";
 
+				// WXTextObject
+				WXMediaMessage msg = new WXMediaMessage();
+				msg.mediaObject = textObj;
+				msg.description = "婚庆助手";
+
+				// 构造一个Req
+				SendMessageToWX.Req req = new SendMessageToWX.Req();
+				// req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				req.transaction = String.valueOf(System.currentTimeMillis());
+				req.message = msg;
+
+				api.sendReq(req);
 			}
 		});
 	}

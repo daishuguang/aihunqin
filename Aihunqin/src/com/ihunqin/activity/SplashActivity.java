@@ -22,6 +22,8 @@ import com.example.aihunqin.R;
 import com.ihunqin.crazy.SinaMain;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class SplashActivity extends Activity {
 	Handler mHandler = new Handler();
@@ -127,6 +129,8 @@ public class SplashActivity extends Activity {
 		rawparams.put("mobile", mobile);
 		rawparams.put("password", password);
 		if (NetworkUtil.isOnline(this)) {
+			// Register wechat
+			// APP_ID
 			Async task = new Async(url, rawparams);
 			task.execute();
 		} else {

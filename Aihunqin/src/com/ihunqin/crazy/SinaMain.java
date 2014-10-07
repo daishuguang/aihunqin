@@ -20,15 +20,27 @@ import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
 import com.ihunqin.fragment.FragmentWeddingList;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.example.aihunqin.R;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
 	Fragment[] mFragments;
-	
+
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
 	private static final String APP_ID = "wx7160a43122ae9274";
+
+	public IWXAPI api;
+
+	private void regToWx() {
+		// 通过WXAPIFactory工厂，获取IWXAPI的实例
+		api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+
+		// 将应用的appId注册到微信
+		api.registerApp(APP_ID);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +114,7 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 					.replace(R.id.fragment_container, fragment)
 					.addToBackStack(null).commit();
 		}
-		if(which.equals("qrcode")){
+		if (which.equals("qrcode")) {
 			FragmentQRCode fragment = new FragmentQRCode();
 			fragment.setArguments(arguments);
 			this.getSupportFragmentManager().beginTransaction()

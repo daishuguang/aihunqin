@@ -3,6 +3,7 @@ package com.ihunqin.model;
 import java.util.*;
 
 public class BookContent {
+
 	// 定义一个内部类，作为系统的业务对象
 	public static class Book {
 		public Integer id;
