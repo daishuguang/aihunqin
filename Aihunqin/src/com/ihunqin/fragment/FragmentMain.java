@@ -2,6 +2,11 @@ package com.ihunqin.fragment;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,7 +18,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,13 +42,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aihunqin.R;
-import com.ihunqin.crazy.SinaMain;
 
 public class FragmentMain extends Fragment {
 	private TextView jindu;
 	private ImageButton qindan;
 	private ImageButton zuowei;
 	LinearLayout settingwedding = null;
+	TextView weddingdate;
+
+	SharedPreferences preferences;
 	OnClickListener settingnameListener = new OnClickListener() {
 
 		@Override
@@ -58,13 +70,16 @@ public class FragmentMain extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		preferences = getActivity().getSharedPreferences("userinfo",
+				Context.MODE_PRIVATE);
 		return inflater.inflate(R.layout.fragment_main, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		weddingdate = (TextView) getView().findViewById(R.id.weddingdate);
+		weddingdate.setText(preferences.getString("weddingdate", "0"));
 		// jindu
 		jindu = (TextView) getView().findViewById(R.id.jindu);
 
@@ -145,7 +160,34 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				final Calendar c = Calendar.getInstance();
+				new DatePickerDialog(getActivity(), new OnDateSetListener() {
 
+					@Override
+					public void onDateSet(DatePicker view, int year,
+							int monthOfYear, int dayOfMonth) {
+						DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						Date date1 = null, date2 = null;
+						try {
+							date1 = format.parse(year + "-" + monthOfYear + "-"
+									+ dayOfMonth);
+							date2 = format.parse(c.get(Calendar.YEAR) + "-"
+									+ c.get(Calendar.MONTH) + "-"
+									+ c.get(Calendar.DAY_OF_MONTH));
+
+						} catch (ParseException e) {
+
+							e.printStackTrace();
+						}
+						long diff = date1.getTime() - date2.getTime();
+						long days = diff / (24 * 60 * 60 * 1000);
+						weddingdate.setText(days + "");
+						preferences.edit().putString("weddingdate", days + "")
+								.commit();
+
+					}
+				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+						.get(Calendar.DAY_OF_MONTH)).show();
 			}
 		});
 		/** Read data from xml */
