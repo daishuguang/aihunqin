@@ -27,11 +27,18 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aihunqin.R;
+import com.ihunqin.crazy.SinaMain;
 
 public class FragmentMain extends Fragment {
+	private TextView jindu;
+	private ImageButton qindan;
+	private ImageButton zuowei;
+	LinearLayout settingwedding = null;
 	OnClickListener settingnameListener = new OnClickListener() {
 
 		@Override
@@ -58,6 +65,31 @@ public class FragmentMain extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		// jindu
+		jindu = (TextView) getView().findViewById(R.id.jindu);
+
+		qindan = (ImageButton) getView().findViewById(R.id.qindan);
+
+		zuowei = (ImageButton) getView().findViewById(R.id.zuowei);
+
+		jindu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
+
+		qindan.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
+
 		ImageButton xizhi = (ImageButton) getView().findViewById(R.id.xizhi);
 		xizhi.setOnClickListener(new OnClickListener() {
 
@@ -80,15 +112,20 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity()
-						.getSupportFragmentManager();
 
-				FragmentTransaction fragmentTransaction = fragmentManager
-						.beginTransaction();
-				Fragment fragment_settingname = new FragmentSettingName();
-				fragmentTransaction.replace(R.id.fragment_container,
-						fragment_settingname);
-				fragmentTransaction.commit();
+				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
+						.show();
+
+				//
+				// FragmentManager fragmentManager = getActivity()
+				// .getSupportFragmentManager();
+				//
+				// FragmentTransaction fragmentTransaction = fragmentManager
+				// .beginTransaction();
+				// Fragment fragment_settingname = new FragmentSettingName();
+				// fragmentTransaction.replace(R.id.fragment_container,
+				// fragment_settingname);
+				// fragmentTransaction.commit();
 			}
 		});
 
@@ -102,6 +139,15 @@ public class FragmentMain extends Fragment {
 		ImageView bannerhead = (ImageView) getView().findViewById(
 				R.id.bannerhead);
 
+		settingwedding = (LinearLayout) getView().findViewById(
+				R.id.settingwedding);
+		settingwedding.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		/** Read data from xml */
 		String str = "";
 		DocumentBuilderFactory documentBuilderFactory;

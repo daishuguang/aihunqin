@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.ihunqin.fragment.FragmentInivitationContent;
@@ -79,9 +80,12 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 							fragment_main);
 					break;
 				case R.id.rbTwo:
-					Fragment fragment_weddingList = new FragmentWeddingList();
-					fragmentTransaction.replace(R.id.fragment_container,
-							fragment_weddingList);
+					Toast.makeText(SinaMain.this, "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
+							.show();
+					// Fragment fragment_weddingList = new
+					// FragmentWeddingList();
+					// fragmentTransaction.replace(R.id.fragment_container,
+					// fragment_weddingList);
 					break;
 				case R.id.rbThree:
 					Fragment fragment_more = new FragmentMore();

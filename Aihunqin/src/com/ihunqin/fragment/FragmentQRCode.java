@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -123,7 +124,9 @@ public class FragmentQRCode extends Fragment {
 				WXMediaMessage msg = new WXMediaMessage(webpage);
 				msg.title = "快来参加我的婚礼吧";
 				msg.description = "婚庆助手";
-				Bitmap bwx = Bitmap.createScaledBitmap(bm, 150, 150, true);
+				Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+						R.drawable.hunqin);
+				Bitmap bwx = Bitmap.createScaledBitmap(bmp, 150, 150, true);
 				msg.setThumbImage(bwx);
 
 				// 构造一个Req

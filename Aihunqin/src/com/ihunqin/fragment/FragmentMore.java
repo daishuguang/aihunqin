@@ -2,6 +2,8 @@ package com.ihunqin.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -137,8 +139,13 @@ public class FragmentMore extends Fragment {
 				textObj.text = "快来参加我的婚礼吧";
 
 				// WXTextObject
-				WXMediaMessage msg = new WXMediaMessage();
-				msg.mediaObject = textObj;
+				WXMediaMessage msg = new WXMediaMessage(textObj);
+				Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+						R.drawable.hunqin);
+				Bitmap bwx = Bitmap.createScaledBitmap(bmp, 150, 150, true);
+				bmp.recycle();
+				msg.setThumbImage(bwx);
+				msg.title = "婚庆助手";
 				msg.description = "婚庆助手";
 
 				// 构造一个Req
