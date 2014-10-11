@@ -48,8 +48,32 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/logoff"
+        android:background="@drawable/button_enable"
         android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/jihuoma"
+        style="@style/Edit_Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="请输入激活码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/jihuo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/logoff"
+        android:text="激活"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 

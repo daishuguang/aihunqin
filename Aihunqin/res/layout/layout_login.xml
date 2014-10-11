@@ -34,13 +34,13 @@
         android:id="@+id/login1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/logoff"
+        android:background="@drawable/button_enable"
         android:text="登录"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 
-    
 </LinearLayout>

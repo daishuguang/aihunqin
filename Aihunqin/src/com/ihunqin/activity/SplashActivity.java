@@ -29,7 +29,7 @@ public class SplashActivity extends Activity {
 	Handler mHandler = new Handler();
 	static final String TAG = "WebGameActivity";
 	Animation animationGone;
-	int LOAD_DISPLAY_TIME = 4000;
+	int LOAD_DISPLAY_TIME = 2500;
 
 	// Baidu Location
 	LocationClient mLocationClient = null;
@@ -80,7 +80,7 @@ public class SplashActivity extends Activity {
 							 * WordPress Activity.
 							 */
 							Intent intent = new Intent(SplashActivity.this,
-									SinaMain.class);
+									AdActivity.class);
 							SplashActivity.this.startActivity(intent);
 							SplashActivity.this.finish();
 							SplashActivity.this.overridePendingTransition(

@@ -28,16 +28,6 @@ public class AdActivity extends Activity {
 				overridePendingTransition(R.anim.launch_input,
 						R.anim.launch_output);
 			}
-		}, 3000);
+		}, 2500);
 	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-
-		Intent intent = new Intent(this, SinaMain.class);
-		startActivity(intent);
-		finish();
-		return super.onTouchEvent(event);
-	}
-
 }
