@@ -1,5 +1,6 @@
 package com.ihunqin.fragment;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -24,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -49,7 +51,7 @@ public class FragmentMain extends Fragment {
 	private ImageButton zuowei;
 	LinearLayout settingwedding = null;
 	TextView weddingdate;
-
+	ImageView shangjialogo;
 	SharedPreferences preferences;
 	OnClickListener settingnameListener = new OnClickListener() {
 
@@ -78,6 +80,17 @@ public class FragmentMain extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		shangjialogo = (ImageView) getView().findViewById(R.id.shangjialogo);
+		try {
+			FileInputStream fis = getActivity().openFileInput("logourl.png");
+			Bitmap bmp = BitmapFactory.decodeStream(fis);
+			shangjialogo.setImageBitmap(bmp);
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
 		weddingdate = (TextView) getView().findViewById(R.id.weddingdate);
 		try {
 			if (!preferences.getString("setweddingdate", "").equals("")) {
@@ -86,8 +99,8 @@ public class FragmentMain extends Fragment {
 
 				long diff;
 				try {
-					diff = Long.parseLong(preferences.getString("setweddingdate",
-							""))
+					diff = Long.parseLong(preferences.getString(
+							"setweddingdate", ""))
 							- format.parse(
 									c.get(Calendar.YEAR) + "-"
 											+ c.get(Calendar.MONTH) + "-"

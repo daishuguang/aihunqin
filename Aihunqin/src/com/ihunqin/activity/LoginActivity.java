@@ -1,5 +1,11 @@
 package com.ihunqin.activity;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +17,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +35,7 @@ import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
 
 public class LoginActivity extends Activity {
-
+	static LoginActivity instance;
 	TextView back;
 	TextView titleTv;
 	TextView rightmenu;
@@ -42,6 +50,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_login);
+		instance = this;
 		p1 = new ProgressDialog(this);
 		phonenum = (EditText) findViewById(R.id.phonenum);
 		password = (EditText) findViewById(R.id.password);
@@ -146,6 +155,47 @@ public class LoginActivity extends Activity {
 					editor.putString("password", password.getText().toString());
 					editor.putString("userid", json.getString("Data"));
 					editor.commit();
+
+					try {
+						FileInputStream fis = openFileInput("boothurl.png");
+					} catch (FileNotFoundException e) {
+						JSONObject dataExt = json.getJSONObject("DataExt");
+						String boothURL = dataExt.getString("BoothURL");
+						String logoURL = dataExt.getString("LogoURL");
+
+						try {
+							String boothurlstr = "http://home.ihunqin.com"
+									+ boothURL;
+							URL imgurl = new URL(boothurlstr);
+							InputStream is = imgurl.openStream();
+							OutputStream os = openFileOutput("boothurl.png",
+									MODE_PRIVATE);
+							byte[] buff = new byte[1024];
+							int hasRead = 0;
+							while ((hasRead = is.read(buff)) > 0) {
+								os.write(buff, 0, hasRead);
+							}
+							is.close();
+							os.close();
+
+							boothurlstr = "http://home.ihunqin.com" + logoURL;
+
+							imgurl = new URL(boothurlstr);
+							is = imgurl.openStream();
+							os = openFileOutput("logourl.png", MODE_PRIVATE);
+							hasRead = 0;
+							while ((hasRead = is.read(buff)) > 0) {
+								os.write(buff, 0, hasRead);
+							}
+							is.close();
+							os.close();
+						} catch (IOException es) {
+
+							es.printStackTrace();
+						}
+						e.printStackTrace();
+					}
+
 					Intent intent = new Intent(LoginActivity.this,
 							AdActivity.class);
 					LoginActivity.this.startActivity(intent);

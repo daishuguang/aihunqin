@@ -1,8 +1,13 @@
 package com.ihunqin.activity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.CookieStore;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,8 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aihunqin.R;
-import com.ihunqin.activity.LoginActivity.Async;
-import com.ihunqin.crazy.SinaMain;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
 
@@ -60,6 +63,7 @@ public class RegisterActivity extends Activity {
 		back.setVisibility(View.VISIBLE);
 		titleTv.setText("ÓÃ»§×¢²á");
 
+		p1 = new ProgressDialog(this);
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -72,8 +76,8 @@ public class RegisterActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				register.setEnabled(false);
-				jihuoinfo.setVisibility(View.VISIBLE);
+				// register.setEnabled(false);
+				// jihuoinfo.setVisibility(View.VISIBLE);
 				if (NetworkUtil.isOnline(RegisterActivity.this)) {
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -101,12 +105,9 @@ public class RegisterActivity extends Activity {
 							.equals(password2.getText().toString()))
 						Toast.makeText(getApplicationContext(), "ÃÜÂë²»Ò»ÖÂ",
 								Toast.LENGTH_SHORT).show();
-					String url = "http://home.ihunqin.com/api/passport/register";
+					String url = "http://home.ihunqin.com/api/passport/check/available/mobile";
 					Map<String, String> rawparams = new HashMap<String, String>();
 					rawparams.put("mobile", phonenum.getText().toString());
-					rawparams.put("password", password1.getText().toString());
-					rawparams.put("passwordConfirmed", password2.getText()
-							.toString());
 					String result = null;
 					try {
 
@@ -114,31 +115,54 @@ public class RegisterActivity extends Activity {
 						JSONObject json = new JSONObject(result);
 						String status = json.getString("Status");
 						if (status.equals("0")) {
-							// HttpUtil.httpClient.getCookieStore();
-							preferences = getSharedPreferences("userinfo",
-									MODE_PRIVATE);
-							editor = preferences.edit();
-							editor.putString("mobile", phonenum.getText()
-									.toString());
-							editor.putString("password", password1.getText()
-									.toString());
-							editor.putString("userid", json.getString("Data"));
-							editor.commit();
+							if (json.getBoolean("Data")) {
+								url = "http://home.ihunqin.com/api/passport/register";
 
-							register.setEnabled(false);
-							jihuoinfo.setVisibility(View.VISIBLE);
+								rawparams.put("mobile", phonenum.getText()
+										.toString());
+								rawparams.put("password", password1.getText()
+										.toString());
+								rawparams.put("passwordConfirmed", password2
+										.getText().toString());
 
-						} else {
-							Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü",
-									Toast.LENGTH_SHORT).show();
+								result = HttpUtil.postRequst(url, rawparams);
+								JSONObject json2 = new JSONObject(result);
+								String status2 = json2.getString("Status");
+								if (status.equals("0")) {
+									// HttpUtil.httpClient.getCookieStore();
+									preferences = getSharedPreferences(
+											"userinfo", MODE_PRIVATE);
+									editor = preferences.edit();
+									editor.putString("mobile", phonenum
+											.getText().toString());
+									editor.putString("password", password1
+											.getText().toString());
+									editor.putString("userid",
+											json2.getString("Data"));
+									editor.commit();
+
+									register.setEnabled(false);
+									jihuoinfo.setVisibility(View.VISIBLE);
+
+								} else {
+									Toast.makeText(getApplicationContext(),
+											"×¢²áÊ§°Ü", Toast.LENGTH_SHORT).show();
+								}
+								if (!(json.get("DataExt").equals(null))) {
+									JSONObject dataext = json
+											.getJSONObject("DataExt");
+								}
+
+							} else {
+								Toast.makeText(RegisterActivity.this,
+										"ÊÖ»úºÅÒÑ±»×¢²á", Toast.LENGTH_SHORT).show();
+							}
 						}
-						if (!(json.get("DataExt").equals(null))) {
-							JSONObject dataext = json.getJSONObject("DataExt");
-						}
+
 					} catch (Exception e) {
-
 						e.printStackTrace();
 					}
+
 				} else {
 					Toast.makeText(RegisterActivity.this, "Î´Á¬½Óµ½ÍøÂç",
 							Toast.LENGTH_SHORT).show();
@@ -164,6 +188,7 @@ public class RegisterActivity extends Activity {
 				p1.show();
 				Async task = new Async(url, rawParams);
 				task.execute();
+				LoginActivity.instance.finish();
 			}
 		});
 
@@ -182,7 +207,12 @@ public class RegisterActivity extends Activity {
 		protected String doInBackground(Void... params) {
 			String result = "";
 			try {
-
+//				Map<String, String> rawparams = new HashMap<String, String>();
+//				rawparams.put("mobile", "15895565819");
+//				rawparams.put("password", "1234");
+//				HttpUtil.postRequst(
+//						"http://home.ihunqin.com/api/passport/signin",
+//						rawparams);
 				result = HttpUtil.postRequst(url, raw);
 
 			} catch (Exception e) {
@@ -202,12 +232,45 @@ public class RegisterActivity extends Activity {
 				String status = json.getString("Status");
 				if (status.equals("0")) {
 					JSONObject dataExt = json.getJSONObject("DataExt");
-					String boothURL =dataExt.getString("BoothURL");
-					
-					Intent intent = new Intent(RegisterActivity.this,
-							AdActivity.class);
-					RegisterActivity.this.startActivity(intent);
-					RegisterActivity.this.finish();
+					String boothURL = dataExt.getString("BoothURL");
+					String logoURL = dataExt.getString("LogoURL");
+
+					try {
+						String boothurlstr = "http://home.ihunqin.com"
+								+ boothURL;
+						URL imgurl = new URL(boothurlstr);
+						InputStream is = imgurl.openStream();
+						OutputStream os = openFileOutput("boothurl.png",
+								MODE_PRIVATE);
+						byte[] buff = new byte[1024];
+						int hasRead = 0;
+						while ((hasRead = is.read(buff)) > 0) {
+							os.write(buff, 0, hasRead);
+						}
+						is.close();
+						os.close();
+
+						boothurlstr = "http://home.ihunqin.com" + logoURL;
+
+						imgurl = new URL(boothurlstr);
+						is = imgurl.openStream();
+						os = openFileOutput("logourl.png", MODE_PRIVATE);
+						hasRead = 0;
+						while ((hasRead = is.read(buff)) > 0) {
+							os.write(buff, 0, hasRead);
+						}
+						is.close();
+						os.close();
+
+						Intent intent = new Intent(RegisterActivity.this,
+								AdActivity.class);
+						RegisterActivity.this.startActivity(intent);
+						RegisterActivity.this.finish();
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
+
 				} else {
 					Toast.makeText(RegisterActivity.this, "¼¤»îÊ§°Ü",
 							Toast.LENGTH_SHORT).show();
@@ -218,4 +281,5 @@ public class RegisterActivity extends Activity {
 			}
 		}
 	}
+
 }
