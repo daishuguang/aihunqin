@@ -147,7 +147,7 @@ public class LoginActivity extends Activity {
 					editor.putString("userid", json.getString("Data"));
 					editor.commit();
 					Intent intent = new Intent(LoginActivity.this,
-							SinaMain.class);
+							AdActivity.class);
 					LoginActivity.this.startActivity(intent);
 					LoginActivity.this.finish();
 				} else {

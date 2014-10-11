@@ -79,7 +79,33 @@ public class FragmentMain extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		weddingdate = (TextView) getView().findViewById(R.id.weddingdate);
-		weddingdate.setText(preferences.getString("weddingdate", "0"));
+		try {
+			if (!preferences.getString("setweddingdate", "").equals("")) {
+				Calendar c = Calendar.getInstance();
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+				long diff;
+				try {
+					diff = Long.parseLong(preferences.getString("setweddingdate",
+							""))
+							- format.parse(
+									c.get(Calendar.YEAR) + "-"
+											+ c.get(Calendar.MONTH) + "-"
+											+ c.get(Calendar.DAY_OF_MONTH))
+									.getTime();
+					long days = diff / (24 * 60 * 60 * 1000);
+					weddingdate.setText(days + "");
+				} catch (ParseException e1) {
+
+					e1.printStackTrace();
+				}
+			}
+
+		} catch (Exception e) {
+			Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
+					.show();
+		}
+
 		// jindu
 		jindu = (TextView) getView().findViewById(R.id.jindu);
 
@@ -182,8 +208,10 @@ public class FragmentMain extends Fragment {
 						long diff = date1.getTime() - date2.getTime();
 						long days = diff / (24 * 60 * 60 * 1000);
 						weddingdate.setText(days + "");
-						preferences.edit().putString("weddingdate", days + "")
-								.commit();
+						preferences
+								.edit()
+								.putString("setweddingdate",
+										date1.getTime() + "").commit();
 
 					}
 				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
