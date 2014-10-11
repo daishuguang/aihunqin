@@ -154,9 +154,6 @@ public class LoginActivity extends Activity {
 					Toast.makeText(LoginActivity.this, "用户名或密码错误",
 							Toast.LENGTH_SHORT).show();
 				}
-				if (!(json.get("DataExt").equals(null))) {
-					JSONObject dataext = json.getJSONObject("DataExt");
-				}
 			} catch (JSONException e) {
 
 				e.printStackTrace();
