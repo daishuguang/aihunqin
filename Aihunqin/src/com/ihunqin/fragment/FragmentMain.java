@@ -167,19 +167,15 @@ public class FragmentMain extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
-						.show();
+				FragmentManager fragmentManager = getActivity()
+						.getSupportFragmentManager();
 
-				//
-				// FragmentManager fragmentManager = getActivity()
-				// .getSupportFragmentManager();
-				//
-				// FragmentTransaction fragmentTransaction = fragmentManager
-				// .beginTransaction();
-				// Fragment fragment_settingname = new FragmentSettingName();
-				// fragmentTransaction.replace(R.id.fragment_container,
-				// fragment_settingname);
-				// fragmentTransaction.commit();
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+				Fragment fragment_zuowei = new FragmentZuowei();
+				fragmentTransaction.replace(R.id.fragment_container,
+						fragment_zuowei);
+				fragmentTransaction.commit();
 			}
 		});
 
