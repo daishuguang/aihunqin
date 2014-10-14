@@ -22,11 +22,6 @@ public class FragmentZuowei extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 
 		super.onActivityCreated(savedInstanceState);
-		FragmentTabHost tabHost = (FragmentTabHost) getView().findViewById(
-				android.R.id.tabhost);
-
-		tabHost.setup(getActivity(), getActivity().getSupportFragmentManager(),
-				R.id.tabzuowei);
 	}
 
 }

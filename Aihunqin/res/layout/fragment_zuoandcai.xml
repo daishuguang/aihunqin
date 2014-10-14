@@ -6,56 +6,30 @@
 
     <include layout="@layout/title_bar" />
 
-    <android.support.v4.app.FragmentTabHost
-        android:id="@android:id/tabhost"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
 
-        <LinearLayout
+        <RadioButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_weight="1"
+            android:background="@color/zuowei"
+            android:button="@null"
+            android:gravity="center"
+            android:text="座位安排"
+            android:textColor="#ffffff" />
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </TabWidget>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:id="@+id/tabzuowei"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fadingEdge="none"
-                    android:orientation="vertical"
-                    android:scrollbars="none" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ahahfa" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabcaidan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fadingEdge="none"
-                    android:orientation="vertical"
-                    android:scrollbars="none" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="fdagdsfda" />
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </android.support.v4.app.FragmentTabHost>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/zuowei"
+            android:button="@null"
+            android:gravity="center"
+            android:text="菜单编辑"
+            android:textColor="#ffffff" />
+    </RadioGroup>
 
 </LinearLayout>
