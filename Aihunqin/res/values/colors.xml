@@ -2,4 +2,6 @@
 <resources>
     <color name="gray">#eeeeff</color>
     <color name="white">#ffffff</color>
+    <color name="radioxuanzhong">#A0E83A46</color>
+    <color name="radioweixuanzhong">#E83A46</color>
 </resources>
