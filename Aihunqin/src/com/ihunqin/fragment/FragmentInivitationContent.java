@@ -1,11 +1,13 @@
 package com.ihunqin.fragment;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
@@ -38,6 +40,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -637,7 +640,7 @@ public class FragmentInivitationContent extends Fragment {
 						.toString());
 				rawparams.put("WeddingLoacation", weddinglocation.getText()
 						.toString());
-				rawparams.put("WeddingMenu", "");
+				rawparams.put("WeddingMenu", readFromFile(getActivity(), "caidan.txt"));
 				rawparams.put("WeddingTables", seat.getText().toString());
 				rawparams.put("LoveWord", love1.getText().toString());
 				rawparams.put("LoveWord2", love2.getText().toString());
@@ -667,6 +670,47 @@ public class FragmentInivitationContent extends Fragment {
 		}).start();
 	}
 
+	private String readFromFile(Context context, String filestr) {
+		if (Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState())) {
+			String foldername = Environment.getExternalStorageDirectory()
+					.getPath() + "/ihunqin";
+			File folder = new File(foldername);
+
+			if (folder == null || folder.exists()) {
+				folder.mkdir();
+			}
+			String fileName = "/" + filestr;
+			File targetFile = new File(foldername + fileName);
+			String readedStr = "";
+			try {
+				if (!targetFile.exists()) {
+					targetFile.createNewFile();
+					return "-1";
+				} else {
+					InputStream in = new BufferedInputStream(
+							new FileInputStream(targetFile));
+					BufferedReader br = new BufferedReader(
+							new InputStreamReader(in, "utf-8"));
+					String tmp;
+
+					while ((tmp = br.readLine()) != null) {
+						readedStr += tmp;
+					}
+					br.close();
+					in.close();
+					return readedStr;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "-1";
+			}
+		} else {
+			Toast.makeText(context, "Œ¥∑¢œ÷SDø®!", Toast.LENGTH_SHORT).show();
+			return "-1";
+		}
+	}
+	
 	void hideIM(View edt) {
 		InputMethodManager im = (InputMethodManager) getActivity()
 				.getSystemService(Activity.INPUT_METHOD_SERVICE);

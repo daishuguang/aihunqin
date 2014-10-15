@@ -12,8 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,9 +19,12 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -67,7 +68,30 @@ public class FragmentZuowei extends Fragment {
 
 		adapter = new MyAdapter(getActivity());
 		zuoweiadapter = new MyZuoAdapter(getActivity());
+		String caidantxt = readFromFile(getActivity(), "caidan.txt");
+		if (!caidantxt.equals("-1") && !caidantxt.equals("")) {
+			String caiitemwithcomma = caidantxt.substring(1,
+					caidantxt.length() - 1);
+			String[] caiitem = caiitemwithcomma.split(",");
+			for (String i : caiitem) {
+				adapter.arr.add(i);
+			}
+		}
 
+		String zuoweitxt = readFromFile(getActivity(), "zuowei.txt");
+		if (!zuoweitxt.equals("-1") && !zuoweitxt.equals("")) {
+			String zuoweiitemwithcomma = zuoweitxt;
+			String[] zuoweiitem = zuoweiitemwithcomma.split("huanhang");
+			int position = 0;
+			for (String i : zuoweiitem) {
+				if (i.equals("<br/>")) {
+					zuoweiadapter.arr.add("");
+				} else {
+					zuoweiadapter.arr.add(i);
+				}
+				position++;
+			}
+		}
 		listcontent = (ListView) getView().findViewById(R.id.listcontent);
 
 		listcontent.setAdapter(zuoweiadapter);
@@ -93,6 +117,16 @@ public class FragmentZuowei extends Fragment {
 		rightmenu = (TextView) getView().findViewById(R.id.rightmenu);
 		rightmenu.setText("添加酒席");
 		rightmenu.setVisibility(View.VISIBLE);
+		rightmenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getActivity(), zuoweiadapter.arr.size() + "",
+						Toast.LENGTH_SHORT).show();
+				zuoweiadapter.arr.add("");
+				zuoweiadapter.notifyDataSetChanged();
+			}
+		});
 
 		radio_zuowei = (RadioButton) getView().findViewById(R.id.radio0);
 		radio_caidan = (RadioButton) getView().findViewById(R.id.radio1);
@@ -116,7 +150,7 @@ public class FragmentZuowei extends Fragment {
 					adapter.notifyDataSetChanged();
 					caiming.setText("");
 					String caistr = adapter.arr.toString();
-					SavedToText(getActivity(), caistr, false);
+					SavedToText(getActivity(), caistr, false, "caidan.txt");
 				}
 			}
 		});
@@ -144,16 +178,6 @@ public class FragmentZuowei extends Fragment {
 						}
 					}
 				});
-
-		String caidantxt = readFromFile(getActivity());
-		if (!caidantxt.equals("-1")) {
-			String caiitemwithcomma = caidantxt.substring(1,
-					caidantxt.length() - 2);
-			String[] caiitem = caiitemwithcomma.split(",");
-			for (String i : caiitem) {
-				adapter.arr.add(i);
-			}
-		}
 
 	}
 
@@ -224,7 +248,7 @@ public class FragmentZuowei extends Fragment {
 		return buffer;
 	}
 
-	private String readFromFile(Context context) {
+	private String readFromFile(Context context, String filestr) {
 		if (Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState())) {
 			String foldername = Environment.getExternalStorageDirectory()
@@ -234,7 +258,7 @@ public class FragmentZuowei extends Fragment {
 			if (folder == null || folder.exists()) {
 				folder.mkdir();
 			}
-			String fileName = "/caidan.txt";
+			String fileName = "/" + filestr;
 			File targetFile = new File(foldername + fileName);
 			String readedStr = "";
 			try {
@@ -266,7 +290,7 @@ public class FragmentZuowei extends Fragment {
 	}
 
 	private void SavedToText(Context context, String stringToWrite,
-			boolean append) {
+			boolean append, String filestr) {
 		if (Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState())) {
 			String foldername = Environment.getExternalStorageDirectory()
@@ -275,7 +299,7 @@ public class FragmentZuowei extends Fragment {
 			if (folder == null || !folder.exists()) {
 				folder.mkdir();
 			}
-			String fileName = "/caidan.txt";
+			String fileName = "/" + filestr;
 			File targetFile = new File(foldername + fileName);
 			OutputStreamWriter osw;
 			try {
@@ -337,11 +361,34 @@ public class FragmentZuowei extends Fragment {
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.item_zuowei, null);
 			}
-			del = (ImageButton) convertView.findViewById(R.id.delzuoxi);
+
 			xuhao = (TextView) convertView.findViewById(R.id.xuhao);
-			zuoweianpai = (EditText) convertView.findViewById(R.id.zuoweianpai);
 			xuhao.setText("第" + (position + 1) + "桌子");
 
+			zuoweianpai = (EditText) convertView.findViewById(R.id.zuoweianpai);
+			zuoweianpai.setText(arr.get(position));
+
+			zuoweianpai.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					if (!hasFocus) {
+						arr.set(position, ((EditText) v).getText().toString());
+						StringBuffer b = new StringBuffer();
+						for (String i : arr) {
+							if (i.equals("")) {
+								b.append("<br/>" + "huanhang");
+							} else
+								b.append(i + "huanhang");
+						}
+
+						SavedToText(getActivity(), b.toString(), false,
+								"zuowei.txt");
+					}
+				}
+			});
+
+			del = (ImageButton) convertView.findViewById(R.id.delzuoxi);
 			del.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -349,7 +396,8 @@ public class FragmentZuowei extends Fragment {
 					arr.remove(position);
 					zuoweiadapter.notifyDataSetChanged();
 					// String caistr = arr.toString();
-					// SavedToText(getActivity(), caistr, false);
+					SavedToText(getActivity(), arr.toString(), false,
+							"zuowei.txt");
 				}
 			});
 			return convertView;
@@ -406,7 +454,7 @@ public class FragmentZuowei extends Fragment {
 					arr.remove(position);
 					adapter.notifyDataSetChanged();
 					String caistr = arr.toString();
-					SavedToText(getActivity(), caistr, false);
+					SavedToText(getActivity(), caistr, false, "caidan.txt");
 				}
 			});
 
