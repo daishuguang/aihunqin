@@ -616,6 +616,7 @@ public class FragmentInivitationContent extends Fragment {
 				String url = "http://wedding.ihunqin.com/api/ecard/" + id
 						+ "/edit";
 				Map<String, String> rawparams = new HashMap<String, String>();
+				String zuoweitxt = readFromFile(getActivity(), "zuowei.txt");
 				// rawparams.put("EcardType1Id", id);
 				rawparams.put(
 						"UserID",
@@ -641,7 +642,7 @@ public class FragmentInivitationContent extends Fragment {
 				rawparams.put("WeddingLoacation", weddinglocation.getText()
 						.toString());
 				rawparams.put("WeddingMenu", readFromFile(getActivity(), "caidan.txt"));
-				rawparams.put("WeddingTables", seat.getText().toString());
+				rawparams.put("WeddingTables", zuoweitxt);
 				rawparams.put("LoveWord", love1.getText().toString());
 				rawparams.put("LoveWord2", love2.getText().toString());
 				rawparams.put("LoveWord3", love3.getText().toString());

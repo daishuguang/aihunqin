@@ -121,8 +121,6 @@ public class FragmentZuowei extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), zuoweiadapter.arr.size() + "",
-						Toast.LENGTH_SHORT).show();
 				zuoweiadapter.arr.add("");
 				zuoweiadapter.notifyDataSetChanged();
 			}
