@@ -65,7 +65,8 @@ public class FragmentZuowei extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 
 		super.onActivityCreated(savedInstanceState);
-
+		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
+		textView.setText("×ùÎ»ºÍ²Ëµ¥");
 		adapter = new MyAdapter(getActivity());
 		zuoweiadapter = new MyZuoAdapter(getActivity());
 		String caidantxt = readFromFile(getActivity(), "caidan.txt");

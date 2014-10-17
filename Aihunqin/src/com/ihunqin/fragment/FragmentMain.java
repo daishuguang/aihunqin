@@ -139,7 +139,15 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				
+				FragmentManager fragmentManager = getActivity()
+						.getSupportFragmentManager();
+
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+				Fragment fragment_invitation = new FragmentJiZhang();
+				fragmentTransaction.replace(R.id.fragment_container,
+						fragment_invitation);
+				fragmentTransaction.commit();
 			}
 		});
 
