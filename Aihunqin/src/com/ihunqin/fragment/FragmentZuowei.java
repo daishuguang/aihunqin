@@ -394,7 +394,14 @@ public class FragmentZuowei extends Fragment {
 					arr.remove(position);
 					zuoweiadapter.notifyDataSetChanged();
 					// String caistr = arr.toString();
-					SavedToText(getActivity(), arr.toString(), false,
+					StringBuffer b = new StringBuffer();
+					for (String i : arr) {
+						if (i.equals("")) {
+							b.append("<br/>" + "huanhang");
+						} else
+							b.append(i + "huanhang");
+					}
+					SavedToText(getActivity(), b.toString(), false,
 							"zuowei.txt");
 				}
 			});

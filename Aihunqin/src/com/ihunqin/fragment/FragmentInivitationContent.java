@@ -32,6 +32,7 @@ import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -64,6 +65,7 @@ public class FragmentInivitationContent extends Fragment {
 	EditText bridegroomname, bridename, bridegroommobile, bridemobile, love1,
 			love2, love3, love4, weddingdate, weddingdatechinese,
 			weddinglocation, hotelname, weddingtime, seat, youkuid;
+	ProgressDialog p1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +78,7 @@ public class FragmentInivitationContent extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		p1 = new ProgressDialog(getActivity());
 		((TextView) getView().findViewById(R.id.titleTv)).setText("编辑请帖内容");
 
 		id = getArguments().getString("id");
@@ -612,6 +615,8 @@ public class FragmentInivitationContent extends Fragment {
 
 			@Override
 			public void run() {
+				p1.setMessage("正在提交中");
+				p1.show();
 				// String url = "http://www.ruiqinsoft.com:3083/wh/edit/" + id;
 				String url = "http://wedding.ihunqin.com/api/ecard/" + id
 						+ "/edit";
@@ -641,7 +646,8 @@ public class FragmentInivitationContent extends Fragment {
 						.toString());
 				rawparams.put("WeddingLoacation", weddinglocation.getText()
 						.toString());
-				rawparams.put("WeddingMenu", readFromFile(getActivity(), "caidan.txt"));
+				rawparams.put("WeddingMenu",
+						readFromFile(getActivity(), "caidan.txt"));
 				rawparams.put("WeddingTables", zuoweitxt);
 				rawparams.put("LoveWord", love1.getText().toString());
 				rawparams.put("LoveWord2", love2.getText().toString());
@@ -666,6 +672,8 @@ public class FragmentInivitationContent extends Fragment {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				} finally {
+					p1.dismiss();
 				}
 			}
 		}).start();
@@ -711,7 +719,7 @@ public class FragmentInivitationContent extends Fragment {
 			return "-1";
 		}
 	}
-	
+
 	void hideIM(View edt) {
 		InputMethodManager im = (InputMethodManager) getActivity()
 				.getSystemService(Activity.INPUT_METHOD_SERVICE);
