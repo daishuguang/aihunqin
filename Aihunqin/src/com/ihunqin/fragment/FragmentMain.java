@@ -139,8 +139,7 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
-						.show();
+				
 			}
 		});
 
