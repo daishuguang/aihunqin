@@ -160,6 +160,26 @@ public class XMLUtil {
 		}
 	}
 
+	public static boolean IsExist(String tagName, String id) {
+		Document document = loadInit(filePath);
+
+		Node tagRoot = document.getElementsByTagName(tagName).item(0);
+
+		try {
+			NodeList tagChilds = tagRoot.getChildNodes();
+			for (int i = 0; i < tagChilds.getLength(); i++) {
+				Node item = tagChilds.item(i);
+				if (item.getAttributes().getNamedItem("id").equals(id)) {
+					return true;
+				}
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	public static boolean saveXML(Document document) {
 		try {
 			TransformerFactory tFactory = TransformerFactory.newInstance();

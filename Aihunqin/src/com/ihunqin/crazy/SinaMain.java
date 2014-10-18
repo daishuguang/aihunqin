@@ -16,6 +16,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.ihunqin.fragment.FragmentInivitationContent;
 import com.ihunqin.fragment.FragmentInvitationCreateNew;
+import com.ihunqin.fragment.FragmentLiJingDetail;
+import com.ihunqin.fragment.FragmentLijinList;
 import com.ihunqin.fragment.FragmentMain;
 import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
@@ -125,7 +127,20 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 					.replace(R.id.fragment_container, fragment)
 					.addToBackStack(null).commit();
 		}
-
+		if (which.equals("lijinlist")) {
+			FragmentLijinList fragment = new FragmentLijinList();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
+		if (which.equals("lijindetail")) {
+			FragmentLiJingDetail fragment = new FragmentLiJingDetail();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
 	}
 
 }
