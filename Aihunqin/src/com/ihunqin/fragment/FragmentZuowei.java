@@ -293,7 +293,7 @@ public class FragmentZuowei extends Fragment {
 		if (Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState())) {
 			String foldername = Environment.getExternalStorageDirectory()
-					.getPath() + "/ihunqin/";
+					.getPath() + "/ihunqin";
 			File folder = new File(foldername);
 			if (folder == null || !folder.exists()) {
 				folder.mkdir();

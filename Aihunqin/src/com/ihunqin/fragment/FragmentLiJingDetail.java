@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
@@ -72,6 +73,12 @@ public class FragmentLiJingDetail extends Fragment {
 			lijintype.setText("礼金支出");
 			itemid = id.substring(7);
 		}
+		String tagName1 = null;
+		if (index != -1) {
+			tagName1 = "income";
+		} else {
+			tagName1 = "outcome";
+		}
 		textView.setVisibility(View.VISIBLE);
 		back = (TextView) getView().findViewById(R.id.back);
 		back.setVisibility(View.VISIBLE);
@@ -106,13 +113,23 @@ public class FragmentLiJingDetail extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				if (lijindolar.getText().toString().equals("")) {
+					Toast.makeText(getActivity(), "礼金不能为空", Toast.LENGTH_SHORT)
+							.show();
+					return;
+				}
+				if (lijinname.getText().toString().equals("")) {
+					Toast.makeText(getActivity(), "宾客不能为空", Toast.LENGTH_SHORT)
+							.show();
+					return;
+				}
 				String tagName = null;
 				if (index != -1) {
 					tagName = "income";
 				} else {
 					tagName = "outcome";
 				}
-				Document document = XMLUtil.loadInit("lj.xml");
+				XMLUtil.setFileName("lj.xml");
 				LiJin liJing = new LiJin();
 				liJing.setId(itemid);
 				liJing.setName(lijinname.getText().toString());
@@ -159,5 +176,14 @@ public class FragmentLiJingDetail extends Fragment {
 		lijincomment = (EditText) getView().findViewById(R.id.lijincomment);
 		lijinname = (EditText) getView().findViewById(R.id.lijinname);
 		lijindolar = (EditText) getView().findViewById(R.id.lijindolar);
+		XMLUtil.setFileName("lj.xml");
+		LiJin lj = new LiJin();
+		if (XMLUtil.IsExist(tagName1, itemid)) {
+			lj = XMLUtil.selectItem(tagName1, itemid);
+			lijincomment.setText(lj.getComment());
+			lijindate.setText(lj.getDate());
+			lijindolar.setText(lj.getDolar() + "");
+			lijinname.setText(lj.getName());
+		}
 	}
 }

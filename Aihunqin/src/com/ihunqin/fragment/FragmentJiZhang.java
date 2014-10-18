@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.ihunqin.util.XMLUtil;
 
 public class FragmentJiZhang extends Fragment {
 	private TextView textView;
@@ -22,6 +23,9 @@ public class FragmentJiZhang extends Fragment {
 	private LinearLayout crash;
 	private LinearLayout dash;
 	TransferIDListener mCallback;
+	private TextView ljincome;
+	private TextView ljoutcome;
+	private TextView ljsummary;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -82,6 +86,15 @@ public class FragmentJiZhang extends Fragment {
 				mCallback.onItemClicked("outcome", "lijinlist");
 			}
 		});
+		ljincome = (TextView) getView().findViewById(R.id.ljincome);
+		ljoutcome = (TextView) getView().findViewById(R.id.ljoutcome);
+		ljsummary = (TextView) getView().findViewById(R.id.ljsummary);
+		XMLUtil.setFileName("lj.xml");
+		int income = XMLUtil.selectDolar("income");
+		int outcome = XMLUtil.selectDolar("outcome");
+		ljincome.setText(income + "");
+		ljoutcome.setText(outcome + "");
+		ljsummary.setText((income - outcome) + "");
 	}
 
 }
