@@ -1,8 +1,12 @@
 package com.ihunqin.fragment;
 
+import java.util.Calendar;
+
 import org.w3c.dom.Document;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,10 +14,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
+import com.ihunqin.model.LiJin;
 import com.ihunqin.util.XMLUtil;
 
 public class FragmentLiJingDetail extends Fragment {
@@ -23,6 +30,11 @@ public class FragmentLiJingDetail extends Fragment {
 	private TextView rightmenu;
 	private Button saveitem;
 	private String itemid = null;
+	private TextView lijintype;
+	private TextView lijindate;
+	private EditText lijindolar;
+	private EditText lijinname;
+	private EditText lijincomment;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -49,12 +61,15 @@ public class FragmentLiJingDetail extends Fragment {
 
 		final String id = getArguments().getString("id");
 		textView = (TextView) getView().findViewById(R.id.titleTv);
+		lijintype = (TextView) getView().findViewById(R.id.lijintype);
 		final int index = id.indexOf("income");
 		if (index != -1) {
 			textView.setText("礼金收入");
+			lijintype.setText("礼金收入");
 			itemid = id.substring(6);
 		} else {
 			textView.setText("礼金支出");
+			lijintype.setText("礼金支出");
 			itemid = id.substring(7);
 		}
 		textView.setVisibility(View.VISIBLE);
@@ -74,7 +89,16 @@ public class FragmentLiJingDetail extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				mCallback.onItemClicked(id, "lijindetail");
+				String tagName = null;
+				if (index != -1) {
+					tagName = "income";
+				} else {
+					tagName = "outcome";
+				}
+				if (XMLUtil.IsExist(tagName, itemid)) {
+					XMLUtil.deleteXML(tagName, itemid);
+				}
+				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
 		saveitem = (Button) getView().findViewById(R.id.saveitem);
@@ -88,11 +112,52 @@ public class FragmentLiJingDetail extends Fragment {
 				} else {
 					tagName = "outcome";
 				}
-				if (XMLUtil.IsExist(tagName, itemid)) {
-					Document document = XMLUtil.loadInit("lj.xml");
-					XMLUtil.saveXML(document);
+				Document document = XMLUtil.loadInit("lj.xml");
+				LiJin liJing = new LiJin();
+				liJing.setId(itemid);
+				liJing.setName(lijinname.getText().toString());
+				liJing.setDate(lijindate.getText().toString());
+				liJing.setDolar(Integer.parseInt(lijindolar.getText()
+						.toString()));
+				liJing.setComment(lijincomment.getText().toString());
+				if (!XMLUtil.IsExist(tagName, itemid)) {
+					XMLUtil.addXML(tagName, liJing);
+				} else {
+					XMLUtil.updateXML(tagName, liJing);
 				}
+				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
+
+		lijindate = (TextView) getView().findViewById(R.id.lijindate);
+		Calendar now = Calendar.getInstance();
+		String nowdate = now.get(Calendar.YEAR) + "年"
+				+ (now.get(Calendar.MONTH) + 1) + "月"
+				+ now.get(Calendar.DAY_OF_MONTH) + "日";
+		lijindate.setText(nowdate);
+		lijindate.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Calendar rightNow = Calendar.getInstance();
+				new DatePickerDialog(getActivity(), new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int year,
+							int monthOfYear, int dayOfMonth) {
+						lijindate.setText(year + "年" + (monthOfYear + 1) + "月"
+								+ dayOfMonth + "日");
+					}
+				}
+				// 设置初始日期
+						, rightNow.get(Calendar.YEAR), rightNow
+								.get(Calendar.MONTH), rightNow
+								.get(Calendar.DAY_OF_MONTH)).show();
+			}
+		});
+
+		lijincomment = (EditText) getView().findViewById(R.id.lijincomment);
+		lijinname = (EditText) getView().findViewById(R.id.lijinname);
+		lijindolar = (EditText) getView().findViewById(R.id.lijindolar);
 	}
 }

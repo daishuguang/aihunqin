@@ -1,6 +1,7 @@
 package com.ihunqin.util;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,7 +21,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
-import com.ihunqin.model.LiJing;
+import com.ihunqin.model.LiJin;
 
 public class XMLUtil {
 	private static String deleteNumber;
@@ -38,6 +39,7 @@ public class XMLUtil {
 				folder.mkdir();
 			}
 			filePath = "/" + fileName;
+			File file = new File(filePath);
 
 			Document document = null;
 			try {
@@ -46,7 +48,26 @@ public class XMLUtil {
 				DocumentBuilder builder;
 
 				builder = factory.newDocumentBuilder();
-				document = builder.parse(new File(filePath));
+				if (!file.exists()) {
+					try {
+						file.createNewFile();
+						document = builder.newDocument();
+						Element root = document.createElement("lijin");
+						document.appendChild(root);
+
+						Element income = document.createElement("income");
+						root.appendChild(income);
+
+						Element outcome = document.createElement("outcome");
+						root.appendChild(outcome);
+						saveXML(document);
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
+				} else {
+					document = builder.parse(file);
+				}
 				document.normalize();
 				return document;
 			} catch (Exception e) {
@@ -59,27 +80,27 @@ public class XMLUtil {
 		}
 	}
 
-	public static boolean addXML(String tagName, LiJing liJing) {
+	public static boolean addXML(String tagName, LiJin liJin) {
 		try {
 			Document document = loadInit(filePath);
 			Element eltItem = document.createElement("item");
-			eltItem.setAttribute("id", liJing.getId());
+			eltItem.setAttribute("id", liJin.getId());
 
 			Element eltName = document.createElement("name");
 			Element eltDolar = document.createElement("dolar");
 			Element eltDate = document.createElement("date");
 			Element eltComment = document.createElement("comment");
-			Text eltNameValue = document.createTextNode(liJing.getName());
+			Text eltNameValue = document.createTextNode(liJin.getName());
 			eltName.appendChild(eltNameValue);
 
 			Text eltDolarValue = document
-					.createTextNode(liJing.getDolar() + "");
+					.createTextNode(liJin.getDolar() + "");
 			eltDolar.appendChild(eltDolarValue);
 
-			Text eltDateValue = document.createTextNode(liJing.getDate());
+			Text eltDateValue = document.createTextNode(liJin.getDate());
 			eltDate.appendChild(eltDate);
 
-			Text eltCommentValue = document.createTextNode(liJing.getComment());
+			Text eltCommentValue = document.createTextNode(liJin.getComment());
 			eltComment.appendChild(eltCommentValue);
 
 			Node tagRoot = document.getElementsByTagName(tagName).item(0);
@@ -90,7 +111,7 @@ public class XMLUtil {
 
 			Element eltRoot = document.getDocumentElement();
 			eltRoot.appendChild(tagRoot);
-
+			saveXML(document);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,8 +142,8 @@ public class XMLUtil {
 
 	}
 
-	public static boolean updateXML(String tagName, LiJing lJing) {
-		String id = lJing.getId();
+	public static boolean updateXML(String tagName, LiJin liJin) {
+		String id = liJin.getId();
 		Document document = loadInit(filePath);
 		try {
 			Node tagRoot = document.getElementsByTagName(tagName).item(0);
@@ -136,16 +157,16 @@ public class XMLUtil {
 					for (int k = 0; k < itemchild.getLength(); k++) {
 						Node itemdetail = itemchild.item(k);
 						if (itemdetail.getNodeName().equals("name")) {
-							itemdetail.setNodeValue(lJing.getName());
+							itemdetail.setNodeValue(liJin.getName());
 						}
 						if (itemdetail.getNodeName().equals("dolar")) {
-							itemdetail.setNodeValue(lJing.getDolar() + "");
+							itemdetail.setNodeValue(liJin.getDolar() + "");
 						}
 						if (itemdetail.getNodeName().equals("date")) {
-							itemdetail.setNodeValue(lJing.getDate());
+							itemdetail.setNodeValue(liJin.getDate());
 						}
 						if (itemdetail.getNodeName().equals("comment")) {
-							itemdetail.setNodeValue(lJing.getComment());
+							itemdetail.setNodeValue(liJin.getComment());
 						}
 						break;
 					}

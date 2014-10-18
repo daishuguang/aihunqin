@@ -1,5 +1,7 @@
 package com.ihunqin.fragment;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,7 @@ public class FragmentLijinList extends Fragment {
 	enum tagtype {
 		income, outcome
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -71,7 +73,8 @@ public class FragmentLijinList extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				mCallback.onItemClicked(id, "lijindetail");
+				String uuid = UUID.randomUUID().toString();
+				mCallback.onItemClicked(id + uuid, "lijindetail");
 			}
 		});
 

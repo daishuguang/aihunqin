@@ -1,6 +1,6 @@
 package com.ihunqin.model;
 
-public class LiJing {
+public class LiJin {
 	private String id;
 
 	public String getId() {
