@@ -153,6 +153,7 @@ public class FragmentLijinList extends Fragment {
 
 				viewholder.ljdolar = (TextView) convertView
 						.findViewById(R.id.ljdolar);
+				convertView.setTag(viewholder);
 			} else {
 				viewholder = (ViewHolder) convertView.getTag();
 			}

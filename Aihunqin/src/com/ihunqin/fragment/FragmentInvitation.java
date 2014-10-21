@@ -355,6 +355,7 @@ public class FragmentInvitation extends Fragment {
 						.findViewById(R.id.listinvitor);
 				viewholder.listdrink = (TextView) convertView
 						.findViewById(R.id.listdrink);
+				convertView.setTag(viewholder);
 
 			} else {
 				viewholder = (ViewHolder) convertView.getTag();

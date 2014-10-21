@@ -371,7 +371,7 @@ public class FragmentZuowei extends Fragment {
 						.findViewById(R.id.xuhao);
 				viewholder.zuoweianpai = (EditText) convertView
 						.findViewById(R.id.zuoweianpai);
-
+				convertView.setTag(viewholder);
 			} else {
 				viewholder = (ViewHolder2) convertView.getTag();
 			}
