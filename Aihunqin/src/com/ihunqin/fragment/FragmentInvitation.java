@@ -357,19 +357,21 @@ public class FragmentInvitation extends Fragment {
 						.findViewById(R.id.listdrink);
 
 			} else {
-				viewholder.listid.setText("第" + position + "张");
-				if (invitationDatas.get(position).getImguri() != null) {
-					viewholder.listimg.setImageURI(Uri.parse(invitationDatas
-							.get(position).getImguri()));
-				}
-				viewholder.listdate.setText(invitationDatas.get(position)
-						.getItemdate());
-				viewholder.listtitle.setText("婚贴标题");
-				viewholder.listinvitor.setText(invitationDatas.get(position)
-						.getIteminvitor());
-				viewholder.listdrink.setText(invitationDatas.get(position)
-						.getItemdrink());
+				viewholder = (ViewHolder) convertView.getTag();
 			}
+			viewholder.listid.setText("第" + position + "张");
+			if (invitationDatas.get(position).getImguri() != null) {
+				viewholder.listimg.setImageURI(Uri.parse(invitationDatas.get(
+						position).getImguri()));
+			}
+			viewholder.listdate.setText(invitationDatas.get(position)
+					.getItemdate());
+			viewholder.listtitle.setText("婚贴标题");
+			viewholder.listinvitor.setText(invitationDatas.get(position)
+					.getIteminvitor());
+			viewholder.listdrink.setText(invitationDatas.get(position)
+					.getItemdrink());
+
 			return convertView;
 		}
 	}

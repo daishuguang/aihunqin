@@ -110,7 +110,7 @@ public class FragmentLijinList extends Fragment {
 
 	private class MyAdapter extends BaseAdapter {
 		private Context context;
-		
+
 		public ArrayList<LiJin> arr;
 
 		public MyAdapter(Context context) {
@@ -154,9 +154,11 @@ public class FragmentLijinList extends Fragment {
 				viewholder.ljdolar = (TextView) convertView
 						.findViewById(R.id.ljdolar);
 			} else {
-				viewholder.ljname.setText(arr.get(position).getName());
-				viewholder.ljdolar.setText(arr.get(position).getDolar() + "");
+				viewholder = (ViewHolder) convertView.getTag();
 			}
+			viewholder.ljname.setText(arr.get(position).getName());
+			viewholder.ljdolar.setText(arr.get(position).getDolar() + "");
+
 			return convertView;
 		}
 	}
