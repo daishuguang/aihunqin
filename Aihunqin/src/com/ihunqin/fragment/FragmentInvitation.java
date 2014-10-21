@@ -318,9 +318,6 @@ public class FragmentInvitation extends Fragment {
 	}
 
 	class InvitationAdapter extends BaseAdapter {
-		TextView listid, listdate, listtitle, listinvitor, listdrink;
-		ImageView listimg;
-
 		@Override
 		public int getCount() {
 			return invitationDatas.size();
@@ -340,29 +337,49 @@ public class FragmentInvitation extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder viewholder = null;
 			if (convertView == null) {
+				viewholder = new ViewHolder();
 				convertView = getActivity().getLayoutInflater().inflate(
 						R.layout.simple_invitation_item, null);
 
-				listid = (TextView) convertView.findViewById(R.id.listid);
-				listid.setText("第" + position + "张");
-				listimg = (ImageView) convertView.findViewById(R.id.listimg);
-				if (invitationDatas.get(position).getImguri() != null) {
-					listimg.setImageURI(Uri.parse(invitationDatas.get(position)
-							.getImguri()));
-				}
-				listdate = (TextView) convertView.findViewById(R.id.listdate);
-				listdate.setText(invitationDatas.get(position).getItemdate());
-				listtitle = (TextView) convertView.findViewById(R.id.listtitle);
-				listtitle.setText("婚贴标题");
-				listinvitor = (TextView) convertView
+				viewholder.listid = (TextView) convertView
+						.findViewById(R.id.listid);
+				viewholder.listimg = (ImageView) convertView
+						.findViewById(R.id.listimg);
+				viewholder.listdate = (TextView) convertView
+						.findViewById(R.id.listdate);
+				viewholder.listtitle = (TextView) convertView
+						.findViewById(R.id.listtitle);
+				viewholder.listinvitor = (TextView) convertView
 						.findViewById(R.id.listinvitor);
-				listinvitor.setText(invitationDatas.get(position)
+				viewholder.listdrink = (TextView) convertView
+						.findViewById(R.id.listdrink);
+
+			} else {
+				viewholder.listid.setText("第" + position + "张");
+				if (invitationDatas.get(position).getImguri() != null) {
+					viewholder.listimg.setImageURI(Uri.parse(invitationDatas
+							.get(position).getImguri()));
+				}
+				viewholder.listdate.setText(invitationDatas.get(position)
+						.getItemdate());
+				viewholder.listtitle.setText("婚贴标题");
+				viewholder.listinvitor.setText(invitationDatas.get(position)
 						.getIteminvitor());
-				listdrink = (TextView) convertView.findViewById(R.id.listdrink);
-				listdrink.setText(invitationDatas.get(position).getItemdrink());
+				viewholder.listdrink.setText(invitationDatas.get(position)
+						.getItemdrink());
 			}
 			return convertView;
 		}
+	}
+
+	private static class ViewHolder {
+		TextView listid;
+		TextView listdate;
+		TextView listtitle;
+		TextView listinvitor;
+		TextView listdrink;
+		ImageView listimg;
 	}
 }

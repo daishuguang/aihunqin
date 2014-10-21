@@ -110,10 +110,7 @@ public class FragmentLijinList extends Fragment {
 
 	private class MyAdapter extends BaseAdapter {
 		private Context context;
-		TextView ljdate;
-		TextView ljname;
-		TextView ljdolar;
-
+		
 		public ArrayList<LiJin> arr;
 
 		public MyAdapter(Context context) {

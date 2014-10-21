@@ -323,11 +323,15 @@ public class FragmentZuowei extends Fragment {
 		}
 	}
 
+	static class ViewHolder2 {
+		EditText zuoweianpai;
+		ImageButton del;
+		TextView xuhao;
+	}
+
 	private class MyZuoAdapter extends BaseAdapter {
 		private Context context;
-		private EditText zuoweianpai;
-		private ImageButton del;
-		private TextView xuhao;
+
 		public ArrayList<String> arr;
 
 		public MyZuoAdapter(Context context) {
@@ -356,23 +360,49 @@ public class FragmentZuowei extends Fragment {
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
+			ViewHolder2 viewholder = null;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.item_zuowei, null);
-			}
 
-			xuhao = (TextView) convertView.findViewById(R.id.xuhao);
-			xuhao.setText("第" + (position + 1) + "桌子");
+				viewholder.del = (ImageButton) convertView
+						.findViewById(R.id.delzuoxi);
+				viewholder.xuhao = (TextView) convertView
+						.findViewById(R.id.xuhao);
+				viewholder.zuoweianpai = (EditText) convertView
+						.findViewById(R.id.zuoweianpai);
 
-			zuoweianpai = (EditText) convertView.findViewById(R.id.zuoweianpai);
-			zuoweianpai.setText(arr.get(position));
+			} else {
+				viewholder.xuhao.setText("第" + (position + 1) + "桌子");
+				viewholder.zuoweianpai.setText(arr.get(position));
+				viewholder.zuoweianpai
+						.setOnFocusChangeListener(new OnFocusChangeListener() {
 
-			zuoweianpai.setOnFocusChangeListener(new OnFocusChangeListener() {
+							@Override
+							public void onFocusChange(View v, boolean hasFocus) {
+								if (!hasFocus) {
+									arr.set(position, ((EditText) v).getText()
+											.toString());
+									StringBuffer b = new StringBuffer();
+									for (String i : arr) {
+										if (i.equals("")) {
+											b.append("<br/>" + "huanhang");
+										} else
+											b.append(i + "huanhang");
+									}
 
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					if (!hasFocus) {
-						arr.set(position, ((EditText) v).getText().toString());
+									SavedToText(getActivity(), b.toString(),
+											false, "zuowei.txt");
+								}
+							}
+						});
+				viewholder.del.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						arr.remove(position);
+						zuoweiadapter.notifyDataSetChanged();
+						// String caistr = arr.toString();
 						StringBuffer b = new StringBuffer();
 						for (String i : arr) {
 							if (i.equals("")) {
@@ -380,32 +410,11 @@ public class FragmentZuowei extends Fragment {
 							} else
 								b.append(i + "huanhang");
 						}
-
 						SavedToText(getActivity(), b.toString(), false,
 								"zuowei.txt");
 					}
-				}
-			});
-
-			del = (ImageButton) convertView.findViewById(R.id.delzuoxi);
-			del.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					arr.remove(position);
-					zuoweiadapter.notifyDataSetChanged();
-					// String caistr = arr.toString();
-					StringBuffer b = new StringBuffer();
-					for (String i : arr) {
-						if (i.equals("")) {
-							b.append("<br/>" + "huanhang");
-						} else
-							b.append(i + "huanhang");
-					}
-					SavedToText(getActivity(), b.toString(), false,
-							"zuowei.txt");
-				}
-			});
+				});
+			}
 			return convertView;
 		}
 
@@ -413,9 +422,6 @@ public class FragmentZuowei extends Fragment {
 
 	private class MyAdapter extends BaseAdapter {
 		private Context context;
-		TextView caidanming;
-		ImageButton del;
-		TextView xuhao;
 		public ArrayList<String> arr;
 
 		public MyAdapter(Context context) {
