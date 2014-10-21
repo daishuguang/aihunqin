@@ -91,6 +91,7 @@
         android:divider="@color/diviercolor"
         android:dividerHeight="1px"
         android:fadingEdge="none"
+        android:fastScrollEnabled="true"
         android:scrollbars="none" >
     </ListView>
 

@@ -444,16 +444,26 @@ public class FragmentZuowei extends Fragment {
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
+			ViewHolder viewholder = null;
 			if (convertView == null) {
+				viewholder = new ViewHolder();
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.item_caidan, null);
+
+				viewholder.caidanming = (TextView) convertView
+						.findViewById(R.id.caidanitem);
+				viewholder.caidanming.setText(arr.get(position));
+				viewholder.xuhao = (TextView) convertView
+						.findViewById(R.id.xuhao);
+
+				viewholder.del = (ImageButton) convertView
+						.findViewById(R.id.delimage);
+				convertView.setTag(viewholder);
+			} else {
+				viewholder = (ViewHolder) convertView.getTag();
 			}
-			caidanming = (TextView) convertView.findViewById(R.id.caidanitem);
-			caidanming.setText(arr.get(position));
-			xuhao = (TextView) convertView.findViewById(R.id.xuhao);
-			xuhao.setText((position + 1) + "");
-			del = (ImageButton) convertView.findViewById(R.id.delimage);
-			del.setOnClickListener(new OnClickListener() {
+			viewholder.xuhao.setText((position + 1) + "");
+			viewholder.del.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -463,8 +473,13 @@ public class FragmentZuowei extends Fragment {
 					SavedToText(getActivity(), caistr, false, "caidan.txt");
 				}
 			});
-
 			return convertView;
 		}
+	}
+
+	private static class ViewHolder {
+		TextView caidanming;
+		TextView xuhao;
+		ImageButton del;
 	}
 }

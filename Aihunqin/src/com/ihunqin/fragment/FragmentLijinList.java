@@ -142,17 +142,31 @@ public class FragmentLijinList extends Fragment {
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
+			ViewHolder viewholder = null;
 			if (convertView == null) {
+				viewholder = new ViewHolder();
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.item_lijin, null);
+
+				viewholder.ljdate = (TextView) convertView
+						.findViewById(R.id.ljdate);
+				viewholder.ljdate.setText(arr.get(position).getDate());
+				viewholder.ljname = (TextView) convertView
+						.findViewById(R.id.ljname);
+
+				viewholder.ljdolar = (TextView) convertView
+						.findViewById(R.id.ljdolar);
+			} else {
+				viewholder.ljname.setText(arr.get(position).getName());
+				viewholder.ljdolar.setText(arr.get(position).getDolar() + "");
 			}
-			ljdate = (TextView) convertView.findViewById(R.id.ljdate);
-			ljdate.setText(arr.get(position).getDate());
-			ljname = (TextView) convertView.findViewById(R.id.ljname);
-			ljname.setText(arr.get(position).getName());
-			ljdolar = (TextView) convertView.findViewById(R.id.ljdolar);
-			ljdolar.setText(arr.get(position).getDolar() + "");
 			return convertView;
 		}
+	}
+
+	private static class ViewHolder {
+		TextView ljdate;
+		TextView ljname;
+		TextView ljdolar;
 	}
 }
