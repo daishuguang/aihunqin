@@ -1,31 +1,31 @@
 package com.ihunqin.crazy;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
+import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInivitationContent;
+import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.ihunqin.fragment.FragmentInvitationCreateNew;
 import com.ihunqin.fragment.FragmentLiJingDetail;
 import com.ihunqin.fragment.FragmentLijinList;
 import com.ihunqin.fragment.FragmentMain;
 import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
-import com.ihunqin.fragment.FragmentWeddingList;
-import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.example.aihunqin.R;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
 	FragmentManager fragmentManager;
@@ -45,6 +45,7 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		api.registerApp(APP_ID);
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,7 +58,11 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		fragmentTransaction.add(R.id.fragment_container, fragment_main);
 		fragmentTransaction.commit();
 		setFragmentIndicator();
-
+		StrictMode.setThreadPolicy(new ThreadPolicy.Builder().detectDiskReads()
+				.detectDiskWrites().detectNetwork().penaltyLog().build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+				.detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
+				.penaltyDeath().penaltyLog().build());
 		// ×¢²áµ½Î¢ÐÅ
 	}
 
