@@ -7,6 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -19,11 +22,8 @@ import android.widget.Toast;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.example.aihunqin.R;
-import com.ihunqin.crazy.SinaMain;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.NetworkUtil;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class SplashActivity extends Activity {
 	Handler mHandler = new Handler();
@@ -135,6 +135,15 @@ public class SplashActivity extends Activity {
 			task.execute();
 		} else {
 			Toast.makeText(this, "未连接到网络", Toast.LENGTH_LONG).show();
+			AlertDialog builder = new AlertDialog.Builder(this).setTitle("错误")
+					.setMessage("请您确认已开通手机上网功能，并在手机上设置正确的上网方式。")
+					.setPositiveButton("确定", new OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					}).show();
 		}
 
 	}

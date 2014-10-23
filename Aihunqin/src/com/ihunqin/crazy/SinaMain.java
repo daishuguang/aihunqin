@@ -45,7 +45,6 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		api.registerApp(APP_ID);
 	}
 
-	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,11 +57,7 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		fragmentTransaction.add(R.id.fragment_container, fragment_main);
 		fragmentTransaction.commit();
 		setFragmentIndicator();
-		StrictMode.setThreadPolicy(new ThreadPolicy.Builder().detectDiskReads()
-				.detectDiskWrites().detectNetwork().penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-				.penaltyDeath().penaltyLog().build());
+		
 		// ×¢²áµ½Î¢ÐÅ
 	}
 
