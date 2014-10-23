@@ -2,19 +2,26 @@ package com.ihunqin.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.*;
-import android.telephony.SmsManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.*;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aihunqin.R;
+import com.ihunqin.activity.LoginActivity;
 import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.crazy.WenhongLocation;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -22,9 +29,11 @@ import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.WXTextObject;
-import com.example.aihunqin.R;
 
 public class FragmentMore extends Fragment {
+	private SharedPreferences preferences;
+	private SharedPreferences.Editor editor;
+	private Button logoff;
 	TextView wenhonglocation;
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
 	private static final String APP_ID = "wx7160a43122ae9274";
@@ -49,6 +58,23 @@ public class FragmentMore extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		logoff = (Button) getView().findViewById(R.id.logoff);
+		logoff.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				preferences = getActivity().getSharedPreferences("userinfo",
+						getActivity().MODE_PRIVATE);
+				editor = preferences.edit();
+				editor.putString("mobile", "");
+				editor.putString("password", "");
+				editor.commit();
+				Intent intent = new Intent(getActivity(), LoginActivity.class);
+				startActivity(intent);
+				getActivity().finish();
+			}
+		});
 		wenhonglocation = (TextView) getView().findViewById(
 				R.id.wenhonglocation);
 		wenhonglocation.setOnClickListener(new OnClickListener() {

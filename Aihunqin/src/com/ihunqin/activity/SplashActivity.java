@@ -134,18 +134,24 @@ public class SplashActivity extends Activity {
 			Async task = new Async(url, rawparams);
 			task.execute();
 		} else {
-			Toast.makeText(this, "未连接到网络", Toast.LENGTH_LONG).show();
-			AlertDialog builder = new AlertDialog.Builder(this).setTitle("错误")
-					.setMessage("请您确认已开通手机上网功能，并在手机上设置正确的上网方式。")
-					.setPositiveButton("确定", new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							finish();
-						}
-					}).show();
+			showDialog();
 		}
 
 	}
 
+	/**
+	 * Network is not available
+	 */
+	private void showDialog() {
+		Toast.makeText(this, "未连接到网络", Toast.LENGTH_LONG).show();
+		AlertDialog builder = new AlertDialog.Builder(this).setTitle("错误")
+				.setMessage("请您确认已开通手机上网功能，并在手机上设置正确的上网方式。")
+				.setPositiveButton("确定", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				}).show();
+	}
 }
