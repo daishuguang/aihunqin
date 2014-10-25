@@ -95,4 +95,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+    <!-- DEMO -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
 </manifest>
