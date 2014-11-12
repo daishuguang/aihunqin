@@ -238,6 +238,8 @@ public class FragmentInivitationContent extends Fragment {
 					return;
 				}
 				// send to server
+				p1.setMessage("正在提交中");
+				p1.show();
 				sendToServer();
 			}
 		});
@@ -615,8 +617,6 @@ public class FragmentInivitationContent extends Fragment {
 
 			@Override
 			public void run() {
-				p1.setMessage("正在提交中");
-				p1.show();
 				// String url = "http://www.ruiqinsoft.com:3083/wh/edit/" + id;
 				String url = "http://wedding.ihunqin.com/api/ecard/" + id
 						+ "/edit";
