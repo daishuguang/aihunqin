@@ -14,18 +14,17 @@ public class FragmentWeddingList extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		return inflater.inflate(R.layout.fragment_weddinglist, container, false);
+		View v = inflater.inflate(R.layout.fragment_weddinglist, container,
+				false);
+		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
+		textView.setText("婚礼清单");
+		return v;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		TextView textView = (TextView) getView().findViewById(R.id.titleTv);
-		textView.setText("婚礼清单");
+
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
 }

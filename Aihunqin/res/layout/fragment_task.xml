@@ -22,6 +22,7 @@
             android:textSize="18sp" />
 
         <EditText
+            android:id="@+id/taskname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -49,6 +50,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/taskjihuashijian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
