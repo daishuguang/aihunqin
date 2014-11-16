@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="right"
-            android:text="*必须输入计划的时间↓"
+            android:text="*必须输入计划的时间"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
@@ -75,6 +75,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/taskmind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -82,7 +83,7 @@
             android:background="@null"
             android:gravity="right"
             android:singleLine="true"
-            android:text="无需提醒↓"
+            android:text="无需提醒"
             android:textColor="#AAAAAA"
             android:textSize="18sp" />
     </LinearLayout>
@@ -103,13 +104,14 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/taskjindu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@null"
             android:gravity="right"
-            android:text="未完成↓"
+            android:text="未完成"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>

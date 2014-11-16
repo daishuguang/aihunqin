@@ -130,8 +130,15 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
-						.show();
+				FragmentManager fragmentManager = getActivity()
+						.getSupportFragmentManager();
+
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+				Fragment fragment_invitation = new FragmentTask();
+				fragmentTransaction.replace(R.id.fragment_container,
+						fragment_invitation);
+				fragmentTransaction.commit();
 			}
 		});
 

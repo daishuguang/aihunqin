@@ -26,6 +26,8 @@
         <activity android:name="com.common.ui.WeddingList" >
         </activity>
         <activity android:name="com.common.ui.ZxingCode" >
+        </activity>
+        <activity android:name="com.common.ui.DateTimeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
