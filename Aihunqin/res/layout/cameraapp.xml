@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/cameraviews"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:contentDescription="@null"
         android:scaleType="fitCenter"

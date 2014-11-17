@@ -2,7 +2,6 @@ package com.ihunqin.fragment;
 
 import com.ihunqin.model.BookContent;
 
-import android.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -24,7 +23,7 @@ public class BookListFragment extends ListFragment {
 		super.onCreate(savedInstaceState);
 		// Œ™∏√ListFragment…Ë÷√Adapter
 		setListAdapter(new ArrayAdapter<BookContent.Book>(getActivity(),
-				R.layout.simple_list_item_activated_1, R.id.text1,
+				android.R.layout.simple_list_item_activated_1, android.R.id.text1,
 				BookContent.ITEMS));
 	}
 

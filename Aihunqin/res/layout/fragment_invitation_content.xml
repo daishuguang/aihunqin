@@ -45,7 +45,6 @@
                     android:text="新郎名字"
                     android:textColor="#E63A46"
                     android:textColorHint="#d3d3d3"
-                    android:textCursorDrawable="@null"
                     android:textSize="14sp" >
 
                     <requestFocus />
@@ -158,7 +157,7 @@
 
                 <EditText
                     android:id="@+id/bridemobile"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -197,7 +196,7 @@
 
                 <EditText
                     android:id="@+id/love1"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -235,7 +234,7 @@
 
                 <EditText
                     android:id="@+id/love2"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -273,7 +272,7 @@
 
                 <EditText
                     android:id="@+id/love3"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -311,7 +310,7 @@
 
                 <EditText
                     android:id="@+id/love4"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -350,7 +349,7 @@
 
                 <EditText
                     android:id="@+id/weddingdate"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -390,7 +389,7 @@
 
                 <EditText
                     android:id="@+id/weddingdatechinese"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -430,7 +429,7 @@
 
                 <EditText
                     android:id="@+id/weddinglocation"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -468,7 +467,7 @@
 
                 <EditText
                     android:id="@+id/hotelname"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -505,7 +504,7 @@
 
                 <EditText
                     android:id="@+id/weddingtime"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -545,7 +544,7 @@
 
                 <EditText
                     android:id="@+id/seat"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
@@ -582,7 +581,7 @@
 
                 <EditText
                     android:id="@+id/youkuid"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"

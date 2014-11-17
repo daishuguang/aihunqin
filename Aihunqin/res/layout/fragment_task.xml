@@ -23,7 +23,7 @@
 
         <EditText
             android:id="@+id/taskname"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/taskjihuashijian"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -78,7 +78,7 @@
 
         <TextView
             android:id="@+id/taskmind"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -107,7 +107,7 @@
 
         <TextView
             android:id="@+id/taskjindu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -134,7 +134,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"

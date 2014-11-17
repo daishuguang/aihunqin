@@ -63,10 +63,6 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 
 	void setFragmentIndicator() {
 		RadioGroup bottomRg = (RadioGroup) findViewById(R.id.bottomRg);
-		RadioButton rbOne = (RadioButton) findViewById(R.id.rbOne);
-		RadioButton rbTwo = (RadioButton) findViewById(R.id.rbTwo);
-		RadioButton rbThree = (RadioButton) findViewById(R.id.rbThree);
-
 		bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override

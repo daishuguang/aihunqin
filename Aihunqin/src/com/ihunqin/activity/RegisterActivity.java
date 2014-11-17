@@ -127,7 +127,6 @@ public class RegisterActivity extends Activity {
 
 								result = HttpUtil.postRequst(url, rawparams);
 								JSONObject json2 = new JSONObject(result);
-								String status2 = json2.getString("Status");
 								if (status.equals("0")) {
 									// HttpUtil.httpClient.getCookieStore();
 									preferences = getSharedPreferences(
