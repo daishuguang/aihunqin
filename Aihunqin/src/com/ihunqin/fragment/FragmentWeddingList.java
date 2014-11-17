@@ -115,6 +115,10 @@ public class FragmentWeddingList extends Fragment {
 				TextView father_title_tv;
 			}
 
+			class ChildHolder {
+				TextView child_title_tv;
+			}
+
 			@Override
 			public boolean isChildSelectable(int groupPosition,
 					int childPosition) {
@@ -148,16 +152,6 @@ public class FragmentWeddingList extends Fragment {
 				return convertView;
 			}
 
-			TextView getTextView() {
-				AbsListView.LayoutParams lp = new LayoutParams(
-						ViewGroup.LayoutParams.WRAP_CONTENT, 64);
-				TextView textView = new TextView(getActivity());
-				textView.setLayoutParams(lp);
-				textView.setGravity(Gravity.CENTER);
-				textView.setTextSize(20);
-				return textView;
-			}
-
 			@Override
 			public long getGroupId(int groupPosition) {
 				return groupPosition;
@@ -181,10 +175,22 @@ public class FragmentWeddingList extends Fragment {
 			@Override
 			public View getChildView(int groupPosition, int childPosition,
 					boolean isLastChild, View convertView, ViewGroup parent) {
-				TextView textView = getTextView();
-				textView.setText(((Task) getChild(groupPosition, childPosition)).title);
-				textView.setTextSize(18);
-				return textView;
+				ChildHolder childHolder = null;
+				if (convertView == null) {
+					childHolder = new ChildHolder();
+					convertView = LayoutInflater.from(getActivity()).inflate(
+							R.layout.expandlistview_task, null);
+					convertView.setLayoutParams(new LayoutParams(
+							android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+							80));
+					childHolder.child_title_tv = (TextView) convertView
+							.findViewById(R.id.child_title_tv);
+					convertView.setTag(childHolder);
+				} else {
+					childHolder = (ChildHolder) convertView.getTag();
+				}
+				childHolder.child_title_tv.setText(((Task) getChild(groupPosition, childPosition)).title);
+				return convertView;
 			}
 
 			@Override
