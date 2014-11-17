@@ -10,25 +10,29 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:contentDescription="@null"
         android:src="@drawable/mind_0" />
 
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="1dp"
+        android:contentDescription="@null"
         android:src="@drawable/des_0" />
 
     <TextView
         android:id="@+id/child_title_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:text="中国人"
-        android:textSize="18sp" />
+        android:textColor="#757575"
+        android:textSize="16sp" />
 
     <ToggleButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
 </LinearLayout>

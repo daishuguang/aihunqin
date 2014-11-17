@@ -20,6 +20,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp"
+            android:contentDescription="@null"
             android:src="@drawable/addmoneyicon1" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="20dp"
-            android:text="0"
+            android:text="@string/zero"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
@@ -56,6 +57,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp"
+            android:contentDescription="@null"
             android:src="@drawable/addmoneyicon2" />
 
         <TextView
@@ -73,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="20dp"
-            android:text="0"
+            android:text="@string/zero"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
@@ -95,7 +97,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:gravity="right"
-        android:text="0"
+        android:text="@string/zero"
         android:textColor="#e31739"
         android:textSize="30sp" />
 

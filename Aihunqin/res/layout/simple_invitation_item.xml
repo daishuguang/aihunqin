@@ -18,6 +18,7 @@
         android:id="@+id/listimg"
         android:layout_width="72dp"
         android:layout_height="90dp"
+        android:contentDescription="@null"
         android:scaleType="centerCrop" />
 
     <LinearLayout

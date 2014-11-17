@@ -8,6 +8,7 @@
         android:id="@+id/adimg"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@null"
         android:scaleType="fitXY" />
 
 </LinearLayout>

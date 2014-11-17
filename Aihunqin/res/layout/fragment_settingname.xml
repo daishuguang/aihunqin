@@ -33,6 +33,7 @@
                 android:layout_width="300dp"
                 android:layout_height="400dp"
                 android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 android:src="@drawable/tabbannerhead" />
 

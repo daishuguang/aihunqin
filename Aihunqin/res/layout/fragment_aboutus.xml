@@ -37,7 +37,7 @@
                 android:layout_height="80dp"
                 android:orientation="horizontal" >
 
-                <ImageView
+                <ImageView        android:contentDescription="@null"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginLeft="10dp"
@@ -82,13 +82,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上海文弘五金制品有限公司"
-                android:textSize="18dp" />
+                android:text="@string/wenhong_gongsi"
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shanghai Wenhong Hardware Products CO.,Ltd" />
+                android:text="@string/wenhong_gongsi_e" />
 
             <View
                 android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.common.ui;
 
-import com.example.commoncomponent.R;
 
 import android.app.ListActivity;
 import android.os.Bundle;

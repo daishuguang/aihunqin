@@ -13,7 +13,6 @@ import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.Toast;
 
 import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInivitationContent;

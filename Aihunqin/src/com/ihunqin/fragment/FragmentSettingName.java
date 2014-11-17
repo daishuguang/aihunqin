@@ -46,7 +46,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihunqin.crazy.PopupMain;
 import com.ihunqin.crazy.SelectPopupWindow;
 import com.example.aihunqin.R;
 

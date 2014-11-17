@@ -28,8 +28,6 @@
             android:name="com.ihunqin.crazy.TabHostTest"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="com.ihunqin.crazy.SelectBookActivity" >
-        </activity>
         <activity android:name="com.ihunqin.crazy.SinaMain" >
         </activity>
         <activity android:name="com.ihunqin.test.AllProvidersTest" >
@@ -37,8 +35,6 @@
         <activity android:name="com.ihunqin.test.FreeProvidersTest" >
         </activity>
         <activity android:name="com.ihunqin.test.LocationTest" >
-        </activity>
-        <activity android:name="com.ihunqin.test.BaiduTest" >
         </activity>
         <activity android:name="com.ihunqin.test.BaiduLocation" >
         </activity>

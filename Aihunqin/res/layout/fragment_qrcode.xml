@@ -22,7 +22,7 @@
         android:gravity="center_horizontal"
         android:text="您的婚贴已经创建" />
 
-    <ImageView
+    <ImageView        android:contentDescription="@null"
         android:id="@+id/qrimg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

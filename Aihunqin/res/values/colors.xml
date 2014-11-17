@@ -8,5 +8,7 @@
     <color name="diviercolor">#dddddd</color>
     <color name="indicator">#F5E1E2</color>
     <color name="indicatorfont">#E31738</color>
+    <color name="indicatorview_red">#e31738</color>
+    <color name="indicatorview_gray">#837d7f</color>
 
 </resources>

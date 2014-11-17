@@ -2,8 +2,11 @@
 <resources>
 
     <string name="app_name">婚庆助手</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="shangbiao">"&#064;2014保留所有权利"</string>
+    <string name="wenhong_gongsi">上海文弘五金制品有限公司</string>
+    <string name="wenhong_gongsi_e">Shanghai Wenhong Hardware Products CO.,Ltd</string>
+    <string name="zero">0</string>
+    <string name="percentzero">0%</string>
 
 </resources>
