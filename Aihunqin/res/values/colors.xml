@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="gray">#eeeeff</color>
     <color name="white">#ffffff</color>
     <color name="radioxuanzhong">#A0E83A46</color>
     <color name="radioweixuanzhong">#E83A46</color>
     <color name="diviercolor">#dddddd</color>
+    <color name="indicator">#F5E1E2</color>
+    <color name="indicatorfont">#E31738</color>
+
 </resources>

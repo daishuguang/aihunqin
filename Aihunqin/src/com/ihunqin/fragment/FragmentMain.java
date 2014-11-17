@@ -135,7 +135,7 @@ public class FragmentMain extends Fragment {
 
 				FragmentTransaction fragmentTransaction = fragmentManager
 						.beginTransaction();
-				Fragment fragment_invitation = new FragmentTask();
+				Fragment fragment_invitation = new FragmentWeddingList();
 				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_invitation);
 				fragmentTransaction.commit();

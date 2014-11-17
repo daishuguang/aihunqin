@@ -24,6 +24,7 @@ import com.ihunqin.fragment.FragmentLijinList;
 import com.ihunqin.fragment.FragmentMain;
 import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
+import com.ihunqin.fragment.FragmentWeddingList;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
@@ -57,7 +58,7 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		fragmentTransaction.add(R.id.fragment_container, fragment_main);
 		fragmentTransaction.commit();
 		setFragmentIndicator();
-		
+
 		// ×¢²áµ½Î¢ÐÅ
 	}
 
@@ -82,12 +83,11 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 							fragment_main);
 					break;
 				case R.id.rbTwo:
-					Toast.makeText(SinaMain.this, "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
-							.show();
-					// Fragment fragment_weddingList = new
-					// FragmentWeddingList();
-					// fragmentTransaction.replace(R.id.fragment_container,
-					// fragment_weddingList);
+					// Toast.makeText(SinaMain.this, "¾´ÇëÆÚ´ý", Toast.LENGTH_SHORT)
+					// .show();
+					Fragment fragment_weddingList = new FragmentWeddingList();
+					fragmentTransaction.replace(R.id.fragment_container,
+							fragment_weddingList);
 					break;
 				case R.id.rbThree:
 					Fragment fragment_more = new FragmentMore();

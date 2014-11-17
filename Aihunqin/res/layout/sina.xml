@@ -3,7 +3,6 @@
     android:id="@+id/mainpop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_bg"
     android:orientation="vertical" >
 
     <!-- 上边主页面 -->
