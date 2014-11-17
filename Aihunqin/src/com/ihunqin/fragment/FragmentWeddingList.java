@@ -1,6 +1,8 @@
 package com.ihunqin.fragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -18,17 +20,21 @@ import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.LinearLayout;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
 
 import com.example.aihunqin.R;
+import com.ihunqin.model.Task;
 
 public class FragmentWeddingList extends Fragment {
 	TextView backbtn;
 	TextView title;
 	TextView rightmenu;
 	ExpandableListView qindanlist;
+
+	ArrayList<String> group = null;
+	ArrayList<ArrayList<Task>> child = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,18 +60,48 @@ public class FragmentWeddingList extends Fragment {
 		// rightmenu.setVisibility(View.VISIBLE);
 		// rightmenu.setText("新建任务");
 
+		ArrayList<Task> childitem = null;
+		Task task = null;
 		XmlResourceParser xml = getResources().getXml(R.xml.task);
 		try {
-			int eventType = xml.getEventType();
+			int eventType = xml.getEventType();// 产生第一个事件
+			String key = null;
 			while (eventType != XmlPullParser.END_DOCUMENT) {
-				if (eventType == XmlPullParser.START_DOCUMENT) {
-
-				} else if (eventType == XmlPullParser.START_TAG) {
-					if (xml.getName().equals("title")) {
+				switch (eventType) {
+				case XmlPullParser.START_DOCUMENT:// 判断当前事件是否是文档开始事件
+					child = new ArrayList<ArrayList<Task>>();
+					group = new ArrayList<String>();
+					break;
+				case XmlPullParser.START_TAG:
+					if ("countdown".equals(xml.getName())) {
+						childitem = new ArrayList<Task>();
+						group.add(xml.getAttributeValue(null, "key"));
+						break;
 					}
-				}
-				eventType = xml.next();
-			}
+					if (childitem != null) {
+						if ("dict".equals(xml.getName())) {
+							task = new Task();
+							task.title = xml.getAttributeValue(null, "title");
+							task.mind = xml.getAttributeValue(null, "mind");
+							task.prompt = xml.getAttributeValue(null, "prompt");
+							task.describe = xml.getAttributeValue(null,
+									"describe");
+							task.status = xml.getAttributeValue(null, "status");
+						}
+					}
+					break;
+				case XmlPullParser.END_TAG:// 判断当前事件是否是标签元素结束事件
+					if ("countdown".equals(xml.getName())) {
+						child.add(childitem);// 将task添加到tasks集合中
+					}
+					if ("dict".equals(xml.getName())) {
+						childitem.add(task);
+						task = null;
+					}
+					break;
+				}// end switch
+				eventType = xml.next();// 进入下一个元素并触发相应事件
+			}// end while
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -74,12 +110,6 @@ public class FragmentWeddingList extends Fragment {
 
 		qindanlist = (ExpandableListView) view.findViewById(R.id.qindanlist);
 		ExpandableListAdapter adapter = new BaseExpandableListAdapter() {
-
-			String[] armTypes = new String[] { "神族兵种", "虫族兵种", "人族兵种" };
-			String[][] arms = new String[][] { { "狂战士", "龙骑士", "黑暗圣堂", "电兵" },
-					{ "小狗", "刺蛇", "飞龙", "自曝飞机" }, { "机枪兵", "护士MM", "幽灵" }
-
-			};
 
 			class GroupHolder {
 				TextView father_title_tv;
@@ -135,25 +165,25 @@ public class FragmentWeddingList extends Fragment {
 
 			@Override
 			public int getGroupCount() {
-				return armTypes.length;
+				return group.size();
 			}
 
 			@Override
 			public Object getGroup(int groupPosition) {
-				return armTypes[groupPosition];
+				return group.get(groupPosition);
 			}
 
 			@Override
 			public int getChildrenCount(int groupPosition) {
-				return arms[groupPosition].length;
+				return child.get(groupPosition).size();
 			}
 
 			@Override
 			public View getChildView(int groupPosition, int childPosition,
 					boolean isLastChild, View convertView, ViewGroup parent) {
 				TextView textView = getTextView();
-				textView.setText(getChild(groupPosition, childPosition)
-						.toString());
+				textView.setText(((Task) getChild(groupPosition, childPosition)).title);
+				textView.setTextSize(18);
 				return textView;
 			}
 
@@ -164,7 +194,7 @@ public class FragmentWeddingList extends Fragment {
 
 			@Override
 			public Object getChild(int groupPosition, int childPosition) {
-				return arms[groupPosition][childPosition];
+				return child.get(groupPosition).get(childPosition);
 			}
 		};
 
@@ -183,5 +213,4 @@ public class FragmentWeddingList extends Fragment {
 		}
 		return view;
 	}
-
 }
