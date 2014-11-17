@@ -1,26 +1,27 @@
 package com.ihunqin.fragment;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
 
@@ -35,6 +36,8 @@ public class FragmentWeddingList extends Fragment {
 
 	ArrayList<String> group = null;
 	ArrayList<ArrayList<Task>> child = null;
+
+	SharedPreferences preferences;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +62,11 @@ public class FragmentWeddingList extends Fragment {
 		// rightmenu = (TextView) view.findViewById(R.id.rightmenu);
 		// rightmenu.setVisibility(View.VISIBLE);
 		// rightmenu.setText("新建任务");
+
+		preferences = getActivity().getSharedPreferences("userinfo",
+				Context.MODE_PRIVATE);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		long diff = Long.parseLong(preferences.getString("setweddingdate", ""));
 
 		ArrayList<Task> childitem = null;
 		Task task = null;
@@ -189,7 +197,8 @@ public class FragmentWeddingList extends Fragment {
 				} else {
 					childHolder = (ChildHolder) convertView.getTag();
 				}
-				childHolder.child_title_tv.setText(((Task) getChild(groupPosition, childPosition)).title);
+				childHolder.child_title_tv.setText(((Task) getChild(
+						groupPosition, childPosition)).title);
 				return convertView;
 			}
 
