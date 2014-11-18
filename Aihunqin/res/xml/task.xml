@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plist>
 	<countdown key="nineMonthPlan">
-			<dict title="婚前体检" mind="false" prompt="" describe="" status="未完成"/>
-			<dict title="选定结婚日期和地点" mind="false" prompt="" describe="" status="未完成"/>
-			<dict title="办理结婚登记手续" mind="false" prompt="" describe="" status="未完成"/>
-			<dict title="商议婚礼形式" mind="false" prompt="" describe="" status="未完成"/>
-			<dict title="预订婚宴场所" mind="false" prompt="建议您在婚期前1年预订好婚宴，并在1个月前确定好桌数，您可以多备1-2桌。
+			<dict title="婚前体检" mind="" prompt="" describe="" status="未完成"/>
+			<dict title="选定结婚日期和地点" mind="" prompt="" describe="" status="未完成"/>
+			<dict title="办理结婚登记手续" mind="" prompt="" describe="" status="未完成"/>
+			<dict title="商议婚礼形式" mind="" prompt="" describe="" status="未完成"/>
+			<dict title="预订婚宴场所" mind="" prompt="建议您在婚期前1年预订好婚宴，并在1个月前确定好桌数，您可以多备1-2桌。
        婚宴酒店选择很重要，能预订到没有柱子的婚宴大厅是您最大的福气。俗话说，货比三家，您可以在酒店选菜时要求先试菜。正规的婚宴酒店都会有婚宴合同，里面会写明定金、桌数、日期、酒店赠送的项目、酒店限制的项目和婚宴喜酒何时可以进场布置等等。
        一般来说，婚宴菜肴数目是双数。八个菜象征发财，十个菜象征十全十美，十二个菜象征月月幸福……" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="sixMonthPlan">
-		<dict title="挑选婚纱影楼" mind="false" prompt="建议您在婚期前5个月时确定好影楼。
+		<dict title="挑选婚纱影楼" mind="" prompt="建议您在婚期前5个月时确定好影楼。
        挑选影楼是婚礼的前哨战，选择一家价位、服务、风格、品质都合适您的。
        影楼丰富的赠品固然是“诱惑”，但要留心这些赠品是否在婚后随即弃之不用，作足功课，为自己规划实用有价值的赠品吧。" describe="" status="未完成"/>
-		<dict title="制定新娘美容计划" mind="false" prompt="1)	美体塑身
+		<dict title="制定新娘美容计划" mind="" prompt="1)	美体塑身
        建议您在婚期前3-4个月开始美体塑身工作。
        要想塑造好的身形，那就要合理饮食和运动互相搭配，不要妄图一瓶减肥药解决所有问题哦。
        您可以做些燃烧脂肪的有氧运动。游泳是不错的选择，不但减肥，还能塑造身材。但是要记得去干净、卫生、正规的场所哦。
@@ -35,21 +35,21 @@
        一日膳食总量最好达到下列标准：即标准面粉250克，大米200克，油50克，豆浆300毫升，油豆腐100克， 肉类200克，鸡蛋100克，牛奶200克，各种蔬菜500克。
        只要您吃的蛋白质、碳水化合物、脂肪、纤维、维他命和矿物质的含量合适，结婚的时候您肯定会容光焕发。
        婚礼前一天可以吃些清淡点的食物，避免吃过分油腻或煎炸的食品。" describe="" status="未完成"/>
-		<dict title="制定结婚费用预算表" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="商讨开支分配" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="草拟宴客名单" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="挑选新娘、新郎服装" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="布置新居" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="收集蜜月旅行资料" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定婚纱影楼" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="拍摄婚纱照" mind="false" prompt="建议您在婚期前5个月时拍好婚纱照。
+		<dict title="制定结婚费用预算表" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="商讨开支分配" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="草拟宴客名单" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="挑选新娘、新郎服装" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="布置新居" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="收集蜜月旅行资料" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定婚纱影楼" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="拍摄婚纱照" mind="" prompt="建议您在婚期前5个月时拍好婚纱照。
        在与摄影师沟通时，决定一个风格就好了！ “自然”、“唯美”、“时尚”、“古典”……抓住您想要的才是重点。拍摄时最好不要戴眼镜，会造成反光，把眼睛睁开听从摄像师的就OK啦。
        拍摄时鞋子是拍不到的，所以MM可以挑双舒服好走的鞋，也可以准备一双高跟鞋，以便不时之需。
        拍照当天难免会紧张，当作去游玩啦！调整好心情，自然会拍得漂亮喽！为了让自己保持状态，可以带上好吃的巧克力，心情和身体状态都会维护的很好。" describe="" status="未完成"/>	
 	</countdown>
 	<countdown key="threeMonthPlan">
-		<dict title="挑选婚庆公司" hmind="false" prompt="" describe="" status="未完成"/>
-		<dict title="选定新人礼服" mind="false" prompt="新郎礼服
+		<dict title="挑选婚庆公司" hmind="" prompt="" describe="" status="未完成"/>
+		<dict title="选定新人礼服" mind="" prompt="新郎礼服
        建议您在婚期前3个月时挑选好新郎礼服。
        新郎礼服一般是新人们在商场挑选购买。主要包含西服、衬衫、领带还有皮鞋。需要提醒您最好准备2件衬衫，这样可以在接亲和婚宴时各穿一件。
        如何搭配要看您自己的喜好，当然还要和裤子、皮鞋搭配起来，才构成一种协调，形成一道亮丽的风景。
@@ -57,59 +57,59 @@
        建议您在婚期前3个月时挑选好心爱的婚纱，提前一天去取礼服。
        新娘礼服可以在婚纱礼服店租也可以去定做，这都根据您个人情况而定。如果是租的礼服，您需要预留改尺寸的时间，改好后您最好再去试穿一下。
        抱着走红地毯的心情挑选您的礼服吧。一般都会选择4套，迎宾婚纱、红毯婚纱、敬酒礼服和送客套装。" describe="" status="未完成"/>
-		<dict title="安排蜜月时间、行程。" mind="false" prompt="建议您在婚期前5个月时确定好行程。
+		<dict title="安排蜜月时间、行程。" mind="" prompt="建议您在婚期前5个月时确定好行程。
        如果需要护照，那就应该提前申请了。准备好充足的时间去办理。跟团除外，自由行一定得安排好每天的日程哦。
        短途旅行选择经典路线的景点就可以，用以放松心情。假期时间长的话可以去浪漫的度假胜地。建议不要把游玩时间安排的太过紧张，可以选择一天出游，一天两人腻在宾馆，这样就不会过于疲惫，才能做到蜜月的真正意义。" describe="" status="未完成"/>
-		<dict title="选购婚戒" mind="false" prompt="建议您在婚期前5个月开始选购结婚钻戒。
+		<dict title="选购婚戒" mind="" prompt="建议您在婚期前5个月开始选购结婚钻戒。
        钻戒是男方向女方求婚所用。钻戒是最坚贞的定情信物，在求婚的时候，为心爱的女孩戴上一枚特别的钻戒，那成功几率会大大增加哦。在这里，iMarry教您挑选钻戒的小常识：
        衡量一枚钻石的价值，主要有4C标准：重量、颜色、净度、切工。其中，唯有切工直接受人为影响，能否彻底展现钻石“闪耀”的特质，就看它了。切工也影响着钻石40%左右的价格。所以买钻戒的时候，不能光看钻石的“个头”大小哦。一般来说，钻石行业以“比利时切工”较为优异，其中“钻石之都”安特卫普的切工，最为世人推崇，是整个行业的典范。
        在挑选求婚钻戒时，寓意也很重要，别期待随便一枚钻戒就能打发未来另一半哦。例如TESIRO通灵“凝爱”结婚钻戒系列，寓意“此刻凝聚，爱意永恒”。
        除了采用比利时优质切工钻石，其独特的内弧设计，能为佩戴者提供舒适感受，这种工艺的制作时间和金损量是普通戒指的3-4倍，所以它的品质和传世价值非常高。" describe="" status="未完成"/>
-		<dict title="新娘试妆" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="新娘美体与保养" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="选购家具、家电用品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="完成新房布置" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="保持新房通风透气" mind="false" prompt="" describe="" status="未完成"/>		
+		<dict title="新娘试妆" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="新娘美体与保养" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="选购家具、家电用品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="完成新房布置" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="保持新房通风透气" mind="" prompt="" describe="" status="未完成"/>		
 	</countdown>
 	<countdown key="twoMonthPlan">
-		<dict title="确定婚庆公司" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定婚礼现场布置" mind="false" prompt="建议您在婚期前3个月时确定好婚宴现场布置。
+		<dict title="确定婚庆公司" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定婚礼现场布置" mind="" prompt="建议您在婚期前3个月时确定好婚宴现场布置。
        婚礼现场的布置是至关重要的环节，如何布置得喜气洋洋而又不落俗套，确实要耗费一些脑筋。总体来说，婚礼现场可以大致分为以下几个区域：
        迎宾区：新人迎接宾客的地方也是首先进入来宾视线的一个区域，别致的布置会让人耳目一新。
        签到区：通常签到区的布置和整场婚礼的风格是一致的。 宾客桌位示意图可以摆放在此处，方便宾客“对号入座”。
        通道区：新人缓缓走向仪式区的地方。一般会铺上幸福的红地毯，红地毯两边使用路引。
        仪式区：举行隆重婚礼的舞台。无论是传统的中式婚礼，还是西式教堂婚礼，仪式都是婚礼的核心部分。
        建议现场最好有一个设计主题，颜色搭配尽量采用一个色系，“和谐”俩字很重要哦。一些小道具的运用，如聚光灯、泡泡机、烟雾机、水晶烛台、香槟塔、特色桌布、鲜花等可以让宾客眼前一亮。" describe="" status="未完成"/>
-		<dict title="准备喜糖、糖盒、喜帖" mind="false" prompt="建议您在婚期前2个月时挑选好喜糖。
+		<dict title="准备喜糖、糖盒、喜帖" mind="" prompt="建议您在婚期前2个月时挑选好喜糖。
        喜糖有两个地方要用：一是婚礼现场，二是回礼。时下也有很多新人喜欢在每位来宾席位上，单独包上一盒精美的喜糖，这样的摆放就需要根据糖盒来决定糖的数量了，一般都是双数，太少则显得不够大气。
        喜糖的包装也很讲究，喜糖的颜色尽量选择暖色调的包装。蓝色、黑色或其他冷色调是不适宜的哦。
        个性喜糖和DIY喜糖日益盛行，譬如把新郎、新娘的名字和照片印在喜糖的包装盒上，或者新人们自己动心思包装喜糖，这些充满心意的喜糖叫人爱不释手。" describe="" status="未完成"/>
-		<dict title="确定伴郎、伴娘人选" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定伴郎、伴娘礼服" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="咨询蜜月行项目" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定宴请嘉宾名单" mind="false" prompt="建议您在婚期前1个月时邀请好宾客。
+		<dict title="确定伴郎、伴娘人选" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定伴郎、伴娘礼服" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="咨询蜜月行项目" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定宴请嘉宾名单" mind="" prompt="建议您在婚期前1个月时邀请好宾客。
        提前2周将请柬送到宾客手中，以便客人安排时间。
        在发请柬的同时，最好附上酒店的详细交通图。" describe="" status="未完成"/>
-		<dict title="制定婚礼当天流程表" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="制定婚礼当天座位表" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="向单位申请婚假" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="决定新娘捧花及头纱" mind="false" prompt="" describe="" status="未完成"/>		
+		<dict title="制定婚礼当天流程表" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="制定婚礼当天座位表" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="向单位申请婚假" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="决定新娘捧花及头纱" mind="" prompt="" describe="" status="未完成"/>		
 	</countdown>
 	<countdown key="oneandhalfMonth">
-		<dict title="预约主婚人、证婚人" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="商议蜜月旅行细节" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="预约花车" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="安排婚宴座位" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="发请柬" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="试穿婚纱、礼服" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="购置婚纱礼服及配饰" mind="false" prompt="" describe="" status="未完成"/>
+		<dict title="预约主婚人、证婚人" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="商议蜜月旅行细节" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="预约花车" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="安排婚宴座位" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="发请柬" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="试穿婚纱、礼服" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="购置婚纱礼服及配饰" mind="" prompt="" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="oneMonth">
-		<dict title="与婚庆公司确定细节" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定司仪" mind="false" prompt="建议您在婚期前一个月时确定好司仪，并提前与司仪沟通。
+		<dict title="与婚庆公司确定细节" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定司仪" mind="" prompt="建议您在婚期前一个月时确定好司仪，并提前与司仪沟通。
        要想婚礼有特色，挑个好司仪是首要条件。所谓“事实胜于一切”，您的司仪可以是幽默型、才艺型或热闹型的，但最好抛开他滔滔不绝地介绍，现场观摩一次“实战”。
        婚礼前记得和司仪沟通一次，告诉司仪哪些是您想让他提到的，哪些环节是您不喜欢的，哪些是您忌讳的，经验丰富的司仪也会给您一些建议。最终需要确定好婚礼节目单，确定好婚礼上将要播放的歌曲。" describe="" status="未完成"/>
-		<dict title="确定摄影师、摄像师" mind="false" prompt="跟拍
+		<dict title="确定摄影师、摄像师" mind="" prompt="跟拍
        建议您在婚期前1个月时确定好跟拍。
        选择一名金牌摄影师吧！你们的笑容、甜蜜就靠他记录了。很多年以后，这将是你们和儿女们分享的幸福回忆。
 摄像师
@@ -117,7 +117,7 @@
        扛着机子到处跑的摄像大哥同样重要。他们还“兼职”了全天的总导演，对于完全不懂流程的您就赚了。
        摄像师不光要拍摄婚礼现场的静物小品，更重要的是捕捉那些幸福的瞬间。
        记得事先与摄影师沟通，让他了解您婚礼的流程，如果有特别策划的节目，也一定要事先告诉摄影师。如果能拍出“电影大片”的效果，那您绝对赚到啦！" describe="" status="未完成"/>
-		<dict title="确定跟妆师" mind="false" prompt="建议您在婚期前1个月时确定好跟妆。
+		<dict title="确定跟妆师" mind="" prompt="建议您在婚期前1个月时确定好跟妆。
        MM们，您可以提前1-2个月进行试妆，选择一位好的化妆师，您就是完美新娘。挑选化妆师时重点观察：
        化妆师的审美和品位：一个会懂得打扮自己的化妆师，才会懂得如何把您打扮得更加美丽。
        化妆师以往的作品：想要了解一个化妆师的真正水平，最好看他们未经PS的作品，或者干脆看现场作品。
@@ -125,18 +125,18 @@
        看化妆师擅长的风格是否与自己风格契合：每位化妆师都有自己擅长的风格，有的擅长个性夸张的风格，有的则擅长清新的风格。
        看化妆师化妆速度和换装速度：这点非常重要。化妆师动作是否够快，直接影响到结婚当天的进程。
        另外，您可以提前让化妆师看下您的礼服，她会给您挑选一些配饰设计出最靓的造型。" describe="" status="未完成"/>
-		<dict title="确定其他工作人员" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定酒席桌数" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定婚宴菜肴" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="选定婚礼蛋糕" mind="false" prompt="建议您在婚期前1个月时挑选好婚礼蛋糕。
+		<dict title="确定其他工作人员" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定酒席桌数" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定婚宴菜肴" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="选定婚礼蛋糕" mind="" prompt="建议您在婚期前1个月时挑选好婚礼蛋糕。
        蛋糕意味着“快乐幸福”之意。在婚宴上与客人们一起分享蛋糕是西式婚礼的传统习俗，客人们也期望自己能分享新婚夫妇的幸福。最好在婚宴的酒店里订购蛋糕，一是和婚宴一起，蛋糕可以有很好的折扣；二是节省运费。这是很好的省钱方法。
        切蛋糕原本是西式婚礼中的细节，如今已经越来越多地运用在中式婚礼中，其实切蛋糕只是一个象征性的程序，只需要让您的新郎握着您的手，共同切下第一刀就圆满地完成了任务，接下来分切蛋糕的工作就由酒店的服务生去做吧。" describe="" status="未完成"/>
-		<dict title="整理婚礼当天服装" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="整理配饰及化妆品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="准备各式嫁妆" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="检查新婚生活用品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="准备蜜月行李物品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="预订蜜月行车票" mind="false" prompt="车票预订
+		<dict title="整理婚礼当天服装" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="整理配饰及化妆品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="准备各式嫁妆" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="检查新婚生活用品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="准备蜜月行李物品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="预订蜜月行车票" mind="" prompt="车票预订
        建议您在婚期前1个月时预订好车票。
        黄金周的机票趁早订，而淡季的机票则可以稍微提前咨询就可以了，多打电话询问航空公司是否有最新的优惠政策。
        团体订票可以优惠，对比多家不同的票价，不妨试试“拉客组团”方式获得优惠票。
@@ -145,30 +145,30 @@
        假如您不是跟团玩，那最好先把返程票买好!如果坐火车，提前买好返程票，就不会因担心买不到票而影响假日心情!如果是乘坐飞机，那就更应该提前把票买好，不仅可以确保行程，还可以省下一笔不小的开支！" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="twoWeek">
-		<dict title="整理新房、摆放婚礼物品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="新房装饰、清扫" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="整理好蜜月行行李物品" mind="false" prompt="行李准备
+		<dict title="整理新房、摆放婚礼物品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="新房装饰、清扫" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="整理好蜜月行行李物品" mind="" prompt="行李准备
        建议您在婚期前1个星期时准备好行李。
        按照旅游目的地的天气，收拾您的行装吧。一些朋友会为旅行添置新衣，以期更好的享受假期。但是，最好不要穿新鞋。衣服也尽量以宽松、休闲为佳，活动起来更方便!
        蜜月旅行需要携带的物品大致可分为以下几类：
        必备证件用品：身份证、结婚证、护照、旅行经费、旅游指南、亲友联系方式、办理好手机漫游套餐。
        旅行用品：阳伞、照相机、电池、手表、急用药品、消遣小物、内衣裤、袜子、换洗衣物、舒适或适合运动的鞋、太阳镜、化妆品、防晒用品等。
        旅行备用应急物品：抗生素类药物、抗病毒药物呼吸系统常用药、消化系统常用药、防晕车、船药、抗过敏药、防暑药和防蚊虫叮咬的药。" describe="" status="未完成"/>
-		<dict title="确定婚宴各项事宜" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="明确工作人员婚宴安排" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="购新娘、伴娘捧花" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="购置胸花、婚宴用花" mind="false" prompt="建议您在婚期前1个星期时准备好胸花。
+		<dict title="确定婚宴各项事宜" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="明确工作人员婚宴安排" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="购新娘、伴娘捧花" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="购置胸花、婚宴用花" mind="" prompt="建议您在婚期前1个星期时准备好胸花。
        在婚礼中，新郎、新娘、伴郎、伴娘、司仪以及新人的父母都需要胸花。一般是由婚庆公司准备，也可以到花店购买。" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="sevenDay">
-		<dict title="购买婚礼仪式道具" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="订购烟酒、饮料、零食" mind="false" prompt="建议您在婚期前1个星期时购买好所有零食。
+		<dict title="购买婚礼仪式道具" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="订购烟酒、饮料、零食" mind="" prompt="建议您在婚期前1个星期时购买好所有零食。
        结婚当天行程紧凑，您可能连吃饭的时间都没有，所以给自己备点零食吧。
        家中最好也准备点休闲食品，巧克力、糖果等无壳食品是不错的选择，亲朋好友如果提前到了，也能垫垫肚子。" describe="" status="未完成"/>
-		<dict title="完成喜糖分装" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="新娘定妆、定造型" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="新娘保养冲刺" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="准备各种红包、费用" mind="false" prompt="建议您在婚期前1个月时挑选好红包。
+		<dict title="完成喜糖分装" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="新娘定妆、定造型" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="新娘保养冲刺" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="准备各种红包、费用" mind="" prompt="建议您在婚期前1个月时挑选好红包。
        红包有很多种，这里iMarry给您一个参考，具体情况还得根据您的经济实力和婚礼预计啦！
        小红包：两元钱/包，约100个 ；散发给周围邻居、围观人员。
        中红包：五元钱/包，约30个；散发给亲友团人员。
@@ -176,8 +176,8 @@
        改口红包：新人双方可以先商量确定数额，约4个。在婚礼当天由双方父母交给新人。
        伴娘伴郎红包：根据您的经济能力，一般至少200元。
        婚车司机红包：如果是租的婚车，意思一下就好了，18、28、68都可以；如果是借朋友的，主婚车，要给个大一些红包，其他的婚车可以稍微降一点，200元左右。" describe="" status="未完成"/>
-		<dict title="收拾新房" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="完成婚礼致辞" mind="false" prompt="主（证）婚词
+		<dict title="收拾新房" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="完成婚礼致辞" mind="" prompt="主（证）婚词
 
 示例1：
        各位来宾、各位先生、各位女士、各位亲朋好友：
@@ -223,23 +223,23 @@
        再一次感谢亲朋好友的光临，为婚礼增添光彩！" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="twoDay">
-		<dict title="向婚礼工作人员描述任务" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="检查蜜月行随身物品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="准备婚礼补妆用品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="检查婚礼各工作细节" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="证婚人、司仪" mind="false" prompt="" describe="" status="未完成"/>
+		<dict title="向婚礼工作人员描述任务" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="检查蜜月行随身物品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="准备婚礼补妆用品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="检查婚礼各工作细节" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="证婚人、司仪" mind="" prompt="" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="oneDay">
-		<dict title="与化妆师定次日时间" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="确定各礼服出场次序" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="检查首饰、饰品" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="新人与家人沟通次日安排" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="保证充足的睡眠" mind="false" prompt="" describe="" status="未完成"/>
+		<dict title="与化妆师定次日时间" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="确定各礼服出场次序" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="检查首饰、饰品" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="新人与家人沟通次日安排" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="保证充足的睡眠" mind="" prompt="" describe="" status="未完成"/>
 	</countdown>
 	<countdown key="theDay">
-		<dict title="早起梳理、化妆、穿戴" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="吃一顿丰富的早餐" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="贵重首饰，礼金专人看管" mind="false" prompt="" describe="" status="未完成"/>
-		<dict title="婚礼当天行程" mind="false" prompt="" describe="" status="未完成"/>
+		<dict title="早起梳理、化妆、穿戴" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="吃一顿丰富的早餐" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="贵重首饰，礼金专人看管" mind="" prompt="" describe="" status="未完成"/>
+		<dict title="婚礼当天行程" mind="" prompt="" describe="" status="未完成"/>
 	</countdown>
 </plist>

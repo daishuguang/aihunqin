@@ -10,5 +10,6 @@
     <color name="indicatorfont">#E31738</color>
     <color name="indicatorview_red">#e31738</color>
     <color name="indicatorview_gray">#837d7f</color>
+    <color name="group_gray">#b1a1a1</color>
 
 </resources>
