@@ -77,8 +77,6 @@ public class FragmentWeddingList extends Fragment {
 
 		format = new SimpleDateFormat("MM‘¬dd»’");
 
-		Toast.makeText(getActivity(), format.format(date), Toast.LENGTH_SHORT)
-				.show();
 		ArrayList<Task> childitem = null;
 		Task task = null;
 		XmlResourceParser xml = getResources().getXml(R.xml.task);
