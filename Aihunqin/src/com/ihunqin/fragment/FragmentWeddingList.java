@@ -70,7 +70,8 @@ public class FragmentWeddingList extends Fragment {
 				Context.MODE_PRIVATE);
 
 		long weddingdate = Long.parseLong(preferences.getString(
-				"setweddingdate", ""));
+				"setweddingdate", ""
+						+ Calendar.getInstance().get(Calendar.DATE)));
 		Date date = new Date(weddingdate);
 		Calendar calendar = new GregorianCalendar();
 
