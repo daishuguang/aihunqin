@@ -22,7 +22,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 		if (!mobNetInfo.isConnected() && !wifiNetInfo.isConnected()) {
 			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó", Toast.LENGTH_SHORT).show();
 		} else {
-
+			// TODO
 		}
 	}
 

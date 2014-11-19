@@ -1,19 +1,19 @@
 package com.ihunqin.activity;
 
-import android.app.Activity;
+import android.app.Application;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.ihunqin.receiver.ConnectionChangeReceiver;
 
-public abstract class BaseActivity extends Activity {
+public class BaseApplication extends Application {
 	private ConnectionChangeReceiver myReceiver;
 
-	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreate() {
+		super.onCreate();
+		registerMyReceiver();
 	}
 
 	/**
