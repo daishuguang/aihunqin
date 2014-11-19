@@ -23,6 +23,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó", Toast.LENGTH_SHORT).show();
 		} else {
 			// TODO
+			
 		}
 	}
 

@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.example.aihunqin.R;
+import com.ihunqin.activity.BaseApplication;
 import com.ihunqin.fragment.FragmentInivitationContent;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.ihunqin.fragment.FragmentInvitationCreateNew;
@@ -136,6 +137,12 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 					.replace(R.id.fragment_container, fragment)
 					.addToBackStack(null).commit();
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		this.unregisterReceiver(((BaseApplication) getApplication()).myReceiver);
+		super.onDestroy();
 	}
 
 }

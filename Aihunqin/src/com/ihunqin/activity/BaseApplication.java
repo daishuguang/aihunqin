@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.ihunqin.receiver.ConnectionChangeReceiver;
 
 public class BaseApplication extends Application {
-	private ConnectionChangeReceiver myReceiver;
+	public ConnectionChangeReceiver myReceiver;
 
 	@Override
 	public void onCreate() {
