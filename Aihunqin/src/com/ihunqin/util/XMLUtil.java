@@ -25,7 +25,7 @@ public class XMLUtil {
 	private static String deleteNumber;
 	private static String updateNumber;
 	private static String fileName;
-	private static String filepath;
+	public static String filepath;
 
 	public static void setFileName(String filename) {
 		fileName = filename;

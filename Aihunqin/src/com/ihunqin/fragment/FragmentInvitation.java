@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -24,6 +25,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
@@ -58,6 +62,7 @@ import com.ihunqin.crazy.WebActivity;
 import com.ihunqin.model.InvitationItem;
 import com.ihunqin.util.HttpUtil;
 import com.ihunqin.util.PullXmlService;
+import com.ihunqin.util.XMLUtil;
 
 public class FragmentInvitation extends Fragment {
 	TextView invitationid;
@@ -69,6 +74,8 @@ public class FragmentInvitation extends Fragment {
 	File file = null;
 	/** data */
 	List<InvitationItem> invitationDatas = null;
+	InvitationAdapter adapter = null;
+	int pos;
 
 	public interface TransferIDListener {
 		public void onItemClicked(String id, String fragment);
@@ -238,7 +245,7 @@ public class FragmentInvitation extends Fragment {
 		try {
 			invitationDatas = PullXmlService.readXml(getActivity()
 					.openFileInput(FILENAME));
-			InvitationAdapter adapter = new InvitationAdapter();
+			adapter = new InvitationAdapter();
 			invitationlist.setAdapter(adapter);
 
 			invitationlist.setOnItemClickListener(new OnItemClickListener() {
@@ -256,6 +263,7 @@ public class FragmentInvitation extends Fragment {
 						@Override
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
+							pos = position;
 							AlertDialog.Builder builder = new Builder(
 									getActivity());
 							builder.setMessage("确定要删除?")
@@ -268,6 +276,9 @@ public class FragmentInvitation extends Fragment {
 														DialogInterface dialog,
 														int which) {
 													// TODO
+													deleteToXml(pos);
+													invitationDatas.remove(pos);
+													adapter.notifyDataSetChanged();
 													
 												}
 											}).setNegativeButton("取消", null)
@@ -351,6 +362,33 @@ public class FragmentInvitation extends Fragment {
 		} catch (IOException e1) {
 
 			e1.printStackTrace();
+		}
+	}
+
+	void deleteToXml(int position) {
+		String id = invitationDatas.get(position).getItemid();
+		DocumentBuilderFactory facotry = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+		try {
+			builder = facotry.newDocumentBuilder();
+			Document document = builder.parse(new File(getActivity()
+					.getFilesDir().getPath() + File.separator + FILENAME));
+			document.normalize();
+			NodeList nodeList = document.getElementsByTagName("invitation_"
+					+ id);
+
+			Node node = nodeList.item(0);
+			node.getParentNode().removeChild(node);
+			XMLUtil.filepath = getActivity().getFilesDir().getPath()
+					+ File.separator + FILENAME;
+			XMLUtil.saveXML(document);
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
