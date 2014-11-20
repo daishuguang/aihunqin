@@ -142,60 +142,74 @@ public class FragmentInvitation extends Fragment {
 							.show();
 					return;
 				}
+				try {
+					invitationDatas = PullXmlService.readXml(getActivity()
+							.openFileInput(FILENAME));
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				if (invitationDatas.size() < 3) {
 
-				// register or login
+					// register or login
 
-				new Thread(new Runnable() {
+					new Thread(new Runnable() {
 
-					@Override
-					public void run() {
-						// String url = "http://www.ruiqinsoft.com:3083/wh/c";
-						String url = "http://wedding.ihunqin.com/api/ecard";
-						Map<String, String> rawparams = new HashMap<String, String>();
-						rawparams.put(
-								"UserID",
-								getActivity().getSharedPreferences("userinfo",
-										Activity.MODE_PRIVATE).getString(
-										"userid", ""));
-						rawparams.put("StoreID", "0");
-						rawparams.put("KehuName", "wenhong");
-						rawparams.put("BackGroundImageUrl", "beijing");
-						rawparams.put("YouKuVideoId", "youkuid");
-						rawparams.put("XinlangName", "xl");
-						rawparams.put("XinlangMobile", "1333");
-						rawparams.put("XinniangName", "xn");
-						rawparams.put("XinniangMobile", "133333");
-						rawparams.put("WeddingDateNongli", "nongliriqi");
-						rawparams.put("WeddingDateTime", (new SimpleDateFormat(
-								"yyyy-MM-dd")).format(new Date()));
-						rawparams.put("textFieldWeddingTime", "jidianshijian");
-						rawparams.put("WeddingLoacation", "123");
-						rawparams.put("WeddingMenu", "hunlicaidan");
-						rawparams.put("WeddingTables", "hunzuo");
-						rawparams.put("LoveWord", "12");
-						rawparams.put("LoveWord2", "12");
-						rawparams.put("LoveWord3", "12");
-						rawparams.put("LoveWord4", "12");
-						rawparams.put("HotelName", "jiudianmingzi");
-						String result;
-						try {
-							result = HttpUtil.postRequst(url, rawparams);
+						@Override
+						public void run() {
+							// String url =
+							// "http://www.ruiqinsoft.com:3083/wh/c";
+							String url = "http://wedding.ihunqin.com/api/ecard";
+							Map<String, String> rawparams = new HashMap<String, String>();
+							rawparams.put(
+									"UserID",
+									getActivity().getSharedPreferences(
+											"userinfo", Activity.MODE_PRIVATE)
+											.getString("userid", ""));
+							rawparams.put("StoreID", "0");
+							rawparams.put("KehuName", "wenhong");
+							rawparams.put("BackGroundImageUrl", "beijing");
+							rawparams.put("YouKuVideoId", "youkuid");
+							rawparams.put("XinlangName", "xl");
+							rawparams.put("XinlangMobile", "1333");
+							rawparams.put("XinniangName", "xn");
+							rawparams.put("XinniangMobile", "133333");
+							rawparams.put("WeddingDateNongli", "nongliriqi");
+							rawparams.put("WeddingDateTime",
+									(new SimpleDateFormat("yyyy-MM-dd"))
+											.format(new Date()));
+							rawparams.put("textFieldWeddingTime",
+									"jidianshijian");
+							rawparams.put("WeddingLoacation", "123");
+							rawparams.put("WeddingMenu", "hunlicaidan");
+							rawparams.put("WeddingTables", "hunzuo");
+							rawparams.put("LoveWord", "12");
+							rawparams.put("LoveWord2", "12");
+							rawparams.put("LoveWord3", "12");
+							rawparams.put("LoveWord4", "12");
+							rawparams.put("HotelName", "jiudianmingzi");
+							String result;
+							try {
+								result = HttpUtil.postRequst(url, rawparams);
 
-							Log.v("roboce", result);
-							JSONObject json;
-							json = new JSONObject(result);
-							if (json.getString("Status").equals("0")) {
-								String m = json.getString("Data");
-								writeToXml(m);
-								// Save to XML
-								mCallback.onItemClicked(m, "createnew");
-								Log.v("roboce", m);
+								Log.v("roboce", result);
+								JSONObject json;
+								json = new JSONObject(result);
+								if (json.getString("Status").equals("0")) {
+									String m = json.getString("Data");
+									writeToXml(m);
+									// Save to XML
+									mCallback.onItemClicked(m, "createnew");
+									Log.v("roboce", m);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
 							}
-						} catch (Exception e) {
-							e.printStackTrace();
 						}
-					}
-				}).start();
+					}).start();
+				} else {
+					Toast.makeText(getActivity(), "最多创建3张", Toast.LENGTH_SHORT)
+							.show();
+				}
 
 			}
 		});
