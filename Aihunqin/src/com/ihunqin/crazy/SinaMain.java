@@ -24,6 +24,7 @@ import com.ihunqin.fragment.FragmentLijinList;
 import com.ihunqin.fragment.FragmentMain;
 import com.ihunqin.fragment.FragmentMore;
 import com.ihunqin.fragment.FragmentQRCode;
+import com.ihunqin.fragment.FragmentTask;
 import com.ihunqin.fragment.FragmentWeddingList;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -137,11 +138,19 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 					.replace(R.id.fragment_container, fragment)
 					.addToBackStack(null).commit();
 		}
+		if (which.equals("task")) {
+			FragmentTask fragment = new FragmentTask();
+			fragment.setArguments(arguments);
+			this.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, fragment)
+					.addToBackStack(null).commit();
+		}
 	}
 
 	@Override
 	protected void onDestroy() {
-		this.unregisterReceiver(((BaseApplication) getApplication()).myReceiver);
+		// this.unregisterReceiver(((BaseApplication)
+		// getApplicationContext()).myReceiver);
 		super.onDestroy();
 	}
 

@@ -10,37 +10,55 @@ import java.util.GregorianCalendar;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.aihunqin.R;
+import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.ihunqin.model.Task;
 
-public class FragmentWeddingList extends Fragment {
+public class FragmentWeddingList extends BaseFragment {
 	TextView backbtn;
 	TextView title;
 	TextView rightmenu;
 	ExpandableListView qindanlist;
-
-	ArrayList<Date> group = null;
-	ArrayList<ArrayList<Task>> child = null;
+	
 	ArrayList<String> years = null;
 	SharedPreferences preferences;
 	SimpleDateFormat format = null;
+	TransferIDListener mCallback;
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mCallback = (TransferIDListener) activity;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+
+		super.onActivityCreated(savedInstanceState);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,12 +88,19 @@ public class FragmentWeddingList extends Fragment {
 				Context.MODE_PRIVATE);
 
 		long weddingdate = Long.parseLong(preferences.getString(
-				"setweddingdate", "" + Calendar.getInstance().getTime().getTime()));
+				"setweddingdate", ""
+						+ Calendar.getInstance().getTime().getTime()));
 		Date date = new Date(weddingdate);
 		Calendar calendar = new GregorianCalendar();
 
 		format = new SimpleDateFormat("MM‘¬dd»’");
-
+		SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd");
+		// String a1 = format.format(date);
+		// String a = f2.format(date);
+		// String a2 = format.format(new Date(Calendar.getInstance().getTime()
+		// .getTime()));
+		// String a3 = f2.format(new Date(Calendar.getInstance().getTime()
+		// .getTime()));
 		ArrayList<Task> childitem = null;
 		Task task = null;
 		XmlResourceParser xml = getResources().getXml(R.xml.task);
@@ -203,8 +228,12 @@ public class FragmentWeddingList extends Fragment {
 				groupHolder.father_title_tv.setText(format.format(
 						(Date) getGroup(groupPosition)).toString());
 				groupHolder.year.setText(years.get(groupPosition));
-				if (Calendar.getInstance().getTime().getTime() > ((Date) getGroup(groupPosition))
-						.getTime()) {
+				Date d = (Date) getGroup(groupPosition);
+				Calendar catemp = new GregorianCalendar();
+				catemp.setTime(d);
+				catemp.add(Calendar.DATE, 1);
+				d = catemp.getTime();
+				if (Calendar.getInstance().getTime().after(d)) {
 					groupHolder.father_title_tv.setTextColor(getResources()
 							.getColor(R.color.group_gray));
 					groupHolder.leftview.setBackgroundColor(getResources()
@@ -277,6 +306,17 @@ public class FragmentWeddingList extends Fragment {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
+				return false;
+			}
+		});
+		qindanlist.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				childp = childPosition;
+				groupp = groupPosition;
+				mCallback.onItemClicked("", "task");
 				return true;
 			}
 		});

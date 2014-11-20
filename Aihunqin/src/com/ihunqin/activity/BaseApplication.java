@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.ihunqin.receiver.ConnectionChangeReceiver;
 
 public class BaseApplication extends Application {
-	public ConnectionChangeReceiver myReceiver;
+	public ConnectionChangeReceiver myReceiver = new ConnectionChangeReceiver();
 
 	@Override
 	public void onCreate() {
@@ -22,7 +22,6 @@ public class BaseApplication extends Application {
 	private void registerMyReceiver() {
 		IntentFilter filter = new IntentFilter(
 				ConnectivityManager.CONNECTIVITY_ACTION);
-		myReceiver = new ConnectionChangeReceiver();
 		this.registerReceiver(myReceiver, filter);
 	}
 }

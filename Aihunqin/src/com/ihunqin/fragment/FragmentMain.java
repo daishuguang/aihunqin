@@ -103,7 +103,7 @@ public class FragmentMain extends Fragment {
 							"setweddingdate", ""))
 							- format.parse(
 									c.get(Calendar.YEAR) + "-"
-											+ c.get(Calendar.MONTH) + "-"
+											+ (c.get(Calendar.MONTH) + 1) + "-"
 											+ c.get(Calendar.DAY_OF_MONTH))
 									.getTime();
 					long days = diff / (24 * 60 * 60 * 1000);
@@ -218,10 +218,10 @@ public class FragmentMain extends Fragment {
 						DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 						Date date1 = null, date2 = null;
 						try {
-							date1 = format.parse(year + "-" + monthOfYear + "-"
-									+ dayOfMonth);
+							date1 = format.parse(year + "-" + (monthOfYear + 1)
+									+ "-" + dayOfMonth);
 							date2 = format.parse(c.get(Calendar.YEAR) + "-"
-									+ c.get(Calendar.MONTH) + "-"
+									+ (1 + c.get(Calendar.MONTH)) + "-"
 									+ c.get(Calendar.DAY_OF_MONTH));
 
 						} catch (ParseException e) {

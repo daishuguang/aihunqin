@@ -1,5 +1,6 @@
 package com.ihunqin.fragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.AlertDialog;
@@ -8,6 +9,8 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +23,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.aihunqin.R;
+import com.ihunqin.model.Task;
 
-public class FragmentTask extends Fragment {
+public class FragmentTask extends BaseFragment {
 	TextView taskjindu;
 	TextView taskmind;
 	TextView taskjihuashijian;
@@ -38,6 +42,7 @@ public class FragmentTask extends Fragment {
 		TextView title = (TextView) view.findViewById(R.id.titleTv);
 
 		taskname = (EditText) view.findViewById(R.id.taskname);
+		taskname.setText(((Task) child.get(groupp).get(childp)).title);
 		if (taskname.getText().toString().equals("")) {
 			title.setText("创建新任务");
 		} else {
@@ -49,27 +54,27 @@ public class FragmentTask extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().beginTransaction()
-						.replace(R.id.fragment_container, new FragmentMain())
-						.commit();
+				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
 		taskjihuashijian = (TextView) view.findViewById(R.id.taskjihuashijian);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+		taskjihuashijian.setText(format.format(group.get(groupp)));
 		taskjihuashijian.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Calendar c = Calendar.getInstance();
-				new DatePickerDialog(getActivity(), new OnDateSetListener() {
-
-					@Override
-					public void onDateSet(DatePicker view, int year,
-							int monthOfYear, int dayOfMonth) {
-						taskjihuashijian.setText(year + "年" + (monthOfYear + 1)
-								+ "月" + dayOfMonth + "日");
-					}
-				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
-						.get(Calendar.DAY_OF_MONTH)).show();
+				// Calendar c = Calendar.getInstance();
+				// new DatePickerDialog(getActivity(), new OnDateSetListener() {
+				//
+				// @Override
+				// public void onDateSet(DatePicker view, int year,
+				// int monthOfYear, int dayOfMonth) {
+				// taskjihuashijian.setText(year + "年" + (monthOfYear + 1)
+				// + "月" + dayOfMonth + "日");
+				// }
+				// }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+				// .get(Calendar.DAY_OF_MONTH)).show();
 			}
 		});
 		taskmind = (TextView) view.findViewById(R.id.taskmind);
@@ -95,8 +100,14 @@ public class FragmentTask extends Fragment {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								Toast.makeText(getActivity(), "hahah",
-										Toast.LENGTH_SHORT).show();
+								int yeart = datePicker.getYear();
+								int montht = datePicker.getMonth() + 1;
+								int days = datePicker.getDayOfMonth();
+
+								int hour = timePicker.getCurrentHour();
+								int min = timePicker.getCurrentMinute();
+								taskmind.setText(yeart + "年" + montht + "月"
+										+ days + "日 " + hour + ":" + min);
 							}
 						});
 
@@ -118,6 +129,14 @@ public class FragmentTask extends Fragment {
 					}
 				}).create().show();
 
+			}
+		});
+		TextView btndone = (TextView) view.findViewById(R.id.btndone);
+		btndone.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
 		return view;
