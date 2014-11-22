@@ -11,5 +11,7 @@
     <color name="indicatorview_red">#e31738</color>
     <color name="indicatorview_gray">#837d7f</color>
     <color name="group_gray">#b1a1a1</color>
+    <color name="yiwancheng">#e6e6e6</color>
+    <color name="weiwancheng">#757575</color>
 
 </resources>

@@ -13,8 +13,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -22,6 +28,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
+import android.media.session.PlaybackState.CustomAction;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Xml;
@@ -33,9 +40,11 @@ import android.widget.AbsListView.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
@@ -43,6 +52,7 @@ import android.widget.TextView;
 import com.example.aihunqin.R;
 import com.ihunqin.fragment.FragmentInvitation.TransferIDListener;
 import com.ihunqin.model.Task;
+import com.ihunqin.util.XMLUtil;
 
 public class FragmentWeddingList extends BaseFragment {
 	TextView backbtn;
@@ -54,6 +64,7 @@ public class FragmentWeddingList extends BaseFragment {
 	SharedPreferences preferences;
 	SimpleDateFormat format = null;
 	TransferIDListener mCallback;
+	String curtitle, curstatus;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -125,6 +136,47 @@ public class FragmentWeddingList extends BaseFragment {
 		}
 
 		return xmlpullparser;
+	}
+
+	void setStatus(String title, String status) {
+
+		String filepath = Environment.getExternalStorageDirectory().getPath()
+				+ "/ihunqin/" + "weddingjihua.xml";
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/ihunqin/" + "weddingjihua.xml");
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+		DocumentBuilder db;
+		try {
+			db = dbf.newDocumentBuilder();
+			Document doc = db.parse(file);
+			Element root = doc.getDocumentElement();
+			NodeList nodelist = root.getElementsByTagName("dict");
+			int totalnode = nodelist.getLength();
+			float done = 0.f;
+			for (int i = 0; i < totalnode; i++) {
+				Element node = (Element) nodelist.item(i);
+				if (node.getAttribute("title").equals(title)) {
+					node.setAttribute("status", status);
+				}
+				if (node.getAttribute("status").equals("已完成")) {
+					done++;
+				}
+			}
+			preferences
+					.edit()
+					.putString("jindu", (int) Math.ceil(done / totalnode) + "%")
+					.commit();
+			XMLUtil.filepath = filepath;
+			XMLUtil.saveXML(doc);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -260,6 +312,7 @@ public class FragmentWeddingList extends BaseFragment {
 				ImageView img_mind;
 				ImageView img_beizhu;
 				TextView child_title_tv;
+				ImageView jihuastatus;
 			}
 
 			@Override
@@ -338,8 +391,9 @@ public class FragmentWeddingList extends BaseFragment {
 			}
 
 			@Override
-			public View getChildView(int groupPosition, int childPosition,
-					boolean isLastChild, View convertView, ViewGroup parent) {
+			public View getChildView(final int groupPosition,
+					final int childPosition, boolean isLastChild,
+					View convertView, ViewGroup parent) {
 				ChildHolder childHolder = null;
 				if (convertView == null) {
 					childHolder = new ChildHolder();
@@ -354,6 +408,8 @@ public class FragmentWeddingList extends BaseFragment {
 							.findViewById(R.id.img_mind);
 					childHolder.img_beizhu = (ImageView) convertView
 							.findViewById(R.id.img_beizhu);
+					childHolder.jihuastatus = (ImageView) convertView
+							.findViewById(R.id.jihuastatus);
 					convertView.setTag(childHolder);
 				} else {
 					childHolder = (ChildHolder) convertView.getTag();
@@ -373,8 +429,47 @@ public class FragmentWeddingList extends BaseFragment {
 				} else {
 					childHolder.img_beizhu.setImageResource(R.drawable.des_1);
 				}
+
 				childHolder.child_title_tv.setText(((Task) getChild(
 						groupPosition, childPosition)).title);
+				if (((Task) getChild(groupPosition, childPosition)).status
+						.equals("已完成")) {
+					childHolder.child_title_tv.setTextColor(getResources()
+							.getColor(R.color.yiwancheng));
+					childHolder.img_mind.setImageResource(R.drawable.mind_0);
+					childHolder.img_beizhu.setImageResource(R.drawable.des_0);
+					childHolder.jihuastatus
+							.setImageResource(R.drawable.status_done);
+				} else {
+					childHolder.child_title_tv.setTextColor(getResources()
+							.getColor(R.color.weiwancheng));
+					childHolder.jihuastatus
+							.setImageResource(R.drawable.status_notdone);
+				}
+
+				childHolder.jihuastatus
+						.setOnClickListener(new OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								if (((Task) getChild(groupPosition,
+										childPosition)).status.equals("已完成")) {
+									child.get(groupPosition).get(childPosition).status = "未完成";
+									curstatus = "未完成";
+									((ImageView) v)
+											.setImageResource(R.drawable.status_notdone);
+								} else {
+									curstatus = "已完成";
+									child.get(groupPosition).get(childPosition).status = "已完成";
+									((ImageView) v)
+											.setImageResource(R.drawable.status_done);
+								}
+								setStatus(
+										((Task) getChild(groupPosition,
+												childPosition)).title,
+										curstatus);
+							}
+						});
 				return convertView;
 			}
 
@@ -398,6 +493,7 @@ public class FragmentWeddingList extends BaseFragment {
 				return false;
 			}
 		});
+
 		qindanlist.setOnChildClickListener(new OnChildClickListener() {
 
 			@Override

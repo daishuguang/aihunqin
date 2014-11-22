@@ -15,7 +15,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -38,10 +40,13 @@ public class FragmentTask extends BaseFragment {
 	EditText taskname;
 	TextView backbtn;
 	EditText beizhu;
+	SharedPreferences preferences;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		preferences = getActivity().getSharedPreferences("userinfo",
+				Context.MODE_PRIVATE);
 		final String[] jindus = new String[] { "未完成", "已完成" };
 
 		View view = inflater.inflate(R.layout.fragment_task, container, false);
@@ -148,7 +153,9 @@ public class FragmentTask extends BaseFragment {
 					Document doc = db.parse(file);
 					Element root = doc.getDocumentElement();
 					NodeList nodelist = root.getElementsByTagName("dict");
-					for (int i = 0; i < nodelist.getLength(); i++) {
+					int totalnode = nodelist.getLength();
+					float done = 0.f;
+					for (int i = 0; i < totalnode; i++) {
 						Element node = (Element) nodelist.item(i);
 						if (node.getAttribute("title").equals(
 								((Task) child.get(groupp).get(childp)).title)) {
@@ -158,12 +165,19 @@ public class FragmentTask extends BaseFragment {
 									.toString());
 							node.setAttribute("status", taskjindu.getText()
 									.toString());
-							break;
+						}
+						if (node.getAttribute("status").equals("已完成")) {
+							done++;
 						}
 					}
-
+					preferences
+							.edit()
+							.putString("jindu",
+									(int) Math.ceil(done / totalnode) + "%")
+							.commit();
 					XMLUtil.filepath = filepath;
 					XMLUtil.saveXML(doc);
+
 					getActivity().getSupportFragmentManager().popBackStack();
 
 				} catch (ParserConfigurationException e) {

@@ -122,6 +122,7 @@ public class FragmentMain extends Fragment {
 		// jindu
 		jindu = (TextView) getView().findViewById(R.id.jindu);
 
+		jindu.setText(preferences.getString("jindu", "0%"));
 		qindan = (ImageButton) getView().findViewById(R.id.qindan);
 
 		zuowei = (ImageButton) getView().findViewById(R.id.zuowei);
