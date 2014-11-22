@@ -1,12 +1,20 @@
 package com.ihunqin.fragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -15,6 +23,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +48,7 @@ public class FragmentWeddingList extends BaseFragment {
 	TextView title;
 	TextView rightmenu;
 	ExpandableListView qindanlist;
-	
+
 	ArrayList<String> years = null;
 	SharedPreferences preferences;
 	SimpleDateFormat format = null;
@@ -58,6 +68,60 @@ public class FragmentWeddingList extends BaseFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 
 		super.onActivityCreated(savedInstanceState);
+	}
+
+	private XmlPullParser readFromSD() {
+		String filepath = null;
+		String filename = "weddingjihua.xml";
+		XmlPullParser xmlpullparser = null;
+		if (Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState())) {
+			String foldername = Environment.getExternalStorageDirectory()
+					.getPath() + "/ihunqin/";
+			File folder = new File(foldername);
+			if (folder == null || !folder.exists()) {
+				folder.mkdir();
+			}
+			filepath = foldername + filename;
+			File file = new File(filepath);
+
+			if (file.exists()) {
+				xmlpullparser = Xml.newPullParser();
+				try {
+					xmlpullparser.setFeature(
+							XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					FileInputStream fs = new FileInputStream(filepath);
+					xmlpullparser.setInput(fs, "UTF-8");
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					file.createNewFile();
+
+					InputStream is = getResources().getAssets()
+							.open("task.xml");
+					OutputStream os = new FileOutputStream(file);
+					int len = 0;
+					byte[] bytes = new byte[1024];
+					while ((len = is.read(bytes)) != -1) {
+						os.write(bytes, 0, len);
+
+					}
+					is.close();
+					os.close();
+					xmlpullparser.setInput(is, "UTF-8");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return xmlpullparser;
 	}
 
 	@Override
@@ -103,7 +167,8 @@ public class FragmentWeddingList extends BaseFragment {
 		// .getTime()));
 		ArrayList<Task> childitem = null;
 		Task task = null;
-		XmlResourceParser xml = getResources().getXml(R.xml.task);
+
+		XmlPullParser xml = readFromSD();
 		try {
 			int eventType = xml.getEventType();// 产生第一个事件
 			String key = null;

@@ -60,23 +60,7 @@ public class FragmentTask extends BaseFragment {
 		taskjihuashijian = (TextView) view.findViewById(R.id.taskjihuashijian);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
 		taskjihuashijian.setText(format.format(group.get(groupp)));
-		taskjihuashijian.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// Calendar c = Calendar.getInstance();
-				// new DatePickerDialog(getActivity(), new OnDateSetListener() {
-				//
-				// @Override
-				// public void onDateSet(DatePicker view, int year,
-				// int monthOfYear, int dayOfMonth) {
-				// taskjihuashijian.setText(year + "年" + (monthOfYear + 1)
-				// + "月" + dayOfMonth + "日");
-				// }
-				// }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
-				// .get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
 		taskmind = (TextView) view.findViewById(R.id.taskmind);
 		taskmind.setOnClickListener(new OnClickListener() {
 
