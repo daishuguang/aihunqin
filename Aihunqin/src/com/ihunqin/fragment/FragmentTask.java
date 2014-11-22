@@ -173,7 +173,7 @@ public class FragmentTask extends BaseFragment {
 					preferences
 							.edit()
 							.putString("jindu",
-									(int) Math.ceil(done / totalnode) + "%")
+									(int)Math.floor((done / totalnode) * 100) + "%")
 							.commit();
 					XMLUtil.filepath = filepath;
 					XMLUtil.saveXML(doc);
