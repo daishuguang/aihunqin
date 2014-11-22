@@ -313,6 +313,7 @@ public class FragmentWeddingList extends BaseFragment {
 				ImageView img_beizhu;
 				TextView child_title_tv;
 				ImageView jihuastatus;
+				ImageView guoqi;
 			}
 
 			@Override
@@ -410,10 +411,15 @@ public class FragmentWeddingList extends BaseFragment {
 							.findViewById(R.id.img_beizhu);
 					childHolder.jihuastatus = (ImageView) convertView
 							.findViewById(R.id.jihuastatus);
+					childHolder.guoqi = (ImageView) convertView
+							.findViewById(R.id.guoqi);
 					convertView.setTag(childHolder);
 				} else {
 					childHolder = (ChildHolder) convertView.getTag();
 				}
+				/**
+				 * mind
+				 */
 				if (((Task) getChild(groupPosition, childPosition)).mind
 						.equals("无需提醒")
 						|| ((Task) getChild(groupPosition, childPosition)).mind
@@ -423,21 +429,36 @@ public class FragmentWeddingList extends BaseFragment {
 					childHolder.img_mind.setImageResource(R.drawable.mind_1);
 				}
 
+				/**
+				 * beizhu
+				 */
 				if (((Task) getChild(groupPosition, childPosition)).describe
 						.equals("")) {
 					childHolder.img_beizhu.setImageResource(R.drawable.des_0);
 				} else {
 					childHolder.img_beizhu.setImageResource(R.drawable.des_1);
 				}
+				/**
+				 * guoqi
+				 */
+				Date d = (Date) getGroup(groupPosition);
+				Calendar catemp = new GregorianCalendar();
+				catemp.setTime(d);
+				catemp.add(Calendar.DATE, 1);
+				d = catemp.getTime();
+				if (Calendar.getInstance().getTime().after(d)) {
+					childHolder.guoqi.setVisibility(View.VISIBLE);
+				} else {
+					childHolder.guoqi.setVisibility(View.INVISIBLE);
+				}
 
-				childHolder.child_title_tv.setText(((Task) getChild(
-						groupPosition, childPosition)).title);
+				/**
+				 * wancheng
+				 */
 				if (((Task) getChild(groupPosition, childPosition)).status
 						.equals("已完成")) {
 					childHolder.child_title_tv.setTextColor(getResources()
 							.getColor(R.color.yiwancheng));
-					childHolder.img_mind.setImageResource(R.drawable.mind_0);
-					childHolder.img_beizhu.setImageResource(R.drawable.des_0);
 					childHolder.jihuastatus
 							.setImageResource(R.drawable.status_done);
 				} else {
@@ -446,6 +467,8 @@ public class FragmentWeddingList extends BaseFragment {
 					childHolder.jihuastatus
 							.setImageResource(R.drawable.status_notdone);
 				}
+				childHolder.child_title_tv.setText(((Task) getChild(
+						groupPosition, childPosition)).title);
 
 				childHolder.jihuastatus
 						.setOnClickListener(new OnClickListener() {
@@ -458,18 +481,33 @@ public class FragmentWeddingList extends BaseFragment {
 									curstatus = "未完成";
 									((ImageView) v)
 											.setImageResource(R.drawable.status_notdone);
+
+									((TextView) ((View) v.getParent())
+											.findViewById(R.id.child_title_tv))
+											.setTextColor(getResources()
+													.getColor(
+															R.color.weiwancheng));
+
 								} else {
 									curstatus = "已完成";
 									child.get(groupPosition).get(childPosition).status = "已完成";
 									((ImageView) v)
 											.setImageResource(R.drawable.status_done);
+
+									((TextView) ((View) v.getParent())
+											.findViewById(R.id.child_title_tv))
+											.setTextColor(getResources()
+													.getColor(
+															R.color.yiwancheng));
 								}
 								setStatus(
 										((Task) getChild(groupPosition,
 												childPosition)).title,
 										curstatus);
+
 							}
 						});
+
 				return convertView;
 			}
 
