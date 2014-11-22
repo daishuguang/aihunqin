@@ -8,12 +8,14 @@
     android:paddingRight="10dp" >
 
     <ImageView
+        android:id="@+id/img_mind"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@null"
         android:src="@drawable/mind_0" />
 
     <ImageView
+        android:id="@+id/img_beizhu"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="3dp"

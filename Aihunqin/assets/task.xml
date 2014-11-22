@@ -48,7 +48,7 @@
        拍照当天难免会紧张，当作去游玩啦！调整好心情，自然会拍得漂亮喽！为了让自己保持状态，可以带上好吃的巧克力，心情和身体状态都会维护的很好。" describe="" status="未完成"/>	
 	</countdown>
 	<countdown key="threeMonthPlan">
-		<dict title="挑选婚庆公司" hmind="" prompt="" describe="" status="未完成"/>
+		<dict title="挑选婚庆公司" mind="" prompt="" describe="" status="未完成"/>
 		<dict title="选定新人礼服" mind="" prompt="新郎礼服
        建议您在婚期前3个月时挑选好新郎礼服。
        新郎礼服一般是新人们在商场挑选购买。主要包含西服、衬衫、领带还有皮鞋。需要提醒您最好准备2件衬衫，这样可以在接亲和婚宴时各穿一件。

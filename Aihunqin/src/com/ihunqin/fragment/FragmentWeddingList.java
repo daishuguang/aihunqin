@@ -35,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
@@ -84,9 +85,8 @@ public class FragmentWeddingList extends BaseFragment {
 			}
 			filepath = foldername + filename;
 			File file = new File(filepath);
-
+			xmlpullparser = Xml.newPullParser();
 			if (file.exists()) {
-				xmlpullparser = Xml.newPullParser();
 				try {
 					xmlpullparser.setFeature(
 							XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -112,7 +112,10 @@ public class FragmentWeddingList extends BaseFragment {
 					}
 					is.close();
 					os.close();
-					xmlpullparser.setInput(is, "UTF-8");
+					xmlpullparser.setFeature(
+							XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					FileInputStream fis = new FileInputStream(filepath);
+					xmlpullparser.setInput(fis, "UTF-8");
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (XmlPullParserException e) {
@@ -254,6 +257,8 @@ public class FragmentWeddingList extends BaseFragment {
 			}
 
 			class ChildHolder {
+				ImageView img_mind;
+				ImageView img_beizhu;
 				TextView child_title_tv;
 			}
 
@@ -345,9 +350,28 @@ public class FragmentWeddingList extends BaseFragment {
 							80));
 					childHolder.child_title_tv = (TextView) convertView
 							.findViewById(R.id.child_title_tv);
+					childHolder.img_mind = (ImageView) convertView
+							.findViewById(R.id.img_mind);
+					childHolder.img_beizhu = (ImageView) convertView
+							.findViewById(R.id.img_beizhu);
 					convertView.setTag(childHolder);
 				} else {
 					childHolder = (ChildHolder) convertView.getTag();
+				}
+				if (((Task) getChild(groupPosition, childPosition)).mind
+						.equals("Œﬁ–ËÃ·–—")
+						|| ((Task) getChild(groupPosition, childPosition)).mind
+								.equals("")) {
+					childHolder.img_mind.setImageResource(R.drawable.mind_0);
+				} else {
+					childHolder.img_mind.setImageResource(R.drawable.mind_1);
+				}
+
+				if (((Task) getChild(groupPosition, childPosition)).describe
+						.equals("")) {
+					childHolder.img_beizhu.setImageResource(R.drawable.des_0);
+				} else {
+					childHolder.img_beizhu.setImageResource(R.drawable.des_1);
 				}
 				childHolder.child_title_tv.setText(((Task) getChild(
 						groupPosition, childPosition)).title);

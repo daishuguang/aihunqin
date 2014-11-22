@@ -134,6 +134,7 @@
             android:textSize="18sp" />
 
         <EditText
+            android:id="@+id/beizhu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"

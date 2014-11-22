@@ -1,17 +1,23 @@
 package com.ihunqin.fragment;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,10 +26,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.aihunqin.R;
 import com.ihunqin.model.Task;
+import com.ihunqin.util.XMLUtil;
 
 public class FragmentTask extends BaseFragment {
 	TextView taskjindu;
@@ -31,6 +37,7 @@ public class FragmentTask extends BaseFragment {
 	TextView taskjihuashijian;
 	EditText taskname;
 	TextView backbtn;
+	EditText beizhu;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +69,11 @@ public class FragmentTask extends BaseFragment {
 		taskjihuashijian.setText(format.format(group.get(groupp)));
 
 		taskmind = (TextView) view.findViewById(R.id.taskmind);
+		if (((Task) child.get(groupp).get(childp)).mind.equals("")) {
+			taskmind.setText("无需提醒");
+		} else
+			taskmind.setText(((Task) child.get(groupp).get(childp)).mind);
+
 		taskmind.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -90,8 +102,9 @@ public class FragmentTask extends BaseFragment {
 
 								int hour = timePicker.getCurrentHour();
 								int min = timePicker.getCurrentMinute();
+								String minstr = min < 10 ? "0" + min : min + "";
 								taskmind.setText(yeart + "年" + montht + "月"
-										+ days + "日 " + hour + ":" + min);
+										+ days + "日 " + hour + ":" + minstr);
 							}
 						});
 
@@ -99,6 +112,7 @@ public class FragmentTask extends BaseFragment {
 			}
 		});
 		taskjindu = (TextView) view.findViewById(R.id.taskjindu);
+		taskjindu.setText(((Task) child.get(groupp).get(childp)).status);
 		taskjindu.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -112,15 +126,54 @@ public class FragmentTask extends BaseFragment {
 						taskjindu.setText(jindus[which]);
 					}
 				}).create().show();
-
 			}
 		});
+		beizhu = (EditText) view.findViewById(R.id.beizhu);
+		beizhu.setText(((Task) child.get(groupp).get(childp)).describe);
 		TextView btndone = (TextView) view.findViewById(R.id.btndone);
 		btndone.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				String filepath = Environment.getExternalStorageDirectory()
+						.getPath() + "/ihunqin/" + "weddingjihua.xml";
+				File file = new File(Environment.getExternalStorageDirectory()
+						.getPath() + "/ihunqin/" + "weddingjihua.xml");
+				DocumentBuilderFactory dbf = DocumentBuilderFactory
+						.newInstance();
+
+				DocumentBuilder db;
+				try {
+					db = dbf.newDocumentBuilder();
+					Document doc = db.parse(file);
+					Element root = doc.getDocumentElement();
+					NodeList nodelist = root.getElementsByTagName("dict");
+					for (int i = 0; i < nodelist.getLength(); i++) {
+						Element node = (Element) nodelist.item(i);
+						if (node.getAttribute("title").equals(
+								((Task) child.get(groupp).get(childp)).title)) {
+							node.setAttribute("mind", taskmind.getText()
+									.toString());
+							node.setAttribute("describe", beizhu.getText()
+									.toString());
+							node.setAttribute("status", taskjindu.getText()
+									.toString());
+							break;
+						}
+					}
+
+					XMLUtil.filepath = filepath;
+					XMLUtil.saveXML(doc);
+					getActivity().getSupportFragmentManager().popBackStack();
+
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				} catch (SAXException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 			}
 		});
 		return view;
