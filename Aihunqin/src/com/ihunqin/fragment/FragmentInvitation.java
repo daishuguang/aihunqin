@@ -147,12 +147,16 @@ public class FragmentInvitation extends Fragment {
 					return;
 				}
 				try {
-					invitationDatas = PullXmlService.readXml(getActivity()
-							.openFileInput(FILENAME));
+					if ((new File(FILENAME)).exists()) {
+						invitationDatas = PullXmlService.readXml(getActivity()
+								.openFileInput(FILENAME));
+					} else {
+						invitationDatas = null;
+					}
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				if (invitationDatas.size() < 3) {
+				if (invitationDatas == null || invitationDatas.size() < 3) {
 
 					// register or login
 
@@ -279,7 +283,7 @@ public class FragmentInvitation extends Fragment {
 													deleteToXml(pos);
 													invitationDatas.remove(pos);
 													adapter.notifyDataSetChanged();
-													
+
 												}
 											}).setNegativeButton("È¡Ïû", null)
 									.create().show();

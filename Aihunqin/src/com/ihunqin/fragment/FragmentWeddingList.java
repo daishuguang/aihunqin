@@ -27,8 +27,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.XmlResourceParser;
-import android.media.session.PlaybackState.CustomAction;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Xml;
@@ -37,16 +35,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aihunqin.R;
@@ -544,6 +538,7 @@ public class FragmentWeddingList extends BaseFragment {
 				return true;
 			}
 		});
+		
 		int qindanlen = qindanlist.getCount();
 		for (int i = 0; i < qindanlen; i++) {
 			qindanlist.expandGroup(i);
