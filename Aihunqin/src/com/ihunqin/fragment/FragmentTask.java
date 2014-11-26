@@ -2,7 +2,11 @@ package com.ihunqin.fragment;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +19,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -28,6 +35,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.aihunqin.R;
 import com.ihunqin.model.Task;
@@ -40,7 +48,67 @@ public class FragmentTask extends BaseFragment {
 	EditText taskname;
 	TextView backbtn;
 	EditText beizhu;
+	TextView rightmenu;
 	SharedPreferences preferences;
+	int yearnew = -1, monthnew, daynew;
+
+	private float calPert(Element root) {
+		float done = 0.f;
+		NodeList nodelist = root.getElementsByTagName("dict");
+		int totalnode = nodelist.getLength();
+		for (int i = 0; i < totalnode; i++) {
+			Element node = (Element) nodelist.item(i);
+			if (node.getAttribute("status").equals("已完成")) {
+				done++;
+			}
+		}
+		return done / totalnode;
+	}
+
+	private void deleteTask() {
+		String filepath = Environment.getExternalStorageDirectory().getPath()
+				+ "/ihunqin/" + "weddingjihua.xml";
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/ihunqin/" + "weddingjihua.xml");
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+		DocumentBuilder db;
+		try {
+			db = dbf.newDocumentBuilder();
+			Document doc = db.parse(file);
+			Element root = doc.getDocumentElement();
+			NodeList nodelist = root.getElementsByTagName("dict");
+			int totalnode = nodelist.getLength();
+			float done = 0.f;
+			for (int i = 0; i < totalnode; i++) {
+				Element node = (Element) nodelist.item(i);
+				if (node.getAttribute("title").equals(
+						((Task) child.get(groupp).get(childp)).title)) {
+					node.getParentNode().removeChild(node);
+				}
+				if (node.getAttribute("status").equals("已完成")) {
+					done++;
+				}
+			}
+			preferences
+					.edit()
+					.putString("jindu",
+							(int) Math.floor((done / totalnode) * 100) + "%")
+					.commit();
+			XMLUtil.filepath = filepath;
+			XMLUtil.saveXML(doc);
+
+			getActivity().getSupportFragmentManager().popBackStack();
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +121,37 @@ public class FragmentTask extends BaseFragment {
 
 		TextView title = (TextView) view.findViewById(R.id.titleTv);
 
+		rightmenu = (TextView) view.findViewById(R.id.rightmenu);
+		rightmenu.setText("删除任务");
+		rightmenu.setVisibility(View.VISIBLE);
+		rightmenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!newTask) {
+					AlertDialog.Builder builder = new Builder(getActivity());
+					builder.setMessage("确定要删除?")
+							.setPositiveButton("确定",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											deleteTask();
+										}
+									}).setNegativeButton("取消", null).create()
+							.show();
+				} else {
+					getActivity().getSupportFragmentManager().popBackStack();
+				}
+			}
+		});
+
 		taskname = (EditText) view.findViewById(R.id.taskname);
-		taskname.setText(((Task) child.get(groupp).get(childp)).title);
+		if (!newTask)
+			taskname.setText(((Task) child.get(groupp).get(childp)).title);
+
 		if (taskname.getText().toString().equals("")) {
 			title.setText("创建新任务");
 		} else {
@@ -71,13 +168,39 @@ public class FragmentTask extends BaseFragment {
 		});
 		taskjihuashijian = (TextView) view.findViewById(R.id.taskjihuashijian);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
-		taskjihuashijian.setText(format.format(group.get(groupp)));
+		if (!newTask)
+			taskjihuashijian.setText(format.format(group.get(groupp)));
+		else
+			taskjihuashijian.setOnClickListener(new OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
+					Calendar c = Calendar.getInstance();
+					new DatePickerDialog(getActivity(),
+							new OnDateSetListener() {
+
+								@Override
+								public void onDateSet(DatePicker view,
+										int year, int monthOfYear,
+										int dayOfMonth) {
+									taskjihuashijian.setText(year + "年"
+											+ (monthOfYear + 1) + "月"
+											+ dayOfMonth + "日");
+									yearnew = year;
+									monthnew = monthOfYear + 1;
+									daynew = dayOfMonth;
+								}
+							}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+									.get(Calendar.DAY_OF_MONTH)).show();
+				}
+			});
 		taskmind = (TextView) view.findViewById(R.id.taskmind);
-		if (((Task) child.get(groupp).get(childp)).mind.equals("")) {
-			taskmind.setText("无需提醒");
-		} else
-			taskmind.setText(((Task) child.get(groupp).get(childp)).mind);
+		if (!newTask) {
+			if (((Task) child.get(groupp).get(childp)).mind.equals("")) {
+				taskmind.setText("无需提醒");
+			} else
+				taskmind.setText(((Task) child.get(groupp).get(childp)).mind);
+		}
 
 		taskmind.setOnClickListener(new OnClickListener() {
 
@@ -117,7 +240,8 @@ public class FragmentTask extends BaseFragment {
 			}
 		});
 		taskjindu = (TextView) view.findViewById(R.id.taskjindu);
-		taskjindu.setText(((Task) child.get(groupp).get(childp)).status);
+		if (!newTask)
+			taskjindu.setText(((Task) child.get(groupp).get(childp)).status);
 		taskjindu.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -134,12 +258,14 @@ public class FragmentTask extends BaseFragment {
 			}
 		});
 		beizhu = (EditText) view.findViewById(R.id.beizhu);
-		beizhu.setText(((Task) child.get(groupp).get(childp)).describe);
+		if (!newTask)
+			beizhu.setText(((Task) child.get(groupp).get(childp)).describe);
 		TextView btndone = (TextView) view.findViewById(R.id.btndone);
 		btndone.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+
 				String filepath = Environment.getExternalStorageDirectory()
 						.getPath() + "/ihunqin/" + "weddingjihua.xml";
 				File file = new File(Environment.getExternalStorageDirectory()
@@ -152,29 +278,105 @@ public class FragmentTask extends BaseFragment {
 					db = dbf.newDocumentBuilder();
 					Document doc = db.parse(file);
 					Element root = doc.getDocumentElement();
-					NodeList nodelist = root.getElementsByTagName("dict");
-					int totalnode = nodelist.getLength();
 					float done = 0.f;
-					for (int i = 0; i < totalnode; i++) {
-						Element node = (Element) nodelist.item(i);
-						if (node.getAttribute("title").equals(
-								((Task) child.get(groupp).get(childp)).title)) {
-							node.setAttribute("mind", taskmind.getText()
-									.toString());
-							node.setAttribute("describe", beizhu.getText()
-									.toString());
-							node.setAttribute("status", taskjindu.getText()
-									.toString());
+					if (!newTask) {
+						NodeList nodelist = root.getElementsByTagName("dict");
+						int totalnode = nodelist.getLength();
+						for (int i = 0; i < totalnode; i++) {
+							Element node = (Element) nodelist.item(i);
+							if (node.getAttribute("title")
+									.equals(((Task) child.get(groupp).get(
+											childp)).title)) {
+								node.setAttribute("mind", taskmind.getText()
+										.toString());
+								node.setAttribute("describe", beizhu.getText()
+										.toString());
+								node.setAttribute("status", taskjindu.getText()
+										.toString());
+							}
+							if (node.getAttribute("status").equals("已完成")) {
+								done++;
+							}
 						}
-						if (node.getAttribute("status").equals("已完成")) {
-							done++;
-						}
+						preferences
+								.edit()
+								.putString(
+										"jindu",
+										(int) Math
+												.floor((done / totalnode) * 100)
+												+ "%").commit();
 					}
-					preferences
-							.edit()
-							.putString("jindu",
-									(int)Math.floor((done / totalnode) * 100) + "%")
-							.commit();
+					if (newTask) {
+						String taskname_new = taskname.getText().toString();
+						if (taskname_new.equals("")) {
+							Toast.makeText(getActivity(), "任务名称不能为空",
+									Toast.LENGTH_SHORT).show();
+							return;
+						}
+						if (yearnew == -1) {
+							Toast.makeText(getActivity(), "必须输入计划的时间",
+									Toast.LENGTH_SHORT).show();
+							return;
+						}
+						SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd");
+						Date datenew = f2.parse(yearnew + "-" + monthnew + "-"
+								+ daynew);
+
+						int flag = 0;
+						for (int i = 0; i < group.size(); i++, flag++) {
+							if (datenew.compareTo(group.get(i)) == 0) {
+								NodeList nodelist = root
+										.getElementsByTagName("countdown");
+								for (int j = 0; j < nodelist.getLength(); j++) {
+									Element ele = (Element) nodelist.item(j);
+									if (ele.getAttribute("key").equals(
+											tags.get(i))) {
+										Node countdown = nodelist.item(j);
+										Element dict = doc
+												.createElement("dict");
+										dict.setAttribute("title", taskname_new);
+										dict.setAttribute("mind", taskmind
+												.getText().toString());
+										dict.setAttribute("describe", beizhu
+												.getText().toString());
+										dict.setAttribute("status", taskjindu
+												.getText().toString());
+										countdown.appendChild(dict);
+										break;
+									}
+								}
+								break;
+							}
+						}
+
+						if (flag == group.size()) {
+							long weddingdate = Long.parseLong(preferences
+									.getString("setweddingdate", ""
+											+ Calendar.getInstance().getTime()
+													.getTime()));
+							long diff = weddingdate - datenew.getTime();
+							long days = diff / (24 * 60 * 60 * 1000);
+							Element countdown = doc.createElement("countdown");
+							countdown.setAttribute("key", days + "");
+							Element dict = doc.createElement("dict");
+							dict.setAttribute("title", taskname_new);
+							dict.setAttribute("mind", taskmind.getText()
+									.toString());
+							dict.setAttribute("describe", beizhu.getText()
+									.toString());
+							dict.setAttribute("status", taskjindu.getText()
+									.toString());
+							countdown.appendChild(dict);
+							root.appendChild(countdown);
+						}
+						preferences
+								.edit()
+								.putString(
+										"jindu",
+										(int) Math.floor(calPert(root) * 100)
+												+ "%").commit();
+					}
+
 					XMLUtil.filepath = filepath;
 					XMLUtil.saveXML(doc);
 
@@ -185,6 +387,8 @@ public class FragmentTask extends BaseFragment {
 				} catch (SAXException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 

@@ -38,6 +38,7 @@ import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
@@ -160,7 +161,7 @@ public class FragmentWeddingList extends BaseFragment {
 			preferences
 					.edit()
 					.putString("jindu",
-							(int)Math.floor((done / totalnode) * 100) + "%")
+							(int) Math.floor((done / totalnode) * 100) + "%")
 					.commit();
 			XMLUtil.filepath = filepath;
 			XMLUtil.saveXML(doc);
@@ -174,13 +175,35 @@ public class FragmentWeddingList extends BaseFragment {
 
 	}
 
+	private void sortData() {
+		int len = group.size();
+		for (int i = 0; i < len - 1; i++) {
+			for (int j = i + 1; j < len; j++) {
+				if (group.get(i).after(group.get(j))) {
+					Date group_temp = group.get(i);
+					String year_temp = years.get(i);
+					String tags_temp = tags.get(i);
+					ArrayList<Task> child_temp = child.get(i);
+					group.set(i, group.get(j));
+					group.set(j, group_temp);
+					years.set(i, years.get(j));
+					years.set(j, year_temp);
+					tags.set(i, tags.get(j));
+					tags.set(j, tags_temp);
+					child.set(i, child.get(j));
+					child.set(j, child_temp);
+				}
+			}
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_weddinglist, container,
 				false);
-
+		newTask = false;
 		backbtn = (TextView) view.findViewById(R.id.back);
 		backbtn.setVisibility(View.VISIBLE);
 		backbtn.setOnClickListener(new OnClickListener() {
@@ -194,9 +217,17 @@ public class FragmentWeddingList extends BaseFragment {
 		});
 		title = (TextView) view.findViewById(R.id.titleTv);
 		title.setText("婚礼清单");
-		// rightmenu = (TextView) view.findViewById(R.id.rightmenu);
-		// rightmenu.setVisibility(View.VISIBLE);
-		// rightmenu.setText("新建任务");
+		rightmenu = (TextView) view.findViewById(R.id.rightmenu);
+		rightmenu.setVisibility(View.VISIBLE);
+		rightmenu.setText("新建任务");
+		rightmenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				newTask = true;
+				mCallback.onItemClicked("", "task");
+			}
+		});
 
 		preferences = getActivity().getSharedPreferences("userinfo",
 				Context.MODE_PRIVATE);
@@ -227,6 +258,7 @@ public class FragmentWeddingList extends BaseFragment {
 				case XmlPullParser.START_DOCUMENT:// 判断当前事件是否是文档开始事件
 					child = new ArrayList<ArrayList<Task>>();
 					group = new ArrayList<Date>();
+					tags = new ArrayList<String>();
 					years = new ArrayList<String>();
 					break;
 				case XmlPullParser.START_TAG:
@@ -257,7 +289,11 @@ public class FragmentWeddingList extends BaseFragment {
 							calendar.add(Calendar.DAY_OF_WEEK, -1);
 						} else if (key.equals("theDay")) {
 
+						} else {
+							calendar.add(Calendar.DAY_OF_YEAR,
+									-Integer.parseInt(key));
 						}
+						tags.add(key);
 						Date d = calendar.getTime();
 						// String datestr = format.format(calendar.getTime());
 						group.add(d);
@@ -294,6 +330,7 @@ public class FragmentWeddingList extends BaseFragment {
 			e.printStackTrace();
 		}
 
+		sortData();
 		qindanlist = (ExpandableListView) view.findViewById(R.id.qindanlist);
 		ExpandableListAdapter adapter = new BaseExpandableListAdapter() {
 
@@ -538,7 +575,7 @@ public class FragmentWeddingList extends BaseFragment {
 				return true;
 			}
 		});
-		
+
 		int qindanlen = qindanlist.getCount();
 		for (int i = 0; i < qindanlen; i++) {
 			qindanlist.expandGroup(i);

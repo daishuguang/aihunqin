@@ -12,4 +12,6 @@ public class BaseFragment extends Fragment {
 	static int childp;
 	static ArrayList<Date> group = null;
 	static ArrayList<ArrayList<Task>> child = null;
+	static boolean newTask = false;
+	static ArrayList<String> tags = null;
 }
