@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -59,6 +60,8 @@ public class FragmentTask extends BaseFragment {
 	AlarmManager alarmManager;
 	Calendar minddate;
 	PendingIntent pi;
+	DatePicker datePicker;
+	TimePicker timePicker;
 
 	private float calPert(Element root) {
 		float done = 0.f;
@@ -217,12 +220,14 @@ public class FragmentTask extends BaseFragment {
 				View view = View.inflate(getActivity(),
 						R.layout.date_time_picker, null);
 
-				final DatePicker datePicker = (DatePicker) view
+				datePicker = (DatePicker) view
 						.findViewById(R.id.act_date_picker);
-				final TimePicker timePicker = (TimePicker) view
+				timePicker = (TimePicker) view
 						.findViewById(R.id.act_time_picker);
 
 				timePicker.setIs24HourView(true);
+				timePicker.setCurrentHour(Calendar.getInstance().get(
+						Calendar.HOUR_OF_DAY));
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
 				builder.setTitle("选择日期与时间");
@@ -253,11 +258,16 @@ public class FragmentTask extends BaseFragment {
 								pi = PendingIntent.getBroadcast(getActivity(),
 										0, intent, 0);
 								minddate = Calendar.getInstance();
-								minddate.setTimeInMillis(System
-										.currentTimeMillis());
-								minddate.set(Calendar.YEAR, yeart);
-								minddate.set(Calendar.MONTH, montht - 1);
-								minddate.set(Calendar.DAY_OF_MONTH, days);
+								SimpleDateFormat format = new SimpleDateFormat(
+										"yyyy-MM-dd");
+								Date d = null;
+								try {
+									d = format.parse(yeart + "-" + montht + "-"
+											+ days);
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+								minddate.setTime(d);
 								minddate.set(Calendar.HOUR_OF_DAY, hour);
 								minddate.set(Calendar.MINUTE, min);
 							}
@@ -408,6 +418,8 @@ public class FragmentTask extends BaseFragment {
 					XMLUtil.saveXML(doc);
 
 					if (alarmManager != null) {
+						minddate.getTimeInMillis();
+						System.currentTimeMillis();
 						alarmManager.set(AlarmManager.RTC_WAKEUP,
 								minddate.getTimeInMillis(), pi);
 					}
