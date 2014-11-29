@@ -79,20 +79,25 @@
         <activity android:name="com.ihunqin.activity.RegisterActivity" >
         </activity>
         <activity android:name="com.ihunqin.activity.SplashActivity" >
-        </activity>
-        <activity android:name="com.ihunqin.test.AlarmTest" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.ihunqin.test.AlarmTest" >
+        </activity>
         <activity android:name="com.ihunqin.activity.AlarmActivity" >
         </activity>
         <activity android:name="com.ihunqin.activity.AdActivity" >
         </activity>
 
-        <receiver android:name="com.ihunqin.receiver.AlarmReceiver" >
+        <receiver
+            android:name="com.ihunqin.receiver.AlarmReceiver"
+            android:process=":newinst" >
+            <intent-filter>
+                <action android:name="MYALARM" />
+            </intent-filter>
         </receiver>
 
         <provider

@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.example.aihunqin.R;
 import com.ihunqin.activity.AlarmActivity;
 import com.ihunqin.model.Task;
+import com.ihunqin.test.AlarmTest;
 import com.ihunqin.util.XMLUtil;
 
 public class FragmentTask extends BaseFragment {
@@ -242,9 +243,14 @@ public class FragmentTask extends BaseFragment {
 										+ days + "»’ " + hour + ":" + minstr);
 								alarmManager = (AlarmManager) getActivity()
 										.getSystemService(Context.ALARM_SERVICE);
-								Intent intent = new Intent(getActivity(),
-										AlarmActivity.class);
-								pi = PendingIntent.getActivity(getActivity(),
+								// Intent intent = new Intent(getActivity(),
+								// AlarmActivity.class);
+								// pi = PendingIntent.getActivity(getActivity(),
+								// 0, intent, 0);
+								Intent intent = new Intent("MYALARM");
+								intent.putExtra("msg", taskname.getText()
+										.toString());
+								pi = PendingIntent.getBroadcast(getActivity(),
 										0, intent, 0);
 								minddate = Calendar.getInstance();
 								// minddate.setTimeInMillis(System
@@ -252,7 +258,7 @@ public class FragmentTask extends BaseFragment {
 								minddate.set(Calendar.YEAR, yeart);
 								minddate.set(Calendar.MONTH, montht);
 								minddate.set(Calendar.DAY_OF_MONTH, days);
-								minddate.set(Calendar.HOUR, hour);
+								minddate.set(Calendar.HOUR_OF_DAY, hour);
 								minddate.set(Calendar.MINUTE, min);
 							}
 						});

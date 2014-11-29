@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.baidu.navi.location.am;
 import com.example.aihunqin.R;
 import com.ihunqin.activity.AlarmActivity;
 import com.ihunqin.receiver.AlarmReceiver;
@@ -45,20 +46,34 @@ public class AlarmTest extends Activity {
 							public void onTimeSet(TimePicker view,
 									int hourOfDay, int minute) {
 
-								Intent intent = new Intent(AlarmTest.this,
-										AlarmReceiver.class);
+								// Intent intent = new Intent(AlarmTest.this,
+								// AlarmReceiver.class);
+								//
+								// PendingIntent pi = PendingIntent.getActivity(
+								// AlarmTest.this, 0, intent, 0);
+								//
+								// Calendar c = Calendar.getInstance();
+								// c.setTimeInMillis(System.currentTimeMillis());
+								// c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+								// c.set(Calendar.MINUTE, minute);
+								// aManager.set(AlarmManager.RTC_WAKEUP,
+								// c.getTimeInMillis(), pi);
+								// Toast.makeText(getApplication(), "hahah",
+								// Toast.LENGTH_SHORT).show();
 
-								PendingIntent pi = PendingIntent.getActivity(
+								Intent intent = new Intent("MYALARM");
+								intent.putExtra("msg", "ƒ„∏√¥ÚΩ¥”Õ¡À");
+								PendingIntent pi = PendingIntent.getBroadcast(
 										AlarmTest.this, 0, intent, 0);
-
 								Calendar c = Calendar.getInstance();
 								c.setTimeInMillis(System.currentTimeMillis());
-								c.set(Calendar.HOUR, hourOfDay);
+								c.set(Calendar.HOUR_OF_DAY, hourOfDay);
 								c.set(Calendar.MINUTE, minute);
+								c.getTimeInMillis();
+								System.currentTimeMillis();
 								aManager.set(AlarmManager.RTC_WAKEUP,
-										c.getTimeInMillis(), pi);
-								Toast.makeText(getApplication(), "hahah",
-										Toast.LENGTH_SHORT).show();
+										c.getTimeInMillis() + 3000, pi);
+
 							}
 						},
 						AlarmTest.this.currentTime.get(Calendar.HOUR_OF_DAY),
