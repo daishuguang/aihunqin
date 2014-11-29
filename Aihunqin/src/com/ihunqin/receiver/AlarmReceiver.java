@@ -19,7 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		// context.startActivity(i);
 
 		String msg = intent.getStringExtra("msg");
-		Toast.makeText(context, "婚礼任务提醒:" + msg, Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "婚礼任务提醒:" + msg, Toast.LENGTH_LONG).show();
 		vibrator = (Vibrator) context
 				.getSystemService(Service.VIBRATOR_SERVICE);
 		vibrator.vibrate(5000);
