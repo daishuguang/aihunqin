@@ -253,10 +253,10 @@ public class FragmentTask extends BaseFragment {
 								pi = PendingIntent.getBroadcast(getActivity(),
 										0, intent, 0);
 								minddate = Calendar.getInstance();
-								// minddate.setTimeInMillis(System
-								// .currentTimeMillis());
+								minddate.setTimeInMillis(System
+										.currentTimeMillis());
 								minddate.set(Calendar.YEAR, yeart);
-								minddate.set(Calendar.MONTH, montht);
+								minddate.set(Calendar.MONTH, montht - 1);
 								minddate.set(Calendar.DAY_OF_MONTH, days);
 								minddate.set(Calendar.HOUR_OF_DAY, hour);
 								minddate.set(Calendar.MINUTE, min);
@@ -407,9 +407,10 @@ public class FragmentTask extends BaseFragment {
 					XMLUtil.filepath = filepath;
 					XMLUtil.saveXML(doc);
 
-					if (alarmManager != null)
+					if (alarmManager != null) {
 						alarmManager.set(AlarmManager.RTC_WAKEUP,
 								minddate.getTimeInMillis(), pi);
+					}
 					getActivity().getSupportFragmentManager().popBackStack();
 
 				} catch (ParserConfigurationException e) {
