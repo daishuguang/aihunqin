@@ -18,12 +18,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.AlertDialog.Builder;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,6 +41,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.aihunqin.R;
+import com.ihunqin.activity.AlarmActivity;
 import com.ihunqin.model.Task;
 import com.ihunqin.util.XMLUtil;
 
@@ -51,6 +55,9 @@ public class FragmentTask extends BaseFragment {
 	TextView rightmenu;
 	SharedPreferences preferences;
 	int yearnew = -1, monthnew, daynew;
+	AlarmManager alarmManager;
+	Calendar minddate;
+	PendingIntent pi;
 
 	private float calPert(Element root) {
 		float done = 0.f;
@@ -233,6 +240,20 @@ public class FragmentTask extends BaseFragment {
 								String minstr = min < 10 ? "0" + min : min + "";
 								taskmind.setText(yeart + "Äê" + montht + "ÔÂ"
 										+ days + "ÈÕ " + hour + ":" + minstr);
+								alarmManager = (AlarmManager) getActivity()
+										.getSystemService(Context.ALARM_SERVICE);
+								Intent intent = new Intent(getActivity(),
+										AlarmActivity.class);
+								pi = PendingIntent.getActivity(getActivity(),
+										0, intent, 0);
+								minddate = Calendar.getInstance();
+								// minddate.setTimeInMillis(System
+								// .currentTimeMillis());
+								minddate.set(Calendar.YEAR, yeart);
+								minddate.set(Calendar.MONTH, montht);
+								minddate.set(Calendar.DAY_OF_MONTH, days);
+								minddate.set(Calendar.HOUR, hour);
+								minddate.set(Calendar.MINUTE, min);
 							}
 						});
 
@@ -380,6 +401,9 @@ public class FragmentTask extends BaseFragment {
 					XMLUtil.filepath = filepath;
 					XMLUtil.saveXML(doc);
 
+					if (alarmManager != null)
+						alarmManager.set(AlarmManager.RTC_WAKEUP,
+								minddate.getTimeInMillis(), pi);
 					getActivity().getSupportFragmentManager().popBackStack();
 
 				} catch (ParserConfigurationException e) {
