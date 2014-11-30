@@ -258,6 +258,7 @@ public class FragmentTask extends BaseFragment {
 								pi = PendingIntent.getBroadcast(getActivity(),
 										0, intent, 0);
 								minddate = Calendar.getInstance();
+								minddate.setTimeInMillis(0);
 								SimpleDateFormat format = new SimpleDateFormat(
 										"yyyy-MM-dd");
 								Date d = null;
@@ -270,6 +271,36 @@ public class FragmentTask extends BaseFragment {
 								minddate.setTime(d);
 								minddate.set(Calendar.HOUR_OF_DAY, hour);
 								minddate.set(Calendar.MINUTE, min);
+								String sys = (new Date(System
+										.currentTimeMillis())).getMonth()
+										+ "/"
+										+ (new Date(System.currentTimeMillis()))
+												.getDay()
+										+ " "
+										+ (new Date(System.currentTimeMillis()))
+												.getHours()
+										+ ":"
+										+ (new Date(System.currentTimeMillis()))
+												.getMinutes()
+										+ " "
+										+ (new Date(System.currentTimeMillis()))
+												.getSeconds();
+								String mind = (new Date(minddate
+										.getTimeInMillis())).getMonth()
+										+ "/"
+										+ (new Date(minddate.getTimeInMillis()))
+												.getDay()
+										+ " "
+										+ (new Date(minddate.getTimeInMillis()))
+												.getHours()
+										+ ":"
+										+ (new Date(minddate.getTimeInMillis()))
+												.getMinutes()
+										+ " "
+										+ (new Date(minddate.getTimeInMillis()))
+												.getSeconds();
+								minddate.getTimeInMillis();
+								System.currentTimeMillis();
 							}
 						});
 
