@@ -71,9 +71,9 @@ public class FragmentZuowei extends Fragment {
 		zuoweiadapter = new MyZuoAdapter(getActivity());
 		String caidantxt = readFromFile(getActivity(), "caidan.txt");
 		if (!caidantxt.equals("-1") && !caidantxt.equals("")) {
-			String caiitemwithcomma = caidantxt.substring(1,
-					caidantxt.length() - 1);
-			String[] caiitem = caiitemwithcomma.split(",");
+			String caiitemwithcomma = caidantxt
+					.substring(0, caidantxt.length());
+			String[] caiitem = caiitemwithcomma.split("huanhang");
 			for (String i : caiitem) {
 				adapter.arr.add(i);
 			}
@@ -148,7 +148,9 @@ public class FragmentZuowei extends Fragment {
 					adapter.arr.add(caimingstr);
 					adapter.notifyDataSetChanged();
 					caiming.setText("");
-					String caistr = adapter.arr.toString();
+					String caistr = adapter.arr.toString()
+							.substring(1, adapter.arr.toString().length() - 1)
+							.replace(",", "huanhang");
 					SavedToText(getActivity(), caistr, false, "caidan.txt");
 				}
 			}
@@ -460,7 +462,7 @@ public class FragmentZuowei extends Fragment {
 
 				viewholder.caidanming = (TextView) convertView
 						.findViewById(R.id.caidanitem);
-				viewholder.caidanming.setText(arr.get(position));
+				
 				viewholder.xuhao = (TextView) convertView
 						.findViewById(R.id.xuhao);
 
@@ -470,6 +472,7 @@ public class FragmentZuowei extends Fragment {
 			} else {
 				viewholder = (ViewHolder) convertView.getTag();
 			}
+			viewholder.caidanming.setText(arr.get(position));
 			viewholder.xuhao.setText((position + 1) + "");
 			viewholder.del.setOnClickListener(new OnClickListener() {
 
@@ -477,7 +480,9 @@ public class FragmentZuowei extends Fragment {
 				public void onClick(View v) {
 					arr.remove(position);
 					adapter.notifyDataSetChanged();
-					String caistr = arr.toString();
+					String caistr = arr.toString()
+							.substring(1, arr.toString().length() - 1)
+							.replace(",", "huanhang");
 					SavedToText(getActivity(), caistr, false, "caidan.txt");
 				}
 			});
