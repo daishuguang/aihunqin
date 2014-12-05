@@ -1,8 +1,12 @@
 package com.ihunqin.fragment;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -128,9 +132,21 @@ public class FragmentMore extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				// Build the intent
 				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
 						+ "4006-513520"));
-				startActivity(intent);
+
+				// Verify it resolves
+				PackageManager packageManager = getActivity()
+						.getPackageManager();
+				List<ResolveInfo> activities = packageManager
+						.queryIntentActivities(intent, 0);
+				boolean isIntentSafe = activities.size() > 0;
+
+				// Start an activity if it's safe
+				if (isIntentSafe) {
+					startActivity(intent);
+				}
 			}
 		});
 
@@ -139,9 +155,22 @@ public class FragmentMore extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+
+				// Build the intent
 				Intent intent = new Intent(Intent.ACTION_SENDTO, Uri
 						.parse("mailto:daishuguang4461@126.com"));
-				startActivity(intent);
+
+				// Verify it resolves
+				PackageManager packageManager = getActivity()
+						.getPackageManager();
+				List<ResolveInfo> activities = packageManager
+						.queryIntentActivities(intent, 0);
+				boolean isIntentSafe = activities.size() > 0;
+
+				// Start an activity if it's safe
+				if (isIntentSafe) {
+					startActivity(intent);
+				}
 			}
 		});
 
@@ -150,9 +179,22 @@ public class FragmentMore extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+
+				// Build the intent
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setType("vnd.android-dir/mms-sms");
-				startActivity(intent);
+
+				// Verify it resolves
+				PackageManager packageManager = getActivity()
+						.getPackageManager();
+				List<ResolveInfo> activities = packageManager
+						.queryIntentActivities(intent, 0);
+				boolean isIntentSafe = activities.size() > 0;
+
+				// Start an activity if it's safe
+				if (isIntentSafe) {
+					startActivity(intent);
+				}
 			}
 		});
 		TextView wechat = (TextView) getView().findViewById(R.id.wechat);

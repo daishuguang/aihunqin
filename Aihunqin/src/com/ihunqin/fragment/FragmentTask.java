@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -256,7 +257,8 @@ public class FragmentTask extends BaseFragment {
 								intent.putExtra("msg", taskname.getText()
 										.toString());
 								pi = PendingIntent.getBroadcast(getActivity(),
-										0, intent, 0);
+										(int) System.currentTimeMillis(),
+										intent, 0);
 								minddate = Calendar.getInstance();
 								minddate.setTimeInMillis(0);
 								SimpleDateFormat format = new SimpleDateFormat(
