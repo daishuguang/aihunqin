@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="18" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -34,6 +34,8 @@
         <activity android:name="com.common.appinteract.appchooser" >
         </activity>
         <activity android:name="com.common.appinteract.NotificationTest" >
+        </activity>
+        <activity android:name="com.android.training.Speech" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
