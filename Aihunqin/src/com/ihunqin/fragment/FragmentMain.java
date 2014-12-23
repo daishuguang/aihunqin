@@ -65,7 +65,7 @@ public class FragmentMain extends Fragment {
 			Fragment fragment_settingname = new FragmentSettingName();
 			fragmentTransaction.replace(R.id.fragment_container,
 					fragment_settingname);
-			fragmentTransaction.commit();
+			fragmentTransaction.addToBackStack(null).commit();
 		}
 	};
 
@@ -139,7 +139,7 @@ public class FragmentMain extends Fragment {
 				Fragment fragment_invitation = new FragmentWeddingList();
 				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_invitation);
-				fragmentTransaction.commit();
+				fragmentTransaction.addToBackStack(null).commit();
 			}
 		});
 
@@ -155,7 +155,7 @@ public class FragmentMain extends Fragment {
 				Fragment fragment_invitation = new FragmentJiZhang();
 				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_invitation);
-				fragmentTransaction.commit();
+				fragmentTransaction.addToBackStack(null).commit();
 			}
 		});
 
@@ -172,7 +172,7 @@ public class FragmentMain extends Fragment {
 				Fragment fragment_invitation = new FragmentInvitation();
 				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_invitation);
-				fragmentTransaction.commit();
+				fragmentTransaction.addToBackStack(null).commit();
 			}
 		});
 
@@ -190,7 +190,7 @@ public class FragmentMain extends Fragment {
 				Fragment fragment_zuowei = new FragmentZuowei();
 				fragmentTransaction.replace(R.id.fragment_container,
 						fragment_zuowei);
-				fragmentTransaction.commit();
+				fragmentTransaction.addToBackStack(null).commit();
 			}
 		});
 

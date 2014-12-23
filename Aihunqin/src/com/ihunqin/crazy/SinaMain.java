@@ -30,7 +30,6 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class SinaMain extends FragmentActivity implements TransferIDListener {
-	FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
 	Fragment[] mFragments;
 
@@ -52,8 +51,7 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.sina);
-		fragmentManager = getSupportFragmentManager();
-		fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		Fragment fragment_main = new FragmentMain();
 		// Add to Activity
 		fragmentTransaction.add(R.id.fragment_container, fragment_main);
@@ -64,13 +62,14 @@ public class SinaMain extends FragmentActivity implements TransferIDListener {
 	}
 
 	void setFragmentIndicator() {
+
 		RadioGroup bottomRg = (RadioGroup) findViewById(R.id.bottomRg);
 		bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-				fragmentTransaction = fragmentManager.beginTransaction();
+				fragmentTransaction = getSupportFragmentManager()
+						.beginTransaction();
 				Log.v("roboce", checkedId + "");
 				switch (checkedId) {
 				// Replace Fragment
