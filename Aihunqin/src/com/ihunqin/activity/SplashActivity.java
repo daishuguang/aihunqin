@@ -29,7 +29,7 @@ public class SplashActivity extends Activity {
 	Handler mHandler = new Handler();
 	static final String TAG = "WebGameActivity";
 	Animation animationGone;
-	int LOAD_DISPLAY_TIME = 2500;
+	int LOAD_DISPLAY_TIME = 1000;
 
 	// Baidu Location
 	LocationClient mLocationClient = null;
