@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebSettings.RenderPriority;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -68,6 +70,8 @@ public class WebActivity extends Activity {
 			}
 
 		});
+
+		webview.getSettings().setRenderPriority(RenderPriority.HIGH);
 		TextView title = (TextView) findViewById(R.id.back);
 		title.setText("Íê³É");
 		title.setVisibility(View.VISIBLE);
