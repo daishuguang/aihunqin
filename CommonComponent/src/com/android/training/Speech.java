@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 public class Speech extends Activity {
 

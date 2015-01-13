@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 public class BaseAdapterTest extends Activity {
 	ListView myList;

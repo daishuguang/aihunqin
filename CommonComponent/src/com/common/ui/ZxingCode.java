@@ -1,6 +1,6 @@
 package com.common.ui;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;

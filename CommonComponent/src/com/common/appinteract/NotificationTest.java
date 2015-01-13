@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 public class NotificationTest extends Activity {
 

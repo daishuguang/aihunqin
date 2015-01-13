@@ -89,6 +89,7 @@
         android:id="@+id/listcontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:divider="@color/diviercolor"
         android:dividerHeight="1px"
         android:fadingEdge="none"

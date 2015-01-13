@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.commoncomponent"
+    package="com.commoncomponent"
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="18" />
+    <uses-sdk android:minSdkVersion="7" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -36,6 +36,10 @@
         <activity android:name="com.common.appinteract.NotificationTest" >
         </activity>
         <activity android:name="com.android.training.Speech" >
+        </activity>
+        <activity android:name="com.developer.reference.MainActivity" >
+        </activity>
+        <activity android:name="com.developer.training.testkeyevent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

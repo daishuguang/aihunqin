@@ -1,6 +1,6 @@
 package com.common.web;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 import android.app.Activity;
 import android.os.Bundle;

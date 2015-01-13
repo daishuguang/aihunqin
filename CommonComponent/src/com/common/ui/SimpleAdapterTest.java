@@ -15,7 +15,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 public class SimpleAdapterTest extends Activity {
 	private String[] names = { "虎头", "弄玉", "李清照", "李白" };

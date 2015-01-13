@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import com.example.commoncomponent.R;
+import com.commoncomponent.R;
 
 public class DateTimeActivity extends Activity {
 

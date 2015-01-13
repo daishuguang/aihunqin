@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNoFullscreen"
+            android:imeOptions="flagNoFullscreen"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNavigatePrevious"
+            android:imeOptions="flagNavigatePrevious"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNavigateNext"
+            android:imeOptions="flagNavigateNext"
+            android:inputType="textCapSentences|textAutoCorrect" />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNoExtractUi"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/ab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNoAccessoryAction"
+            android:imeOptions="flagNoAccessoryAction"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/abc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagNoEnterAction"
+            android:imeOptions="flagNoEnterAction"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/abd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="flagForceAscii"
+            android:imeOptions="flagForceAscii"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/abe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionUnspecified"
+            android:imeOptions="actionUnspecified"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/af"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionNone"
+            android:imeOptions="actionNone"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/ag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionGo"
+            android:imeOptions="actionGo"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/aa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionSearch"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/abb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionSend"
+            android:imeOptions="actionSend"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/aw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionNext"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/aeb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionDone"
+            android:imeOptions="actionDone"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/aess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="actionPrevious"
+            android:imeOptions="actionPrevious"
+            android:inputType="text" />
+    </LinearLayout>
+
+</ScrollView>
